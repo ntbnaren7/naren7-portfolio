@@ -1,10 +1,13 @@
 import { Heart } from "lucide-react";
 import { blogs, profile } from "../../data/portfolio";
+import { useBlogLikes } from "../../hooks/useBlogLikes";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { ViewAllLink } from "../ui/ViewAllLink";
 
 export function BlogSection({ showViewAll = true }: { showViewAll?: boolean }) {
+  const { likes } = useBlogLikes();
+
   return (
     <section id="blogs" className="portfolio-section blog-section">
       <SectionHeading>Blogs</SectionHeading>
@@ -23,7 +26,15 @@ export function BlogSection({ showViewAll = true }: { showViewAll?: boolean }) {
               </span>
               <span className="blog-likes">
                 <Heart size={13} aria-hidden="true" />
-                <span aria-label="0 likes">0</span>
+                <span
+                  aria-label={
+                    likes[blog.slug]
+                      ? `${likes[blog.slug].count} likes`
+                      : "Like count unavailable"
+                  }
+                >
+                  {likes[blog.slug]?.count ?? "–"}
+                </span>
               </span>
               <i />
               {blog.tags.map((tag) => (

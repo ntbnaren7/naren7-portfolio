@@ -11,6 +11,7 @@ import { createRoot } from "react-dom/client";
 import { ArrowLeft, ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { CommandMenu } from "./components/CommandMenu";
 import { BlogSection } from "./components/sections/BlogSection";
+import { BlogLikeButton } from "./components/ui/BlogLikeButton";
 import { Icon } from "./components/ui/Icon";
 import { LiveClock } from "./components/ui/LiveClock";
 import { blogEditorial } from "./data/blog-editorial";
@@ -246,6 +247,7 @@ function BlogPage() {
                 <ArrowLeft size={14} aria-hidden="true" />
                 {backToPortfolio ? backLabel : "All blogs"}
               </a>
+              <BlogLikeButton slug={post.slug} />
             </div>
           </article>
         ) : (

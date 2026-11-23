@@ -31,27 +31,7 @@ export const sections = [
 
 export const { skills, highlights } = reference;
 
-export const blogs = [
-  {
-    title: "Why Gemini Never Feels as Good as Claude to Me",
-    url: "/blogs/why-gemini-never-feels-as-good-as-claude-to-me/",
-    date: "Sep 14, 2026",
-    readingTime: "8 min read",
-    description:
-      "This isn't a benchmark. It's just what I've experienced while actually building things.",
-    tags: ["AI", "Coding"],
-  },
-  {
-    title: "Is entrepreneurship Gen Z's main character moment?",
-    url: "/blogs/is-entrepreneurship-gen-z-main-character-moment/",
-    date: "Aug 7, 2026",
-    readingTime: "6 min read",
-    description:
-      "Some casual reflections on why this generation is trading traditional careers for pure ownership, and why everyone suddenly wants to build.",
-    tags: ["Business", "Startups", "Careers"],
-  },
-  // ...reference.blogs, // Previous sample posts retained for reference.
-];
+export { default as blogs } from "./blog-posts.json";
 
 export const experiences: typeof reference.experiences = [
   {

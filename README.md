@@ -73,6 +73,10 @@ The Resume button and command-menu action open the same native dialog with a fad
 
 The GitHub calendar requests the latest public contribution data for `ntbnaren7` from the [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api) on page load. If the request fails, it labels and displays the saved `src/data/github-activity.json` snapshot. The `OpenSourceSection` import and render in `App.tsx`, plus the Open Source entry in `src/data/portfolio.ts`, are commented out for now. Its implementation and sample data remain available for later use.
 
+## Blog likes
+
+Apply `supabase/migrations/20261123000000_blog_likes.sql` in Supabase and set the server-only `BLOG_LIKES_DATABASE_URL` in Vercel to the Supabase transaction pooler URI. The Vercel function serves `/api/blog-likes` and keeps one like per post and browser cookie. Use `vercel dev` to run the frontend and function together locally.
+
 Desktop geometry follows the reference: a centered 40vw column, a 22vh banner, a 112px identity row, locally hosted Geist, dotted rules, and a fixed section index. Basic small-screen fallbacks are included; a dedicated mobile matching pass is pending mobile references.
 
 Horizontal rules include small 3px circular junctions where they meet the column rails and project-grid divider. The shared CSS backgrounds follow both themes, add no layout space, and hide rail junctions when the rails are hidden on small screens.

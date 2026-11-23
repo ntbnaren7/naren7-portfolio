@@ -274,7 +274,33 @@
 
 .blog-post-footer {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   padding-top: 24px;
+}
+
+.blog-like-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.blog-like-action button {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.blog-like-action button:disabled {
+  cursor: default;
+}
+
+.blog-like-status {
+  color: var(--muted);
+  font-size: 12px;
 }
 
 .blog-resources {
