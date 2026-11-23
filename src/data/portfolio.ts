@@ -111,7 +111,7 @@ export const experiences: typeof reference.experiences = [
     location: "Hybrid · Hyderabad",
     image: "/images/experience/echo.png",
     stats: [
-      { value: "T-Hub and WSA", label: "Recognition" },
+      { value: "T-Hub and WS Audiology", label: "Recognition" },
       { value: "300+", label: "People surveyed" },
     ],
     description: [

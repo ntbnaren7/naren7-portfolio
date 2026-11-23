@@ -1,6 +1,46 @@
-import calendar from "../../data/github-activity.json";
+import { useEffect, useState } from "react";
+import snapshot from "../../data/github-activity.json";
+
+type Calendar = Omit<typeof snapshot, "username">;
+
+const calendarUrl = `https://github-contributions-api.jogruber.de/v4/${snapshot.username}?y=last`;
 
 export function GitHubActivitySection() {
+  const [liveCalendar, setLiveCalendar] = useState<Calendar | null>(null);
+  const [refreshFailed, setRefreshFailed] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function refreshCalendar() {
+      try {
+        const response = await fetch(calendarUrl, {
+          cache: "no-store",
+          signal: AbortSignal.any([
+            controller.signal,
+            AbortSignal.timeout(8000),
+          ]),
+        });
+        if (!response.ok) throw new Error("Contribution calendar unavailable");
+
+        const data: Calendar = await response.json();
+        if (
+          !Number.isInteger(data.total?.lastYear) ||
+          !data.contributions?.length
+        ) {
+          throw new Error("Invalid contribution calendar");
+        }
+        if (!controller.signal.aborted) setLiveCalendar(data);
+      } catch {
+        if (!controller.signal.aborted) setRefreshFailed(true);
+      }
+    }
+
+    void refreshCalendar();
+    return () => controller.abort();
+  }, []);
+
+  const calendar = liveCalendar ?? snapshot;
   const days = calendar.contributions;
   const months = days.filter(
     (day, i) => i === 0 || new Date(`${day.date}T12:00:00`).getDate() === 1,
@@ -13,8 +53,12 @@ export function GitHubActivitySection() {
     >
       <div className="section-heading full-divider">
         <h2 id="activity-title">GitHub Activity</h2>
-        <span className="activity-total">
-          {calendar.total.lastYear} GitHub activities in the last year
+        <span className="activity-total" role="status">
+          {liveCalendar
+            ? `${calendar.total.lastYear} GitHub contributions in the last year`
+            : refreshFailed
+              ? `${snapshot.total.lastYear} contributions (saved snapshot)`
+              : "Updating contributions…"}
         </span>
       </div>
       <div className="activity-calendar">
@@ -29,7 +73,7 @@ export function GitHubActivitySection() {
         </div>
         <div
           className="calendar-grid"
-          aria-label={`Daily GitHub contributions for ${calendar.username} over the last year`}
+          aria-label={`Daily GitHub contributions for ${snapshot.username} over the last year`}
         >
           {days.map((day) => (
             <div

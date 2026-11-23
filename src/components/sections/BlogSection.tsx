@@ -1,3 +1,4 @@
+import { Heart } from "lucide-react";
 import { blogs, profile } from "../../data/portfolio";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
@@ -20,7 +21,10 @@ export function BlogSection({ showViewAll = true }: { showViewAll?: boolean }) {
                 <Icon name="calendar" />
                 {blog.date}
               </span>
-              <span className="blog-claps">♧ &nbsp;0</span>
+              <span className="blog-likes">
+                <Heart size={13} aria-hidden="true" />
+                <span aria-label="0 likes">0</span>
+              </span>
               <i />
               {blog.tags.map((tag) => (
                 <span className="tag" key={tag}>
