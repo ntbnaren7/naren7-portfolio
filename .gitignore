@@ -16,6 +16,20 @@ dist/
 *.crt
 credentials*.json
 secrets*.json
+.pgpass
+.pgpass.*
+.netrc
+_netrc
+.npmrc
+.aws/
+.ssh/
+*.kdbx
+
+# Local deployment links and database CLI state
+.vercel/
+.supabase/
+/supabase/.temp/
+/supabase/.branches/
 
 # Local tooling and editor state
 .vscode/

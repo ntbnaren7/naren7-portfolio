@@ -10,6 +10,7 @@ import { flushSync } from "react-dom";
 import { createRoot } from "react-dom/client";
 import { ArrowLeft, ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { CommandMenu } from "./components/CommandMenu";
+import { VercelTelemetry } from "./components/VercelTelemetry";
 import { BlogSection } from "./components/sections/BlogSection";
 import { BlogLikeButton } from "./components/ui/BlogLikeButton";
 import { Icon } from "./components/ui/Icon";
@@ -275,6 +276,7 @@ flushSync(() => {
   root.render(
     <StrictMode>
       <BlogPage />
+      <VercelTelemetry />
     </StrictMode>,
   );
 });
