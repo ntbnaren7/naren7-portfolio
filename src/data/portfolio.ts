@@ -29,7 +29,7 @@ export const sections = [
   { id: "highlights", label: "Highlights" },
 ];
 
-export const { skills, highlights } = reference;
+export const { highlights } = reference;
 
 export { default as blogs } from "./blog-posts.json";
 

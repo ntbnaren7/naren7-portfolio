@@ -1,18 +1,40 @@
 import type { IconType } from "react-icons";
+import { RiOpenaiLine } from "react-icons/ri";
 import {
+  SiClaude,
   SiFastapi,
+  SiFirebase,
+  SiFlutter,
   SiGooglegemini,
+  SiHuggingface,
+  SiLangchain,
+  SiLanggraph,
+  SiOpenjdk,
   SiPydantic,
+  SiPytorch,
   SiRazorpay,
+  SiScikitlearn,
   SiSqlalchemy,
+  SiSupabase,
 } from "react-icons/si";
 
 const techIcons: Record<string, IconType> = {
+  claude: SiClaude,
   fastapi: SiFastapi,
+  firebase: SiFirebase,
+  flutter: SiFlutter,
   gemini: SiGooglegemini,
+  "hugging-face": SiHuggingface,
+  java: SiOpenjdk,
+  langchain: SiLangchain,
+  langgraph: SiLanggraph,
+  openai: RiOpenaiLine,
   pydantic: SiPydantic,
+  pytorch: SiPytorch,
   razorpay: SiRazorpay,
+  "scikit-learn": SiScikitlearn,
   sqlalchemy: SiSqlalchemy,
+  supabase: SiSupabase,
 };
 
 type IconProps = { name: string; size?: number; className?: string };
