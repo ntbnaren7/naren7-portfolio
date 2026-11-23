@@ -110,7 +110,10 @@ export const experiences: typeof reference.experiences = [
     date: "Feb 2025 - Jan 2026",
     location: "Hybrid · Hyderabad",
     image: "/images/experience/echo.png",
-    stats: [],
+    stats: [
+      { value: "T-Hub and WSA", label: "Recognition" },
+      { value: "300+", label: "People surveyed" },
+    ],
     description: [
       "**Co-founded echo**, a hearing intelligence startup recognized by **T-Hub and WS Audiology**, making hearing screening and everyday hearing care more accessible.",
       "Led a **5-member founding team**, owning product direction, engineering strategy, system design, and the journey from concept to working prototypes.",
