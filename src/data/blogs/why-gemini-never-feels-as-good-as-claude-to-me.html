@@ -1,0 +1,107 @@
+<p>I don't think Gemini is a bad model. Quite the opposite, actually.</p>
+<p>I've had some genuinely impressive experiences with Gemini. At one point, <strong>Gemini 3.8 Flash High</strong> was one of the models I genuinely enjoyed using for engineering. It could reason through complex problems, help me build substantial pieces of software, and sometimes solve things incredibly well.</p>
+<p>But after using both Gemini and Claude extensively while building products end-to-end, I've noticed a pattern that keeps coming back:</p>
+<p><strong>When the problem gets genuinely complex, Claude feels like a better engineer to me.</strong></p>
+<p>Not necessarily a better code generator. A better <strong>problem solver</strong>. And that distinction matters.</p>
+<h2 id="the-real-test-isnt-writing-code">The Real Test Isn't Writing Code</h2>
+<p>When I'm building a product, I write a lot of tests. Unit tests, integration tests, pipeline tests — whatever is necessary to make sure the system actually behaves the way I intended.</p>
+<p>Because real engineering isn't:</p>
+<blockquote>Write code → run it → done.</blockquote>
+<p>It's:</p>
+<blockquote>Build → test → fail → investigate → understand → hypothesize → fix → verify.</blockquote>
+<p>The hard part isn't usually writing the first implementation. <strong>The hard part is figuring out why something broke.</strong> That's where I started noticing the biggest difference between Gemini and Claude.</p>
+<h2 id="when-the-pipeline-breaks">When the Pipeline Breaks</h2>
+<p>Imagine you have a reasonably complex codebase. There are multiple components, dependencies, APIs, state transitions, tests, and architectural constraints.</p>
+<p>You make a change. Your end-to-end pipeline fails. So you give the failure to an AI coding model and say:</p>
+<blockquote>"Figure out what's wrong and fix it."</blockquote>
+<p>There are two very different ways the model can approach that. One is:</p>
+<blockquote><strong>Make the test pass.</strong></blockquote>
+<p>The other is:</p>
+<blockquote><strong>Understand why the system is failing.</strong></blockquote>
+<p>They sound almost identical. They're not.</p>
+<h2 id="the-gemini-loop">The Gemini Loop</h2>
+<p>One pattern I've repeatedly encountered with Gemini looks something like this:</p>
+<p>It sees the error. It modifies the obvious piece of code. Runs the test. The test fails.</p>
+<p>It modifies something else. Runs it again. Another thing breaks. Changes that. Runs it again.</p>
+<p>And eventually, the process can turn into a loop of:</p>
+<p><strong>modify → run → fail → modify → run → fail.</strong></p>
+<p>The frustrating part is that the original objective can quietly change. You asked:</p>
+<blockquote>"Find the root cause."</blockquote>
+<p>But the model starts optimizing for:</p>
+<blockquote>"Make the current test pass."</blockquote>
+<p>Those aren't the same thing. Sometimes that can mean changing validation, altering assumptions, modifying mocks, restructuring logic, or making a local change simply because it makes the current failure disappear.</p>
+<p>The code runs. Maybe the test passes. But the underlying problem may still be there.</p>
+<p><strong>At that point, the model isn't really debugging the system. It's reacting to symptoms.</strong></p>
+<h2 id="then-claude-does-something-very-different">Then Claude Does Something Very Different</h2>
+<p>I've given Claude the same kind of complex failures. And the first thing I notice is that it usually doesn't rush to modify the code. It investigates.</p>
+<p>It looks at the file where the failure happened. Then it looks at the associated files. It traces the relevant pipeline. It reads the existing tests.</p>
+<p>It runs the tests and looks at the actual failure. And only then does it start thinking about what could be causing it.</p>
+<p>That sounds incredibly basic. But that's exactly how I expect an engineer to approach a difficult bug.</p>
+<h3>Symptoms vs. Causes</h3>
+<figure class="blog-inline-art">
+  <img src="/images/blogs/gemini-debugging.webp" width="1280" height="720" loading="lazy" decoding="async" alt="A magnifying glass reveals the broken solder joint behind a red warning light."/>
+  <figcaption>Tracing a failure back to its source.</figcaption>
+</figure>
+<p>Suppose an error appears at the end of a pipeline. A shallow debugging approach asks:</p>
+<blockquote>"What line can I change to get rid of this error?"</blockquote>
+<p>A stronger approach asks:</p>
+<blockquote>"What assumption earlier in the pipeline caused this state to exist?"</blockquote>
+<p>That difference becomes huge when you're working on real systems.</p>
+<p>Take <strong>Cognis</strong>, for example. Its architecture isn't just a single application function. There are multiple surfaces, event-driven components, cross-context communication, event contracts, and state flowing through the system.</p>
+<p>If something fails at the end of that pipeline, the line throwing the error isn't necessarily where the actual problem is.</p>
+<p>The same principle applied to the kind of reliability-focused work I was doing for the <strong>Razorpay Buildathon</strong>. When you're dealing with payment-related flows, recovery logic, state transitions, retries, and failure semantics, "make this test green" isn't enough.</p>
+<p>You need to understand <strong>why the system reached that state in the first place.</strong></p>
+<p>Complex systems punish symptom-level debugging.</p>
+<h2 id="this-is-why-claude-feels-better">This Is Why Claude Feels Better</h2>
+<p>What I like about Claude isn't that it magically knows the answer. It doesn't. Claude makes mistakes too. What feels different is <strong>how it deals with uncertainty</strong>.</p>
+<p>When it doesn't immediately know what's wrong, it tends to investigate the uncertainty instead of immediately trying random fixes.</p>
+<p>It gathers context. It examines dependencies. It looks at the surrounding implementation. It checks the tests. It forms a hypothesis.</p>
+<p>Then it changes something. And that change is usually connected to the hypothesis.</p>
+<p>The workflow becomes:</p>
+<blockquote><strong>Observe → understand → hypothesize → modify → verify.</strong></blockquote>
+<p>Instead of:</p>
+<blockquote><strong>Modify → run → fail → modify → run → fail.</strong></blockquote>
+<p>The first one is debugging. The second can become trial and error. And when I'm engineering something seriously, I want the first.</p>
+<h2 id="and-yes-claude-eats-tokens-like-crazy">And Yes, Claude Eats Tokens Like Crazy</h2>
+<p>Here's the funny part. Claude can be <strong>ridiculously expensive in tokens</strong>. Sonnet, Opus — doesn't matter. Give Claude a sufficiently complex engineering task and sometimes it will happily consume a mountain of tokens thinking through the problem.</p>
+<p>And honestly? <strong>I don't care.</strong></p>
+<p>Because if those tokens are being spent understanding the system, tracing dependencies, reasoning about the failure, and arriving at the correct solution, that's a trade-off I'm perfectly willing to make.</p>
+<p>I'd much rather have:</p>
+<blockquote><strong>100k tokens of useful reasoning → one correct fix</strong></blockquote>
+<p>than:</p>
+<blockquote><strong>20k tokens → 17 code changes → 14 test runs → 6 broken assumptions → infinite loop.</strong></blockquote>
+<p>So yes, Claude may be burning through tokens like it has absolutely no financial responsibility. But when it eventually looks at the problem, identifies the actual cause, makes the right change, and the entire pipeline goes:</p>
+<p><strong>boom — green.</strong></p>
+<p>I'll take it.</p>
+<h2 id="gemini-was-actually-really-good">Gemini Was Actually Really Good</h2>
+<p>This is also why I'm not comfortable simply saying <em>"Gemini is bad."</em></p>
+<p>Because I've seen Gemini be <strong>really good</strong>.</p>
+<p>There was a point where Gemini 3.8 Flash High genuinely surprised me with how well it could reason through complex engineering tasks.</p>
+<p>It helped me build solid systems. It could understand problems. It could debug. It could reason about architecture.</p>
+<p>And I remember thinking:</p>
+<blockquote>"Okay, this is actually really good."</blockquote>
+<p>Which makes the change I experienced afterward even more noticeable. At some point, that behavior became far less consistent for me.</p>
+<p>The model started falling into the modify-and-rerun loop more often. Instead of investigating the failure deeply, it would sometimes keep trying increasingly local changes without really identifying what was fundamentally wrong.</p>
+<p>I don't know why. Maybe the model changed. Maybe the inference configuration changed. Maybe the reasoning behavior changed. Maybe my workloads became harder.</p>
+<p>I don't have enough evidence to say that Google "nerfed" anything. <strong>All I can say is that, from my experience, the quality of that engineering behavior changed.</strong> And that changed which model I trusted.</p>
+<h2 id="what-i-actually-want-from-an-ai-engineer">What I Actually Want From an AI Engineer</h2>
+<p>I don't want an AI that is obsessed with producing output. I want one that can stop and say:</p>
+<blockquote><strong>"Wait. Something doesn't make sense here."</strong></blockquote>
+<p>I want it to understand the architecture before changing it. I want it to inspect the tests instead of immediately assuming they're wrong. I want it to distinguish a symptom from a root cause. I want it to respect constraints.</p>
+<p>I want it to understand that making one test pass isn't necessarily the same as fixing the system.</p>
+<p>And most importantly:</p>
+<p><strong>I want it to optimize for correctness, not merely a green terminal.</strong></p>
+<p>Because that's what engineering actually is.</p>
+<h2 id="so-is-claude-better-than-gemini">So, Is Claude Better Than Gemini?</h2>
+<p>I don't think that's really the right question. There are tasks where Gemini is excellent. There are tasks where Gemini may be the better choice. And I'm sure there are workloads where someone else's experience is completely different from mine.</p>
+<p>Models change. Versions change. Inference configurations change. Tools change.</p>
+<p>So I'm not claiming:</p>
+<blockquote><strong>Claude &gt; Gemini.</strong></blockquote>
+<p>I'm saying something much narrower:</p>
+<blockquote><strong>For the kind of complex, constraint-heavy engineering work I do, Claude has consistently felt more reliable at reasoning through failures and finding the underlying problem.</strong></blockquote>
+<p>That's the difference I care about. Because writing a function is becoming increasingly easy for AI models. The harder problem is everything that happens when that function doesn't work.</p>
+<p>The failing test. The hidden dependency. The incorrect assumption. The unexpected state. The regression. The architectural constraint. The bug that's actually three layers away from where the error appears.</p>
+<p>That's where I start seeing the difference. And that's ultimately why, today, <strong>Claude feels better to me.</strong></p>
+<p>Not because Gemini is bad. Not because Claude is always right. But because when something breaks, I feel like Claude is more likely to <strong>stop, understand the system, reason through the failure, and then fix the actual problem.</strong></p>
+<p>And when you're building real software, that's the behavior I value most.</p>
+<p class="blog-author-note"><em>These are purely my own opinions and reflections. No AI was used to write any part of this blog.</em></p>

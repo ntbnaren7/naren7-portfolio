@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { profile, socials } from "../../data/portfolio";
 import { Icon } from "../ui/Icon";
+import { LiveClock } from "../ui/LiveClock";
 import { SocialHoverCard } from "../ui/SocialHoverCard";
 import { ResumeButton } from "../ui/ResumeButton";
 import { BookingLink } from "../ui/BookingLink";
@@ -17,14 +17,6 @@ export function ProfileHeader({
   onToggleTheme: () => void;
   onOpenResume: () => void;
 }) {
-  const [time, setTime] = useState("");
-  useEffect(() => {
-    const tick = () =>
-      setTime(new Date().toLocaleTimeString("en-GB").replaceAll(":", "."));
-    tick();
-    const timer = setInterval(tick, 1000);
-    return () => clearInterval(timer);
-  }, []);
   return (
     <>
       <div className="hero-banner">
@@ -44,7 +36,7 @@ export function ProfileHeader({
           height={937}
         />
         <BannerAtmosphere light={light} />
-        <time className="hero-clock">{time}</time>
+        <LiveClock />
       </div>
       <header className="profile-header full-divider">
         <div className="profile-identity">
@@ -87,16 +79,13 @@ export function ProfileHeader({
           <li>{profile.philosophy}</li>
           <li>
             Building <strong>{profile.currentProjects[0]}</strong>,{" "}
-            <strong>{profile.currentProjects[1]}</strong>, and whatever curiosity
-            leads me to next.
+            <strong>{profile.currentProjects[1]}</strong>, and whatever
+            curiosity leads me to next.
           </li>
         </ul>
         <div className="contact-actions">
           <BookingLink href={profile.bookingUrl} />
-          <a
-            className="small-button tactile-button"
-            href={profile.contactUrl}
-          >
+          <a className="small-button tactile-button" href={profile.contactUrl}>
             <Icon name="mail" />
             Send an email
           </a>

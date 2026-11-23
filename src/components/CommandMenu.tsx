@@ -7,11 +7,13 @@ export function CommandMenu({
   onClose,
   onToggleTheme,
   onOpenResume,
+  sectionBase = "",
 }: {
   open: boolean;
   onClose: () => void;
   onToggleTheme: () => void;
   onOpenResume: () => void;
+  sectionBase?: "" | "/";
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
@@ -19,7 +21,7 @@ export function CommandMenu({
   const commands = [
     ...sections.map((section) => ({
       label: `Go to ${section.label}`,
-      href: `#${section.id}`,
+      href: `${sectionBase}#${section.id}`,
       icon: "arrow-right",
       action: undefined as (() => void) | undefined,
     })),
@@ -73,7 +75,10 @@ export function CommandMenu({
         .querySelector(command.href)
         ?.scrollIntoView({ behavior: "smooth" });
       history.replaceState(null, "", command.href);
-    } else if (command.href.startsWith("mailto:")) {
+    } else if (
+      command.href.startsWith("/#") ||
+      command.href.startsWith("mailto:")
+    ) {
       window.location.href = command.href;
     } else window.open(command.href, "_blank", "noopener,noreferrer");
     onClose();

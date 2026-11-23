@@ -14,7 +14,7 @@ export const profile = {
   bookingUrl: "https://calendly.com/a-naren1308",
   contactUrl: "mailto:community.naren1308@gmail.com",
   githubUrl: "https://github.com/ntbnaren7",
-  blogUrl: "https://medium.com/@ashutoshx7",
+  blogUrl: "/blogs/",
   quote:
     "By believing passionately in something that still does not exist, we create it. The non-existent is whatever we have not sufficiently desired",
   quoteAuthor: "Franz Kafka",
@@ -29,7 +29,30 @@ export const sections = [
   { id: "highlights", label: "Highlights" },
 ];
 
-export const { skills, blogs, highlights } = reference;
+export const { skills, highlights } = reference;
+
+export const blogs = [
+  {
+    title: "Why Gemini Never Feels as Good as Claude to Me",
+    url: "/blogs/why-gemini-never-feels-as-good-as-claude-to-me/",
+    date: "Sep 14, 2026",
+    readingTime: "8 min read",
+    description:
+      "This isn't a benchmark. It's just what I've experienced while actually building things.",
+    tags: ["AI", "Coding"],
+  },
+  {
+    title: "Is entrepreneurship Gen Z's main character moment?",
+    url: "/blogs/is-entrepreneurship-gen-z-main-character-moment/",
+    date: "Aug 7, 2026",
+    readingTime: "6 min read",
+    description:
+      "Some casual reflections on why this generation is trading traditional careers for pure ownership, and why everyone suddenly wants to build.",
+    tags: ["Business", "Startups", "Careers"],
+  },
+  // ...reference.blogs, // Previous sample posts retained for reference.
+];
+
 export const experiences: typeof reference.experiences = [
   {
     id: "hyle-global",
@@ -79,6 +102,23 @@ export const experiences: typeof reference.experiences = [
       "Automated repetitive research and campaign-planning workflows, reducing an estimated **15-20 hours of manual work per week**.",
     ],
     tags: ["AI Content Automation", "Content Strategy", "Workflow Automation"],
+  },
+  {
+    id: "echo",
+    title: "echo",
+    role: "Cofounder and Forward Deployed CEO",
+    date: "Feb 2025 - Jan 2026",
+    location: "Hybrid · Hyderabad",
+    image: "/images/experience/echo.png",
+    stats: [],
+    description: [
+      "**Co-founded echo**, a hearing intelligence startup recognized by **T-Hub and WS Audiology**, making hearing screening and everyday hearing care more accessible.",
+      "Led a **5-member founding team**, owning product direction, engineering strategy, system design, and the journey from concept to working prototypes.",
+      "Engineered a **gamified hearing-screening system** with adaptive tone testing, audiogram generation, and environmental noise checks to improve screening reliability.",
+      "Developed **real-time audio processing capabilities**, exploring personalized hearing assistance through DSP, frequency adjustments, and earphone-based audio enhancement.",
+      "Expanded echo beyond one-time screening into a **continuous hearing-wellness platform**, combining listening-exposure monitoring, hearing insights, and personalized assistance.",
+    ],
+    tags: [],
   },
   // ...reference.experiences, // Previous sample entries retained for later.
 ];
