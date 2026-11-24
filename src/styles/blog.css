@@ -131,13 +131,6 @@
   letter-spacing: -0.025em;
 }
 
-.blog-post-tags .tag {
-  color: var(--blog-accent);
-  border-color: color-mix(in srgb, var(--blog-accent) 26%, transparent);
-  font-size: 11px;
-  font-weight: 500;
-}
-
 .blog-post-header p,
 .blog-post-body {
   color: var(--body-text);
@@ -473,20 +466,20 @@
   padding-block: clamp(28px, 5vw, 56px) 28px;
 }
 
-.blog-shell[data-layout="essay"] :is(.blog-cover, .essay-excerpt--photo img) {
+:is(.blog-cover, .blog-inline-art img, .essay-excerpt--photo img) {
   filter: grayscale(1);
   transition: filter 430ms ease;
 }
 
-.blog-shell[data-layout="essay"] :is(.blog-cover, .essay-excerpt--photo img):is(
+:is(.blog-cover, .blog-inline-art img, .essay-excerpt--photo img):is(
     :hover,
     :focus
   ) {
   filter: grayscale(0);
 }
 
-.blog-shell[data-layout="essay"] :is(.blog-cover, .essay-excerpt--photo img):focus-visible {
-  outline: 2px solid var(--blog-accent);
+:is(.blog-cover, .blog-inline-art img, .essay-excerpt--photo img):focus-visible {
+  outline: 2px solid var(--muted);
   outline-offset: 3px;
 }
 
@@ -663,7 +656,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .blog-shell[data-layout="essay"] :is(.blog-cover, .essay-excerpt--photo img) {
+  :is(.blog-cover, .blog-inline-art img, .essay-excerpt--photo img) {
     transition: none;
   }
 }

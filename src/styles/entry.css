@@ -11,25 +11,27 @@
       opacity 520ms ease;
   }
 
-  .portfolio-column::before,
-  .portfolio-column::after {
+  :root:not(.blog-return) .portfolio-column::before,
+  :root:not(.blog-return) .portfolio-column::after {
     animation: survey-rail 0.65s ease-out both;
   }
 
-  .profile-header::before {
+  :root:not(.blog-return) .profile-header::before {
     animation: survey-rule 0.42s ease-out 0.2s both;
   }
 
-  .profile-header::after {
+  :root:not(.blog-return) .profile-header::after {
     animation: survey-rule 0.42s ease-out 0.35s both;
   }
 
-  .hero-banner,
-  .profile-header > *,
-  .introduction,
-  .section-index,
-  .portfolio-column > .portfolio-section,
-  .portfolio-column > footer {
+  :root:not(.blog-return) :is(
+    .hero-banner,
+    .profile-header > *,
+    .introduction,
+    .section-index,
+    .portfolio-column > .portfolio-section,
+    .portfolio-column > footer
+  ) {
     animation: content-arrive 0.24s ease-out 0.78s both;
   }
 }

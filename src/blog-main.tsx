@@ -24,7 +24,7 @@ import { LiveClock } from "./components/ui/LiveClock";
 import { blogEditorial } from "./data/blog-editorial";
 import { blogs, profile } from "./data/portfolio";
 import { useBlogLikes } from "./hooks/useBlogLikes";
-import { scrollIntoBlog } from "./lib/blog-scroll";
+import { blogReturnUrl, scrollIntoBlog } from "./lib/blog-scroll";
 import "./styles/shadcn.css";
 import "./styles/global.css";
 import "./styles/blog.css";
@@ -57,10 +57,8 @@ const referrer = document.referrer ? new URL(document.referrer) : undefined;
 const localReferrer =
   referrer?.origin === location.origin ? referrer.pathname : "";
 const fromPortfolio = post && ["/", "/index.html"].includes(localReferrer);
-const fromBlogList =
-  post && ["/blogs", "/blogs/", "/blogs/index.html"].includes(localReferrer);
 const backToPortfolio = !post || fromPortfolio;
-const backHref = backToPortfolio ? "/#blogs" : profile.blogUrl;
+const backHref = backToPortfolio ? blogReturnUrl : profile.blogUrl;
 const backLabel = backToPortfolio ? "Back to portfolio" : "Back to all blogs";
 
 function isRegularClick(event: MouseEvent<HTMLAnchorElement>) {
@@ -71,17 +69,6 @@ function isRegularClick(event: MouseEvent<HTMLAnchorElement>) {
     !event.shiftKey &&
     !event.altKey
   );
-}
-
-function returnToSource(event: MouseEvent<HTMLAnchorElement>) {
-  if (
-    (fromPortfolio || fromBlogList) &&
-    history.length > 1 &&
-    isRegularClick(event)
-  ) {
-    event.preventDefault();
-    history.back();
-  }
 }
 
 function jumpToHeading(event: MouseEvent<HTMLAnchorElement>, id: string) {
@@ -170,12 +157,7 @@ function BlogPage() {
           <LiveClock />
         </div>
         <header className="blog-page-header full-divider">
-          <a
-            className="framed-button"
-            href={backHref}
-            aria-label={backLabel}
-            onClick={returnToSource}
-          >
+          <a className="framed-button" href={backHref} aria-label={backLabel}>
             <ArrowLeft size={16} aria-hidden="true" />
           </a>
           <div className="blog-page-label">
@@ -241,7 +223,7 @@ function BlogPage() {
                 width={1280}
                 height={720}
                 fetchPriority="high"
-                tabIndex={editorial.layout === "essay" ? 0 : undefined}
+                tabIndex={0}
               />
             )}
             {headings.length > 0 && (
@@ -306,11 +288,7 @@ function BlogPage() {
               </section>
             )}
             <div className="blog-post-footer">
-              <a
-                className="framed-button"
-                href={backHref}
-                onClick={returnToSource}
-              >
+              <a className="framed-button" href={backHref}>
                 <ArrowLeft size={14} aria-hidden="true" />
                 {backToPortfolio ? backLabel : "All blogs"}
               </a>
