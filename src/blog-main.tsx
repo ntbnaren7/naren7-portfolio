@@ -8,7 +8,13 @@ import {
 } from "react";
 import { flushSync } from "react-dom";
 import { createRoot } from "react-dom/client";
-import { ArrowLeft, ArrowUpRight, Calendar, Clock } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  Calendar,
+  ChevronDown,
+  Clock,
+} from "lucide-react";
 import { CommandMenu } from "./components/CommandMenu";
 import { VercelTelemetry } from "./components/VercelTelemetry";
 import { BlogSection } from "./components/sections/BlogSection";
@@ -17,6 +23,7 @@ import { Icon } from "./components/ui/Icon";
 import { LiveClock } from "./components/ui/LiveClock";
 import { blogEditorial } from "./data/blog-editorial";
 import { blogs, profile } from "./data/portfolio";
+import { useBlogLikes } from "./hooks/useBlogLikes";
 import { scrollIntoBlog } from "./lib/blog-scroll";
 import "./styles/shadcn.css";
 import "./styles/global.css";
@@ -90,6 +97,16 @@ function jumpToHeading(event: MouseEvent<HTMLAnchorElement>, id: string) {
 function BlogPage() {
   const [commandsOpen, setCommandsOpen] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const [outlineOpen, setOutlineOpen] = useState(false);
+  const [savingLike, setSavingLike] = useState(false);
+  const [likeSaveFailed, setLikeSaveFailed] = useState(false);
+  const { likes, failed: likesFailed, setLiked } = useBlogLikes(Boolean(post));
+  const postLikes = post && likes[post.slug];
+  const likeStatus = likesFailed
+    ? "Likes unavailable"
+    : likeSaveFailed
+      ? "Could not save. Try again."
+      : "";
   const [light, setLight] = useState(() => {
     try {
       return localStorage.getItem("portfolio-theme") === "light";
@@ -121,8 +138,33 @@ function BlogPage() {
 
   const toggleTheme = () => setLight((value) => !value);
 
+  async function toggleLike() {
+    if (!post || !postLikes || savingLike) return;
+    setSavingLike(true);
+    setLikeSaveFailed(false);
+    try {
+      await setLiked(post.slug, !postLikes.liked);
+    } catch {
+      setLikeSaveFailed(true);
+    } finally {
+      setSavingLike(false);
+    }
+  }
+
+  const likeButton = (
+    <BlogLikeButton
+      post={postLikes}
+      disabled={!postLikes || savingLike}
+      onToggle={toggleLike}
+    />
+  );
+
   return (
-    <div className="portfolio-shell blog-shell" data-accent={editorial?.accent}>
+    <div
+      className="portfolio-shell blog-shell"
+      data-accent={editorial?.accent}
+      data-layout={editorial?.layout}
+    >
       <main className="portfolio-column blog-column">
         <div className="blog-dot-banner full-divider">
           <LiveClock />
@@ -183,6 +225,12 @@ function BlogPage() {
                   <Clock size={14} aria-hidden="true" />
                   {post.readingTime}
                 </span>
+                <div className="blog-like-action">
+                  {likeButton}
+                  <span className="blog-like-status" role="status">
+                    {likeStatus}
+                  </span>
+                </div>
               </div>
             </header>
             {editorial && (
@@ -193,31 +241,49 @@ function BlogPage() {
                 width={1280}
                 height={720}
                 fetchPriority="high"
+                tabIndex={editorial.layout === "essay" ? 0 : undefined}
               />
             )}
             {headings.length > 0 && (
-              <details className="blog-outline">
-                <summary>On this page</summary>
-                <ul>
-                  {headings.map(({ id, textContent }) => (
-                    <li key={id}>
-                      <a
-                        href={`#${id}`}
-                        onClick={(event) => jumpToHeading(event, id)}
-                      >
-                        {textContent}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
+              <nav className="blog-outline" aria-label="On this page">
+                <button
+                  type="button"
+                  className="blog-outline-toggle"
+                  aria-controls="blog-outline-links"
+                  aria-expanded={outlineOpen}
+                  onClick={() => setOutlineOpen((open) => !open)}
+                >
+                  <ChevronDown size={14} aria-hidden="true" />
+                  On this page
+                </button>
+                <div
+                  id="blog-outline-links"
+                  className="blog-outline-panel"
+                  inert={!outlineOpen}
+                >
+                  <div>
+                    <ul>
+                      {headings.map(({ id, textContent }) => (
+                        <li key={id}>
+                          <a
+                            href={`#${id}`}
+                            onClick={(event) => jumpToHeading(event, id)}
+                          >
+                            {textContent}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </nav>
             )}
             {/* Article fragments are checked-in markup from Naren's published posts. */}
             <div
               className="blog-post-body full-divider"
               dangerouslySetInnerHTML={{ __html: body }}
             />
-            {editorial && (
+            {editorial && editorial.resources.length > 0 && (
               <section
                 className="blog-resources full-divider"
                 aria-labelledby="blog-resources-heading"
@@ -248,7 +314,14 @@ function BlogPage() {
                 <ArrowLeft size={14} aria-hidden="true" />
                 {backToPortfolio ? backLabel : "All blogs"}
               </a>
-              <BlogLikeButton slug={post.slug} />
+              <div className="blog-like-action">
+                {likeButton}
+                {likeStatus && (
+                  <span className="blog-like-status" aria-hidden="true">
+                    {likeStatus}
+                  </span>
+                )}
+              </div>
             </div>
           </article>
         ) : (

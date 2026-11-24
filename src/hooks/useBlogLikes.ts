@@ -14,11 +14,12 @@ async function requestLikes(options?: RequestInit): Promise<BlogLikes> {
   return response.json();
 }
 
-export function useBlogLikes() {
+export function useBlogLikes(enabled = true) {
   const [likes, setLikes] = useState<BlogLikes>({});
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
+    if (!enabled) return;
     let active = true;
 
     function load() {
@@ -48,7 +49,7 @@ export function useBlogLikes() {
       active = false;
       window.removeEventListener("pageshow", onPageShow);
     };
-  }, []);
+  }, [enabled]);
 
   async function setLiked(slug: string, liked: boolean) {
     const result = await requestLikes({

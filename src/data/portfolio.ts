@@ -91,11 +91,11 @@ export const experiences: typeof reference.experiences = [
     location: "Hybrid · Hyderabad",
     image: "/images/experience/echo.png",
     stats: [
-      { value: "T-Hub and WS Audiology", label: "Recognition" },
+      { value: "T-Hub and WSAudiology", label: "Recognition" },
       { value: "300+", label: "People surveyed" },
     ],
     description: [
-      "**Co-founded echo**, a hearing intelligence startup recognized by **T-Hub and WS Audiology**, making hearing screening and everyday hearing care more accessible.",
+      "**Co-founded echo**, a hearing intelligence startup recognized by **T-Hub and WSAudiology**, making hearing screening and everyday hearing care more accessible.",
       "Led a **5-member founding team**, owning product direction, engineering strategy, system design, and the journey from concept to working prototypes.",
       "Engineered a **gamified hearing-screening system** with adaptive tone testing, audiogram generation, and environmental noise checks to improve screening reliability.",
       "Developed **real-time audio processing capabilities**, exploring personalized hearing assistance through DSP, frequency adjustments, and earphone-based audio enhancement.",
