@@ -87,18 +87,23 @@ function HackathonShowcase({ event }: { event: Hackathon }) {
           />
           {annotation && (
             <figcaption className="hackathon-photo-annotation">
-              <span>{annotation.text}</span>
+              <span
+                style={
+                  annotation.placement === "inside"
+                    ? { top: `${annotation.labelTop}%` }
+                    : undefined
+                }
+              >
+                dat's me
+              </span>
               {annotation.placement === "inside" ? (
                 <svg
-                  viewBox="0 0 1100 773"
+                  viewBox={`0 0 ${width} ${height}`}
                   preserveAspectRatio="none"
                   fill="none"
                   aria-hidden="true"
                 >
-                  <path
-                    d="M832 57C783 70 747 43 695 95m-1-25 1 25 25-6"
-                    vectorEffect="non-scaling-stroke"
-                  />
+                  <path d={annotation.path} vectorEffect="non-scaling-stroke" />
                 </svg>
               ) : (
                 <svg viewBox="0 0 76 28" fill="none" aria-hidden="true">

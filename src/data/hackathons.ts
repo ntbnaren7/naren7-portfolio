@@ -18,7 +18,9 @@ type HackathonItem = {
       alt: string;
       width: number;
       height: number;
-      annotation?: { text: string; placement: "inside" | "outside" };
+      annotation?:
+        | { placement: "outside" }
+        | { placement: "inside"; labelTop: number; path: string };
     }[];
   };
   githubUrl?: string;
@@ -61,7 +63,7 @@ export const hackathons: HackathonItem[] = [
           width: 960,
           height: 960,
           alt: "The four Conclave teammates working around a table at the hackathon",
-          annotation: { text: "dat's me", placement: "outside" },
+          annotation: { placement: "outside" },
         },
         {
           file: "deepmind-bangalore-poster.webp",
@@ -110,7 +112,11 @@ export const hackathons: HackathonItem[] = [
           width: 1100,
           height: 773,
           alt: "The Attest team at the Cashfree × Sarvam AI Buildathon",
-          annotation: { text: "that's me", placement: "inside" },
+          annotation: {
+            placement: "inside",
+            labelTop: 2,
+            path: "M832 57C783 70 747 43 695 95m-1-25 1 25 25-6",
+          },
         },
         {
           file: "cashfree-sarvam-office.webp",
@@ -240,12 +246,6 @@ export const hackathons: HackathonItem[] = [
           height: 800,
           alt: "SaaSathoN first-place trophy beside the Scribe demo",
         },
-        {
-          file: "saasathon-scribe-product.webp",
-          width: 850,
-          height: 532,
-          alt: "Scribe product website",
-        },
       ],
     },
     whatIBuilt: [
@@ -284,6 +284,11 @@ export const hackathons: HackathonItem[] = [
           width: 1100,
           height: 734,
           alt: "The DriveOS team onstage at Auristra",
+          annotation: {
+            placement: "inside",
+            labelTop: 18,
+            path: "M875 187C835 178 794 185 774 223m-5-24 5 24 23-10",
+          },
         },
         {
           file: "auristra-takshashila-campus.webp",
@@ -326,6 +331,11 @@ export const hackathons: HackathonItem[] = [
           width: 1100,
           height: 825,
           alt: "The WI4ED team receiving the second-place award at Hackcelerate",
+          annotation: {
+            placement: "inside",
+            labelTop: 11,
+            path: "M900 151C873 168 886 190 919 207m-11-24 11 24-25 2",
+          },
         },
         {
           file: "hackcelerate-wi4ed-award.webp",

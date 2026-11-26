@@ -524,12 +524,13 @@
   inset: 0;
   padding: 0;
   font-size: clamp(10px, 2.6vw, 15px);
-  text-shadow: 0 1px 3px #000e;
+  text-shadow:
+    0 1px 3px #000,
+    0 0 5px #000b;
   transform: none;
 }
 [data-annotation="inside"] .hackathon-photo-annotation span {
   position: absolute;
-  top: 2%;
   right: 5%;
   transform: rotate(-4deg);
 }
@@ -560,6 +561,7 @@
   margin-inline: auto;
   object-fit: contain;
 }
+.hackathon-showcase-photo[data-annotation="inside"] img,
 .hackathon-showcase-media:has([data-annotation="outside"]) img {
   max-height: none;
 }
