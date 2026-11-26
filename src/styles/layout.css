@@ -78,6 +78,7 @@
   margin-top: 24px;
 }
 .experience-section::before,
+.hackathons-section::before,
 .skills-section::before,
 .blog-section::before,
 .highlights-section::before {
@@ -93,6 +94,7 @@
 .skills-section > .section-heading,
 .blog-section > .section-heading,
 .highlights-section > .section-heading,
+.hackathons-section > .section-heading,
 .projects-section > .section-heading {
   padding-top: 12px;
 }

@@ -54,6 +54,9 @@
   flex-wrap: wrap;
   align-items: center;
   column-gap: 8px;
+}
+.experience-main h3,
+.hackathon-name {
   color: var(--foreground);
   font-size: 17px;
   font-weight: 700;
@@ -282,6 +285,261 @@
   border-radius: 12px;
   background: color-mix(in srgb, var(--surface) 80%, transparent);
   overflow: hidden;
+}
+.hackathons-section {
+  margin-top: 12px;
+}
+.hackathon-entry {
+  background: var(--dotted-rule) bottom / 100% 1px no-repeat;
+}
+.hackathon-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.hackathon-logos > span {
+  display: grid;
+  height: 29px;
+  max-width: 100%;
+  place-items: center;
+  padding: 4px 6px;
+  border: 1px solid #e4e4e7;
+  border-radius: 4px;
+  background: #fff;
+  overflow: hidden;
+}
+.hackathon-logos img {
+  display: block;
+  width: auto;
+  height: 19px;
+  max-width: 104px;
+  object-fit: contain;
+}
+.hackathon-logos img[src$="/lakshya.jpeg"] {
+  transform: scale(1.5);
+}
+.hackathon-open {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
+  min-height: 56px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  color: var(--foreground);
+  text-align: start;
+  cursor: pointer;
+}
+.hackathon-open:hover {
+  background: var(--surface-hover);
+}
+.hackathon-open:focus-visible {
+  outline: 1px solid var(--muted);
+  outline-offset: -2px;
+}
+.hackathon-identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.hackathon-open .hackathon-logos {
+  gap: 4px;
+  margin: 0;
+}
+.hackathon-open .hackathon-logos > span {
+  height: 17px;
+  padding: 1px 3px;
+}
+.hackathon-open .hackathon-logos img {
+  height: 12px;
+  max-width: 62px;
+  filter: grayscale(1);
+  transition: filter 240ms ease;
+}
+.hackathon-open:is(:hover, :focus-visible) .hackathon-logos img {
+  filter: grayscale(0);
+}
+.hackathon-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.hackathon-meta > span:first-child {
+  font-family: "Geist Mono", monospace;
+}
+.hackathon-note {
+  color: var(--body-text);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.tag.hackathon-badge {
+  justify-self: end;
+  padding: 2px 7px;
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--body-text);
+  font-weight: 550;
+  white-space: nowrap;
+}
+@property --hackathon-badge-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 48deg;
+}
+.tag.hackathon-badge:is([data-placement="Winner"], [data-placement="Top 1%"]) {
+  border-color: transparent;
+  border-radius: 6px;
+  background:
+    linear-gradient(#0a0a0d, #0a0a0d) padding-box,
+    conic-gradient(
+      from var(--hackathon-badge-angle, 48deg),
+      #45434c 0%,
+      #45434c 61%,
+      #655a85 68%,
+      #6ca3ff 73%,
+      #c7e8ff 77%,
+      #fff 79%,
+      #fbe3ad 82%,
+      #f39862 86%,
+      #be79d6 91%,
+      #45434c 97%
+    ) border-box;
+  box-shadow: 0 0 8px rgb(123 146 221 / 22%);
+  color: #f4f4f5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tag.hackathon-badge:is([data-placement="Winner"], [data-placement="Top 1%"]) {
+    animation: hackathon-badge-orbit 5s linear infinite;
+  }
+}
+@keyframes hackathon-badge-orbit {
+  to {
+    --hackathon-badge-angle: 408deg;
+  }
+}
+.hackathon-details {
+  display: grid;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.hackathon-details :is(dt, h4) {
+  color: var(--foreground);
+  font-weight: 600;
+}
+.hackathon-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  gap: 8px 16px;
+}
+.hackathon-details ul {
+  list-style: disc;
+  padding-inline-start: 18px;
+}
+.hackathon-details .experience-tags {
+  margin-top: 0;
+}
+.hackathon-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+.hackathon-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.hackathon-links a:hover {
+  color: var(--foreground);
+}
+.hackathon-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(560px, calc(100% - 32px));
+  max-height: min(76dvh, 660px);
+  margin: auto;
+  overflow: auto;
+}
+.hackathon-dialog > header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.hackathon-dialog h3 {
+  font-weight: 700;
+}
+.hackathon-dialog > header button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 4px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.hackathon-dialog > header button:hover {
+  background: var(--surface-hover);
+  color: var(--foreground);
+}
+.hackathon-dialog .hackathon-details {
+  gap: 16px;
+  padding: 16px;
+}
+.hackathon-dialog .hackathon-facts {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hackathon-dialog {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+    transition:
+      opacity 280ms ease,
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      display 320ms allow-discrete,
+      overlay 320ms allow-discrete;
+  }
+  .hackathon-dialog[open] {
+    opacity: 1;
+    transform: none;
+  }
+  .hackathon-dialog::backdrop {
+    background-color: transparent;
+    backdrop-filter: blur(0);
+    transition:
+      background-color 280ms ease,
+      backdrop-filter 280ms ease,
+      display 320ms allow-discrete,
+      overlay 320ms allow-discrete;
+  }
+  .hackathon-dialog[open]::backdrop {
+    background-color: #0009;
+    backdrop-filter: blur(5px);
+  }
+  @starting-style {
+    .hackathon-dialog[open] {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+    }
+    .hackathon-dialog[open]::backdrop {
+      background-color: transparent;
+      backdrop-filter: blur(0);
+    }
+  }
 }
 .project-screen {
   position: absolute;
@@ -856,7 +1114,8 @@
   .contribution-tabs {
     margin-block: 4px;
   }
-  .experience-main h3 {
+  .experience-main h3,
+  .hackathon-name {
     font-size: 16px;
   }
   .project-card:nth-child(3)::before {

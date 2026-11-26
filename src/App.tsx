@@ -6,6 +6,7 @@ import { BlogSection } from "./components/sections/BlogSection";
 import { ExperienceSection } from "./components/sections/ExperienceSection";
 import { HighlightsSection } from "./components/sections/HighlightsSection";
 import { GitHubActivitySection } from "./components/sections/GitHubActivitySection";
+import { HackathonsSection } from "./components/sections/HackathonsSection";
 // import { OpenSourceSection } from "./components/sections/OpenSourceSection";
 import { ProfileHeader } from "./components/sections/ProfileHeader";
 import { ProjectsSection } from "./components/sections/ProjectsSection";
@@ -108,6 +109,7 @@ export function App() {
         />
         <ExperienceSection />
         <ProjectsSection />
+        <HackathonsSection />
         <GitHubActivitySection />
         {/* <OpenSourceSection /> */}
         <SkillsSection />
