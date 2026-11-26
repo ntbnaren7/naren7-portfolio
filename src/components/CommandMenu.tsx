@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { profile, sections, socials } from "../data/portfolio";
 import { Icon } from "./ui/Icon";
+import { pinActiveSection } from "../hooks/useActiveSection";
 
 export function CommandMenu({
   open,
@@ -71,6 +72,7 @@ export function CommandMenu({
     if (!command) return;
     if (command.action) command.action();
     else if (command.href.startsWith("#")) {
+      pinActiveSection(command.href.slice(1));
       document
         .querySelector(command.href)
         ?.scrollIntoView({ behavior: "smooth" });

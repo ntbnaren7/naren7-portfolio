@@ -1,5 +1,5 @@
 import { sections } from "../data/portfolio";
-import { useActiveSection } from "../hooks/useActiveSection";
+import { pinActiveSection, useActiveSection } from "../hooks/useActiveSection";
 
 export function SectionIndex() {
   const active = useActiveSection();
@@ -10,6 +10,7 @@ export function SectionIndex() {
         <a
           key={id}
           href={`#${id}`}
+          onClick={() => pinActiveSection(id)}
           className={active === id ? "active" : ""}
           aria-current={active === id ? "location" : undefined}
         >
