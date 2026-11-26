@@ -42,7 +42,7 @@ one thing though: the personal stuff is mine, so swap it out for your own. that 
 
 ## shoutouts
 
-- huge thanks to my friend **Ashutosh**. the overall design is heavily inspired by his portfolio, and the phone layout is a nod to his [portfolio v1](https://github.com/Ashutoshx7/Portfoliov1). go say hi:
+- huge thanks to **Ashutosh**. the overall design is heavily inspired by his portfolio, and the phone layout is a nod to his [portfolio v1](https://github.com/Ashutoshx7/Portfoliov1). go say hi:
   - website: [ashutoshx7.me](https://www.ashutoshx7.me/)
   - github: [@Ashutoshx7](https://github.com/Ashutoshx7)
   - x: [@Ashutosh_7x7](https://x.com/Ashutosh_7x7)
