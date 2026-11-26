@@ -155,11 +155,17 @@ export function GitHubActivitySection() {
       <div className="section-heading full-divider">
         <h2 id="activity-title">GitHub Activity</h2>
         <span className="activity-total" role="status">
-          {liveCalendar
-            ? `${calendar.total.lastYear} GitHub contributions in the last year`
-            : refreshFailed
-              ? `${snapshot.total.lastYear} contributions (saved snapshot)`
-              : "Updating contributions…"}
+          {liveCalendar ? (
+            <>
+              {calendar.total.lastYear}
+              <span className="activity-total-long"> GitHub</span> contributions
+              <span className="activity-total-long"> in the last year</span>
+            </>
+          ) : refreshFailed ? (
+            `${snapshot.total.lastYear} contributions (saved snapshot)`
+          ) : (
+            "Updating contributions…"
+          )}
         </span>
       </div>
       <p className="section-callout">{sectionIntros.activity}</p>
