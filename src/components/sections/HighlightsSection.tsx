@@ -27,27 +27,41 @@ export function HighlightsSection() {
               aria-hidden={copy ? true : undefined}
             >
               {highlights.map((highlight, i) => (
-                <button
-                  type="button"
-                  tabIndex={copy ? -1 : 0}
-                  className="highlight-card"
+                <div
+                  className="highlight-item"
                   key={highlight.title}
                   style={{ width: highlight.width }}
-                  onClick={() => openHighlight(i)}
-                  aria-label={`View ${highlight.title}`}
                 >
-                  <div className="highlight-image">
-                    <img
-                      src={highlight.image}
-                      alt={highlight.title}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="highlight-caption">
-                    <span className="highlight-label">{highlight.label}</span>
-                    <p>{highlight.title}</p>
-                  </div>
-                </button>
+                  <button
+                    type="button"
+                    tabIndex={copy ? -1 : 0}
+                    className="highlight-card"
+                    onClick={() => openHighlight(i)}
+                    aria-label={`View ${highlight.title}`}
+                  >
+                    <div className="highlight-image">
+                      <img
+                        src={highlight.image}
+                        alt={highlight.title}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="highlight-caption">
+                      <span className="highlight-label">{highlight.label}</span>
+                      <p>{highlight.title}</p>
+                    </div>
+                  </button>
+                  <a
+                    className="highlight-direct-link"
+                    href={highlight.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    tabIndex={copy ? -1 : 0}
+                    aria-label={`Open ${highlight.label} post on LinkedIn`}
+                  >
+                    <Icon name="arrow-up-right" size={14} />
+                  </a>
+                </div>
               ))}
             </div>
           ))}

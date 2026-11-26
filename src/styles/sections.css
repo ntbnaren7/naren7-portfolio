@@ -1092,10 +1092,14 @@
     transform: translateX(calc(-50% - 250px));
   }
 }
+.highlight-item {
+  flex-shrink: 0;
+  min-width: 0;
+}
 .highlight-card {
   position: relative;
   display: block;
-  flex-shrink: 0;
+  width: 100%;
   padding: 0;
   border: 1px solid var(--soft-border);
   border-radius: 6px;
@@ -1171,6 +1175,19 @@
   font-weight: 500;
   line-height: 1.375;
   color: var(--body-text);
+}
+.highlight-direct-link {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  margin: 5px 0 0 auto;
+  place-items: center;
+  border-radius: 4px;
+  color: var(--muted);
+}
+.highlight-direct-link:is(:hover, :focus-visible) {
+  background: var(--surface-hover);
+  color: var(--foreground);
 }
 @media (min-width: 1536px) {
   .experience-row .experience-summary {
