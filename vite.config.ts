@@ -9,6 +9,7 @@ export default defineConfig({
       input: [
         "index.html",
         "hackathons/index.html",
+        "projects/index.html",
         "blogs/index.html",
         "blogs/you-have-no-idea-how-cracked-people-are/index.html",
         "blogs/why-gemini-never-feels-as-good-as-claude-to-me/index.html",

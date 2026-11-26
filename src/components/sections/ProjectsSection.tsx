@@ -1,6 +1,7 @@
 import { projects } from "../../data/portfolio";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
+import { ViewAllLink } from "../ui/ViewAllLink";
 
 const technologyLabels: Record<string, string> = {
   next: "Next.js",
@@ -15,10 +16,10 @@ const technologyLabels: Record<string, string> = {
   razorpay: "Razorpay API",
 };
 
-export function ProjectsSection() {
+export function ProjectsSection({ archive = false }: { archive?: boolean }) {
   return (
     <section id="projects" className="portfolio-section projects-section">
-      <SectionHeading>Projects</SectionHeading>
+      {!archive && <SectionHeading>Projects</SectionHeading>}
       <div className="projects-grid">
         {projects.map((project) => (
           <article className="project-card" key={project.name}>
@@ -85,6 +86,13 @@ export function ProjectsSection() {
           </article>
         ))}
       </div>
+      {!archive && (
+        <ViewAllLink
+          href="/projects/"
+          external={false}
+          arrow="arrow-up-right"
+        />
+      )}
     </section>
   );
 }
