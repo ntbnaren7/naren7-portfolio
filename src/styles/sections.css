@@ -1047,28 +1047,17 @@
   margin-right: 8px;
 }
 .highlights-window {
-  position: relative;
+  --highlight-edge-fade: clamp(28px, 5vw, 52px);
   margin-top: 16px;
+  padding-block: 8px;
   overflow: hidden;
-  padding: 8px 0;
-}
-.highlights-window::before,
-.highlights-window::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 2;
-  width: 20px;
-  pointer-events: none;
-}
-.highlights-window::before {
-  left: 0;
-  background: linear-gradient(to right, var(--background), transparent);
-}
-.highlights-window::after {
-  right: 0;
-  background: linear-gradient(to left, var(--background), transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 var(--highlight-edge-fade),
+    #000 calc(100% - var(--highlight-edge-fade)),
+    transparent
+  );
 }
 .highlights-track {
   display: flex;
@@ -1085,11 +1074,8 @@
   animation-play-state: paused;
 }
 @keyframes highlights-scroll {
-  from {
-    transform: translateX(-250px);
-  }
   to {
-    transform: translateX(calc(-50% - 250px));
+    transform: translateX(-50%);
   }
 }
 .highlight-item {
@@ -1188,6 +1174,30 @@
 .highlight-direct-link:is(:hover, :focus-visible) {
   background: var(--surface-hover);
   color: var(--foreground);
+}
+@media (prefers-reduced-motion: reduce) {
+  .highlights-window {
+    padding-inline: 8px;
+    mask-image: none;
+  }
+  .highlights-track {
+    width: auto;
+    animation: none;
+  }
+  .highlights-group {
+    min-width: 0;
+    flex-wrap: wrap;
+    padding-right: 0;
+  }
+  .highlights-group[aria-hidden="true"] {
+    display: none;
+  }
+  .highlight-item {
+    max-width: 100%;
+  }
+  .highlight-image img {
+    transition: none;
+  }
 }
 @media (min-width: 1536px) {
   .experience-row .experience-summary {
