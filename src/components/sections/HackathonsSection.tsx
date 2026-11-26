@@ -3,7 +3,6 @@ import { flushSync } from "react-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import { hackathons } from "../../data/hackathons";
 import { skills } from "../../data/skills";
-import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { SkillGrid } from "../ui/SkillGrid";
 import { ViewAllLink } from "../ui/ViewAllLink";
@@ -25,20 +24,6 @@ const showcaseTechIcons: Partial<Record<string, string>> = {
   OpenCV: "opencv",
   Dart: "dart",
 };
-
-function HackathonLogos({ logos }: { logos: Hackathon["logos"] }) {
-  if (!logos?.length) return null;
-
-  return (
-    <span className="hackathon-logos">
-      {logos.map(({ image, name }) => (
-        <span key={image}>
-          <img src={`/images/hackathons/${image}`} alt={name} />
-        </span>
-      ))}
-    </span>
-  );
-}
 
 function HackathonLinks({ event }: { event: Hackathon }) {
   const links = [
@@ -71,49 +56,40 @@ function HackathonShowcase({ event }: { event: Hackathon }) {
       className="hackathon-showcase-media"
       data-single={images.length === 1 || undefined}
     >
-      {images.map(({ file, alt, width, height, annotation }) => (
-        <figure
-          className="hackathon-showcase-photo"
-          key={file}
-          data-annotation={annotation?.placement}
-          data-portrait={height > width || undefined}
-        >
+      {images.map(({ file, alt, width, height, crop, expandable }) => {
+        const src = `/images/hackathons/${file}`;
+        const photo = (
           <img
-            src={`/images/hackathons/${file}`}
+            src={src}
             alt={alt}
             width={width}
             height={height}
-            tabIndex={0}
+            tabIndex={expandable ? undefined : 0}
           />
-          {annotation && (
-            <figcaption className="hackathon-photo-annotation">
-              <span
-                style={
-                  annotation.placement === "inside"
-                    ? { top: `${annotation.labelTop}%` }
-                    : undefined
-                }
+        );
+
+        return (
+          <figure
+            className="hackathon-showcase-photo"
+            key={file}
+            data-crop={crop}
+            data-portrait={height > width || undefined}
+          >
+            {expandable ? (
+              <a
+                href={src}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open full-size image: ${alt}`}
               >
-                dat's me
-              </span>
-              {annotation.placement === "inside" ? (
-                <svg
-                  viewBox={`0 0 ${width} ${height}`}
-                  preserveAspectRatio="none"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path d={annotation.path} vectorEffect="non-scaling-stroke" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 76 28" fill="none" aria-hidden="true">
-                  <path d="M73 6C53 1 28 1 15 20m-3-9 3 9 11-3" />
-                </svg>
-              )}
-            </figcaption>
-          )}
-        </figure>
-      ))}
+                {photo}
+              </a>
+            ) : (
+              photo
+            )}
+          </figure>
+        );
+      })}
     </div>
   );
 
@@ -127,7 +103,6 @@ function HackathonShowcase({ event }: { event: Hackathon }) {
           <header>
             <strong>{linkedinPreview.author}</strong>
             <a href={event.linkedinUrl} target="_blank" rel="noreferrer">
-              <Icon name="linkedin" size={12} />
               LinkedIn
               <ArrowUpRight size={12} aria-hidden="true" />
             </a>
@@ -191,10 +166,7 @@ export function HackathonsSection({ archive = false }: { archive?: boolean }) {
               aria-haspopup="dialog"
               onClick={() => openDetails(event)}
             >
-              <span className="hackathon-identity">
-                <span className="hackathon-name">{event.name}</span>
-                <HackathonLogos logos={event.logos} />
-              </span>
+              <span className="hackathon-name">{event.name}</span>
               {event.badge && (
                 <span
                   className="tag hackathon-badge"
@@ -217,7 +189,6 @@ export function HackathonsSection({ archive = false }: { archive?: boolean }) {
           <>
             <header>
               <div>
-                <HackathonLogos logos={selected.logos} />
                 <h3 id="hackathon-dialog-title">
                   {selected.showcase.title ?? selected.name}
                 </h3>

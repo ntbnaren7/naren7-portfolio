@@ -1,7 +1,6 @@
 type HackathonItem = {
   name: string;
   project: string;
-  logos?: { image: string; name: string }[];
   location: string;
   badge?: "Winner" | "Top 1%" | "Runner-up" | "Pre-Finale";
   placement?: string;
@@ -18,9 +17,8 @@ type HackathonItem = {
       alt: string;
       width: number;
       height: number;
-      annotation?:
-        | { placement: "outside" }
-        | { placement: "inside"; labelTop: number; path: string };
+      crop?: "top";
+      expandable?: boolean;
     }[];
   };
   githubUrl?: string;
@@ -32,10 +30,6 @@ export const hackathons: HackathonItem[] = [
   {
     name: "Cerebral Valley × DeepMind Hackathon",
     project: "Conclave",
-    logos: [
-      { image: "cerebral-valley.svg", name: "Cerebral Valley" },
-      { image: "deepmind.svg", name: "DeepMind" },
-    ],
     location: "WeWork Roshni Tech Hub, Bangalore",
     solution:
       "Conclave brings four AI stakeholders into live design reviews. Gemini Live streams audio to each agent, a shared context engine tracks decisions, and an arbitrator chooses when to interrupt.",
@@ -63,7 +57,7 @@ export const hackathons: HackathonItem[] = [
           width: 960,
           height: 960,
           alt: "The four Conclave teammates working around a table at the hackathon",
-          annotation: { placement: "outside" },
+          crop: "top",
         },
         {
           file: "deepmind-bangalore-poster.webp",
@@ -85,10 +79,6 @@ export const hackathons: HackathonItem[] = [
   {
     name: "Cashfree × Sarvam AI Buildathon",
     project: "Attest",
-    logos: [
-      { image: "cashfree.svg", name: "Cashfree" },
-      { image: "sarvam.svg", name: "Sarvam AI" },
-    ],
     location: "Cashfree Office, Ecoworld, Bengaluru",
     solution:
       "Attest brings voice, chat, and document scans into a collections desk that reconciles balances across four Indian languages. Cashfree verifies payments, and operators approve actions that move money.",
@@ -112,11 +102,6 @@ export const hackathons: HackathonItem[] = [
           width: 1100,
           height: 773,
           alt: "The Attest team at the Cashfree × Sarvam AI Buildathon",
-          annotation: {
-            placement: "inside",
-            labelTop: 2,
-            path: "M832 57C783 70 747 43 695 95m-1-25 1 25 25-6",
-          },
         },
         {
           file: "cashfree-sarvam-office.webp",
@@ -137,7 +122,6 @@ export const hackathons: HackathonItem[] = [
   {
     name: "Amazon ML Challenge 2025",
     project: "Smart Product Pricing",
-    logos: [{ image: "amazon-science.svg", name: "Amazon Science" }],
     location: "Online",
     placement: "Rank #816 Globally, 1st Place Campus Level",
     badge: "Top 1%",
@@ -181,8 +165,7 @@ export const hackathons: HackathonItem[] = [
   {
     name: "LTTS TECHgium 9th Edition",
     project: "Harmony Aura",
-    logos: [{ image: "ltts.svg", name: "L&T Technology Services" }],
-    location: "LTTS campus, Mysore",
+    location: "Virtual proof-of-concept round",
     badge: "Pre-Finale",
     solution:
       "Harmony Aura combines machine telemetry and worker biometrics in an industrial safety monitoring system. A shared live feed powers a supervisor dashboard and mobile apps for operators.",
@@ -203,10 +186,18 @@ export const hackathons: HackathonItem[] = [
         "Machine faults and worker stress are often tracked separately. Seeing both together helps supervisors respond to unsafe conditions earlier.",
       images: [
         {
-          file: "ltts-techgium.webp",
-          width: 1050,
-          height: 591,
-          alt: "Official artwork for the LTTS TECHgium 9th Edition",
+          file: "ltts-techgium-certificate.webp",
+          width: 1800,
+          height: 1273,
+          alt: "TECHgium certificate recognizing Harmony Aura’s participation in the virtual proof-of-concept round",
+          expandable: true,
+        },
+        {
+          file: "ltts-techgium-shortlist.webp",
+          width: 1897,
+          height: 294,
+          alt: "TECHgium email confirming the shortlist for the proof-of-concept presentation",
+          expandable: true,
         },
       ],
     },
@@ -219,10 +210,6 @@ export const hackathons: HackathonItem[] = [
   {
     name: "SaaSathoN'26",
     project: "Scribe",
-    logos: [
-      { image: "lakshya.jpeg", name: "Lakshya" },
-      { image: "ssn.png", name: "SSN College of Engineering" },
-    ],
     location: "SSN College of Engineering, Chennai",
     badge: "Winner",
     solution:
@@ -284,11 +271,6 @@ export const hackathons: HackathonItem[] = [
           width: 1100,
           height: 734,
           alt: "The DriveOS team onstage at Auristra",
-          annotation: {
-            placement: "inside",
-            labelTop: 18,
-            path: "M875 187C835 178 794 185 774 223m-5-24 5 24 23-10",
-          },
         },
         {
           file: "auristra-takshashila-campus.webp",
@@ -316,11 +298,11 @@ export const hackathons: HackathonItem[] = [
       "WI4ED is a smart plug with a companion app that shows live power use, identifies unusual appliance behavior, and can alert the user or cut power.",
     role: "Mobile App Developer",
     tech: [
-      "Electrical Signature Analysis",
+      "FL Chart",
       "Flutter",
       "Dart",
       "Provider",
-      "FL Chart",
+      "Electrical Signature Analysis",
     ],
     showcase: {
       rationale:
@@ -331,11 +313,6 @@ export const hackathons: HackathonItem[] = [
           width: 1100,
           height: 825,
           alt: "The WI4ED team receiving the second-place award at Hackcelerate",
-          annotation: {
-            placement: "inside",
-            labelTop: 11,
-            path: "M900 151C873 168 886 190 919 207m-11-24 11 24-25 2",
-          },
         },
         {
           file: "hackcelerate-wi4ed-award.webp",
