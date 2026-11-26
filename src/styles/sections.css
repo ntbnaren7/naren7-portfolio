@@ -1172,15 +1172,6 @@
   line-height: 1.375;
   color: var(--body-text);
 }
-.highlight-arrow {
-  position: absolute;
-  top: 18px;
-  right: 12px;
-  color: var(--subtle);
-}
-.highlights-section .view-all-row {
-  padding-top: 24px;
-}
 @media (min-width: 1536px) {
   .experience-row .experience-summary {
     flex-direction: row;

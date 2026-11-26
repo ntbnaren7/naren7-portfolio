@@ -99,6 +99,18 @@ dialog::backdrop {
   color: var(--body-text);
   text-align: center;
 }
+.highlight-post-link {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 4px;
+  margin: 10px auto 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.highlight-post-link:hover {
+  color: var(--foreground);
+}
 .dialog-close {
   position: sticky;
   top: 0;

@@ -30,8 +30,6 @@ export const sections = [
   { id: "highlights", label: "Highlights" },
 ];
 
-export const { highlights } = reference;
-
 export { default as blogs } from "./blog-posts.json";
 
 export const experiences: typeof reference.experiences = [
