@@ -13,6 +13,10 @@ type HackathonItem = {
   role?: string;
   tech?: string[];
   whatIBuilt?: string[];
+  showcase?: {
+    title: string;
+    images: { file: string; alt: string }[];
+  };
   githubUrl?: string;
   demoUrl?: string;
   galleryUrl?: string;
@@ -20,6 +24,57 @@ type HackathonItem = {
 };
 
 export const hackathons: HackathonItem[] = [
+  {
+    name: "Cerebral Valley × DeepMind Hackathon",
+    project: "Conclave",
+    logos: [
+      { image: "cerebral-valley.svg", name: "Cerebral Valley" },
+      { image: "deepmind.svg", name: "DeepMind" },
+    ],
+    date: "July 11, 2026",
+    location: "WeWork Roshni Tech Hub, Bangalore",
+    hours: 7,
+    note: "Live design reviews with four AI stakeholders that raise concerns as the team talks.",
+    problem:
+      "Design reviews can miss assumptions when specialists are outside the room.",
+    solution:
+      "Conclave brings four AI stakeholders into live design reviews. Gemini Live streams audio to each agent, a shared context engine tracks decisions, and an arbitrator chooses when to interrupt.",
+    role: "Lead AI Architect & Full Stack Developer",
+    tech: [
+      "Gemini Live API",
+      "WebSocket Audio",
+      "Multi-Agent Orchestration",
+      "Typed Event Bus",
+      "Shared Blackboard",
+      "Urgency Arbitration",
+      "Attention Budget",
+      "Semantic Compression",
+      "Decision Graph",
+      "TypeScript",
+      "Node.js",
+    ],
+    showcase: {
+      title: "Google DeepMind Bangalore Hackathon",
+      images: [
+        {
+          file: "conclave-team.webp",
+          alt: "The four Conclave teammates working around a table at the hackathon",
+        },
+        {
+          file: "deepmind-bangalore-poster.webp",
+          alt: "Google DeepMind Bangalore Hackathon event poster",
+        },
+      ],
+    },
+    whatIBuilt: [
+      "Built the typed event bus and shared blackboard.",
+      "Built an arbitration kernel to prioritize and budget interruptions.",
+      "Built parallel Gemini Live sessions and real-time interruption logic.",
+    ],
+    githubUrl: "https://github.com/ntbnaren7/conclave",
+    galleryUrl:
+      "https://www.linkedin.com/posts/naren-tech_googledeepmind-gemini-google-activity-7483148291568861184-6nIj",
+  },
   {
     name: "Cashfree × Sarvam AI Buildathon",
     project: "Attest",
@@ -37,37 +92,6 @@ export const hackathons: HackathonItem[] = [
     tech: ["Python", "Sarvam AI", "Cashfree"],
     githubUrl: "https://github.com/ntbnaren7/attest",
     eventUrl: "https://luma.com/azuhrzuj",
-  },
-  {
-    name: "Google DeepMind Hackathon",
-    project: "Conclave",
-    logos: [{ image: "deepmind.svg", name: "Google DeepMind" }],
-    date: "July 11, 2026",
-    location: "WeWork Roshni Tech Hub, Bangalore",
-    hours: 7,
-    note: "Built a live design-review tool where AI participants surface issues as a meeting unfolds.",
-    problem:
-      "Technical design meetings suffer from cognitive overload and incomplete domain representation, leaving architectural, product, financial, and research-based assumptions unchecked.",
-    solution:
-      "A Cognitive Operating System that orchestrates a panel of autonomous AI stakeholders to observe live audio streams, reason over a shared blackboard, and voice immediate, domain-specific interventions.",
-    role: "Lead AI Architect & Full Stack Developer",
-    tech: [
-      "TypeScript",
-      "Node.js",
-      "WebSockets",
-      "Gemini Live API",
-      "Semantic Compressor",
-      "Vitest",
-      "Vite",
-    ],
-    whatIBuilt: [
-      "Distributed Multi-Agent Orchestration: Designed a highly concurrent 'Live Pool' managing four persistent connections to the Gemini Live API for parallel multi-modal processing.",
-      "Low-Latency Event-Driven Audio Pipeline: Built a full-duplex WebSocket gateway and in-memory event bus to stream 16kHz PCM audio, achieving sub-second round-trip latency.",
-      "Centralized Cognitive Kernel: Engineered a 400ms arbitration window, attention budgeting, and dynamic post-speech cooldowns to smoothly resolve race conditions.",
-    ],
-    githubUrl: "https://github.com/ntbnaren7/googledeepmindhackathon-conclave",
-    galleryUrl:
-      "https://www.linkedin.com/posts/naren-tech_googledeepmind-gemini-google-activity-7483148291568861184-6nIj",
   },
   {
     name: "Amazon ML Challenge 2025",
@@ -93,7 +117,7 @@ export const hackathons: HackathonItem[] = [
     githubUrl: "https://github.com/ntbnaren7/amazon-ml-challenge-2025",
   },
   {
-    name: "TECHgium 9th Edition",
+    name: "LTTS TECHgium 9th Edition",
     project: "Harmony Aura",
     logos: [{ image: "ltts.svg", name: "L&T Technology Services" }],
     date: "November 10, 2025 - March 10, 2026",

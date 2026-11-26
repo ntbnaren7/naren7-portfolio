@@ -307,6 +307,7 @@
   border: 1px solid #e4e4e7;
   border-radius: 4px;
   background: #fff;
+  color-scheme: light;
   overflow: hidden;
 }
 .hackathon-logos img {
@@ -502,6 +503,112 @@
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 4px;
+}
+.hackathon-dialog[data-showcase="true"] {
+  height: calc(100dvh - 24px);
+  max-height: none;
+  overscroll-behavior: contain;
+}
+.hackathon-dialog[data-showcase="true"] > header {
+  padding-block: 12px;
+}
+.hackathon-dialog[data-showcase="true"] h3 {
+  font-size: clamp(25px, 5vw, 32px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+.hackathon-dialog[data-showcase="true"][open] {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+.hackathon-showcase-details {
+  display: grid;
+  align-content: space-between;
+  gap: 10px;
+  padding: 16px;
+  color: var(--muted);
+  font-size: clamp(14px, 1.8dvh, 17px);
+  line-height: 1.45;
+}
+.hackathon-showcase-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+}
+.hackathon-showcase-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  filter: grayscale(1);
+  transition: filter 300ms ease;
+}
+.hackathon-showcase-media img:first-child {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top center;
+}
+.hackathon-showcase-media img:is(:hover, :focus-visible) {
+  filter: grayscale(0);
+}
+.hackathon-showcase-media img:last-child {
+  margin-top: clamp(12px, 4vw, 26px);
+}
+.hackathon-showcase-details h4 {
+  margin: 0 0 4px;
+  color: var(--foreground);
+  font-size: 1.12em;
+  font-weight: 650;
+}
+.hackathon-showcase-details :is(p, ul) {
+  margin: 0;
+}
+.hackathon-showcase-location {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: clamp(13px, 1.6dvh, 15px);
+  line-height: 1.35;
+}
+.hackathon-showcase-details .hackathon-showcase-role {
+  margin-bottom: 6px;
+  color: var(--body-text);
+}
+.hackathon-showcase-work ul {
+  display: grid;
+  gap: 4px;
+  padding-inline-start: 18px;
+  list-style: disc;
+}
+.hackathon-showcase-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 10px 0 0;
+  list-style: none;
+  background: var(--dotted-rule) top / 100% 1px no-repeat;
+}
+.hackathon-showcase-stack .skill-tile {
+  gap: 4px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 11px;
+  line-height: 16.5px;
+}
+@media (max-width: 430px) {
+  .hackathon-showcase-details {
+    gap: 7px;
+    padding-block: 12px;
+  }
+  .hackathon-showcase-work ul {
+    gap: 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hackathon-showcase-media img {
+    transition: none;
+  }
 }
 @media (prefers-reduced-motion: no-preference) {
   .hackathon-dialog {

@@ -8,13 +8,14 @@ import { ViewAllLink } from "../ui/ViewAllLink";
 
 export function BlogSection({ showViewAll = true }: { showViewAll?: boolean }) {
   const { likes } = useBlogLikes();
+  const visibleBlogs = showViewAll ? blogs.slice(0, 2) : blogs;
 
   return (
     <section id="blogs" className="portfolio-section blog-section">
       <SectionHeading>Blogs</SectionHeading>
-      {blogs.map((blog, i) => (
+      {visibleBlogs.map((blog, i) => (
         <a
-          className={`blog-row ${i === blogs.length - 1 ? "full-divider" : "local-divider"}`}
+          className={`blog-row ${i === visibleBlogs.length - 1 ? "full-divider" : "local-divider"}`}
           href={blog.url}
           key={blog.title}
         >
