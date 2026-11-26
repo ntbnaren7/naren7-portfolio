@@ -49,6 +49,8 @@ GitHub activity is fetched live from a public contributions API on page load, an
 
 `Icon.tsx` renders `<use href="/icons/portfolio-icons.svg#name">`, so new icons need a `<symbol>` added to that sprite. Public assets use lowercase hyphenated names, grouped by section (and by post, project, or event) under `public/images/`. Image-generation prompts live in `assets/prompts/`.
 
+**Images and the resume are not in the repo.** `public/images/`, `public/resume/` and `assets/` are gitignored and exist only locally and in the public Vercel Blob store `naren7-assets` (region bom1). `vercel.json` rewrites `/images/*` and `/resume/*` to the store, so URLs stay the same and `npm run dev` keeps using the local files. After adding or changing an image, run `npm run upload-assets` (needs `BLOB_READ_WRITE_TOKEN` from `vercel env pull`; `-- --check` previews) before deploying, or it will 404 on the live site. A fresh clone has no images.
+
 ### Caching
 
 `vercel.json` sets browser caching: hashed `/assets/*` bundles and `/fonts/*` are immutable for a year; `/images/*`, `/icons/*`, and `/favicon.svg` are cached for 7 days. Those files are not content-hashed, so **give a replaced image a new filename** rather than overwriting it, or returning visitors may see the old one for a week. HTML pages, `/resume/*`, and `/api/*` are deliberately left uncached. The GitHub calendar is cached in `localStorage` for an hour (`GitHubActivitySection.tsx`).

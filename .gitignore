@@ -52,3 +52,9 @@ temp/
 
 # Source assets kept as local staging inputs; published copies live in public/
 assets-to-use/
+
+# Personal images, resume and source assets: kept locally and in Vercel Blob
+# (npm run upload-assets), never in the repo. vercel.json serves them.
+public/images/
+public/resume/
+assets/

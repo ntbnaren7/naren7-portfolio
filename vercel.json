@@ -59,5 +59,15 @@
       "destination": "https://naren7.me/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/images/:path*",
+      "destination": "https://mtvuxy2lpftvjjan.public.blob.vercel-storage.com/images/:path*"
+    },
+    {
+      "source": "/resume/:path*",
+      "destination": "https://mtvuxy2lpftvjjan.public.blob.vercel-storage.com/resume/:path*"
+    }
   ]
 }

@@ -38,7 +38,7 @@ without them, the site still works and those bits just politely say they're unav
 
 go for it, it's free. fork it, rip it apart, make it yours. the code's under the [MIT license](./LICENSE), so the only real ask is that you keep the license file around.
 
-one thing though: the personal stuff is mine, so swap it out for your own. that means my photos, blog posts, resume, the knight banners and the raven. most of it lives in `src/data/` and `public/images/`, and `CLAUDE.md` has a pretty thorough map of how everything fits together.
+one thing though: the personal stuff is mine. my photos, resume, banners and the raven aren't even in the repo, so a fresh clone shows up without images. drop your own into `public/images/` (the paths are in `src/data/`), and swap out my blog posts too. `CLAUDE.md` has a pretty thorough map of how everything fits together.
 
 ## shoutouts
 
