@@ -3,7 +3,7 @@
 // art. Needs `npm run dev` running and Google Chrome installed (macOS).
 //
 //   npm run og-cards            all cards
-//   npm run og-cards -- <slug>  one blog post
+//   npm run og-cards -- <slug>  one blog post (or `home` for the home card)
 //
 // Cards are written as JPEGs next to the other public images; the HTML entries
 // reference them with og:image / twitter:image.
@@ -116,12 +116,13 @@ function postCard(post) {
 
 const cards = [
   {
-    out: "public/images/og/home-card-v2.jpg",
+    slug: "home",
+    out: "public/images/og/home-card-v3.jpg",
     html: bannerCard({
       title: "naren7",
       lines: [
         "<strong style='color:#fafafa'>Engineer / Dreamer.</strong> Just someone who loves creating things.",
-        "Building <strong style='color:#fafafa'>ECHO</strong>, <strong style='color:#fafafa'>Scribe</strong>, and whatever comes next.",
+        "Building whatever comes next.",
       ],
     }),
   },
@@ -167,9 +168,10 @@ const cards = [
     html: postCard(post),
   })),
 ].filter((card) => !only || card.slug === only);
+// `npm run og-cards -- home` renders just the home card; a blog slug renders that post.
 
 if (only && cards.length === 0) {
-  console.error(`No blog post with slug "${only}".`);
+  console.error(`No card for "${only}" (use "home" or a blog slug).`);
   process.exit(1);
 }
 
