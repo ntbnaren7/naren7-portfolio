@@ -10,6 +10,7 @@ export default defineConfig({
         "index.html",
         "hackathons/index.html",
         "projects/index.html",
+        "highlights/index.html",
         "blogs/index.html",
         "blogs/you-have-no-idea-how-cracked-people-are/index.html",
         "blogs/why-gemini-never-feels-as-good-as-claude-to-me/index.html",

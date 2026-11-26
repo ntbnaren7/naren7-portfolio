@@ -1090,6 +1090,25 @@
   background: var(--border);
   margin-right: 8px;
 }
+.highlights-archive {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+  padding: 24px 4px;
+}
+.highlights-archive .highlight-caption {
+  height: auto;
+  min-height: 86px;
+}
+.highlights-archive .highlight-caption p {
+  display: block;
+}
+@media (max-width: 600px) {
+  .highlights-archive {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .highlights-window {
   --highlight-edge-fade: clamp(28px, 5vw, 52px);
   margin-top: 16px;
