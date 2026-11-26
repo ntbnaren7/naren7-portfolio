@@ -2,17 +2,28 @@ import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import { hackathons } from "../../data/hackathons";
+import { skills } from "../../data/skills";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
+import { SkillGrid } from "../ui/SkillGrid";
 import { ViewAllLink } from "../ui/ViewAllLink";
 
 type Hackathon = (typeof hackathons)[number];
 
 const featuredHackathons = hackathons.slice(0, 3);
 const showcaseTechIcons: Partial<Record<string, string>> = {
+  ...Object.fromEntries(skills),
   "Gemini Live API": "gemini",
-  TypeScript: "typescript",
-  "Node.js": "node",
+  Gemini: "gemini",
+  SQLite: "sqlite",
+  Pandas: "pandas",
+  NumPy: "numpy",
+  TensorFlow: "tensorflow",
+  ESP32: "espressif",
+  YOLOv8s: "ultralytics",
+  "ONNX Runtime": "onnx",
+  OpenCV: "opencv",
+  Dart: "dart",
 };
 
 function HackathonLogos({ logos }: { logos: Hackathon["logos"] }) {
@@ -33,7 +44,10 @@ function HackathonLinks({ event }: { event: Hackathon }) {
   const links = [
     { label: "GitHub", url: event.githubUrl },
     { label: "Demo", url: event.demoUrl },
-    { label: "Photos", url: event.galleryUrl },
+    {
+      label: "LinkedIn",
+      url: event.showcase.linkedinPreview ? undefined : event.linkedinUrl,
+    },
   ];
   return (
     <div className="hackathon-links">
@@ -49,109 +63,101 @@ function HackathonLinks({ event }: { event: Hackathon }) {
   );
 }
 
-function HackathonDetails({ event }: { event: Hackathon }) {
-  return (
-    <div className="hackathon-details">
-      <p className="hackathon-note">{event.note}</p>
-      <dl className="hackathon-facts">
-        <div>
-          <dt>Location</dt>
-          <dd>{event.location}</dd>
-        </div>
-        {event.hours && (
-          <div>
-            <dt>Duration</dt>
-            <dd>{event.hours} hours</dd>
-          </div>
-        )}
-        {event.role && (
-          <div>
-            <dt>My role</dt>
-            <dd>{event.role}</dd>
-          </div>
-        )}
-        {event.placement && (
-          <div>
-            <dt>Placement</dt>
-            <dd>{event.placement}</dd>
-          </div>
-        )}
-      </dl>
-      <div>
-        <h4>{event.solution ? "The problem" : "Event brief"}</h4>
-        <p>{event.problem}</p>
-      </div>
-      {event.solution && (
-        <div>
-          <h4>Our solution</h4>
-          <p>{event.solution}</p>
-        </div>
-      )}
-      {event.whatIBuilt && (
-        <div>
-          <h4>What I built</h4>
-          <ul>
-            {event.whatIBuilt.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {event.tech && (
-        <div className="experience-tags" aria-label="Technologies">
-          {event.tech.map((tech) => (
-            <span className="tag" key={tech}>
-              {tech}
-            </span>
-          ))}
-        </div>
-      )}
-      <HackathonLinks event={event} />
+function HackathonShowcase({ event }: { event: Hackathon }) {
+  const { images, linkedinPreview, rationale } = event.showcase;
+
+  const gallery = (
+    <div
+      className="hackathon-showcase-media"
+      data-single={images.length === 1 || undefined}
+    >
+      {images.map(({ file, alt, width, height, annotation }) => (
+        <figure
+          className="hackathon-showcase-photo"
+          key={file}
+          data-annotation={annotation?.placement}
+          data-portrait={height > width || undefined}
+        >
+          <img
+            src={`/images/hackathons/${file}`}
+            alt={alt}
+            width={width}
+            height={height}
+            tabIndex={0}
+          />
+          {annotation && (
+            <figcaption className="hackathon-photo-annotation">
+              <span>{annotation.text}</span>
+              {annotation.placement === "inside" ? (
+                <svg
+                  viewBox="0 0 1100 773"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M832 57C783 70 747 43 695 95m-1-25 1 25 25-6"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 76 28" fill="none" aria-hidden="true">
+                  <path d="M73 6C53 1 28 1 15 20m-3-9 3 9 11-3" />
+                </svg>
+              )}
+            </figcaption>
+          )}
+        </figure>
+      ))}
     </div>
   );
-}
-
-function HackathonShowcase({ event }: { event: Hackathon }) {
-  if (!event.showcase) return null;
 
   return (
     <div className="hackathon-showcase-details">
-      <div className="hackathon-showcase-media">
-        {event.showcase.images.map(({ file, alt }) => (
-          <img
-            key={file}
-            src={`/images/hackathons/${file}`}
-            alt={alt}
-            width={960}
-            height={960}
-            tabIndex={0}
-          />
-        ))}
-      </div>
+      {linkedinPreview && event.linkedinUrl ? (
+        <article
+          className="hackathon-linkedin-preview"
+          aria-label="LinkedIn preview"
+        >
+          <header>
+            <strong>{linkedinPreview.author}</strong>
+            <a href={event.linkedinUrl} target="_blank" rel="noreferrer">
+              <Icon name="linkedin" size={12} />
+              LinkedIn
+              <ArrowUpRight size={12} aria-hidden="true" />
+            </a>
+          </header>
+          <p>{linkedinPreview.summary}</p>
+          {gallery}
+        </article>
+      ) : (
+        gallery
+      )}
       <div className="hackathon-showcase-overview">
-        <h4>What we built · {event.project}</h4>
-        <p>{event.solution}</p>
+        <div>
+          <h4>What we built · {event.project}</h4>
+          <p>{event.solution}</p>
+        </div>
+        <div>
+          <h4>Why {event.project}</h4>
+          <p>{rationale}</p>
+        </div>
       </div>
       <div className="hackathon-showcase-work">
         <h4>What I built</h4>
         <p className="hackathon-showcase-role">My role · {event.role}</p>
         <ul>
-          {event.whatIBuilt?.map((item) => (
+          {event.whatIBuilt.map((item) => (
             <li key={item}>{item}</li>
           ))}
         </ul>
       </div>
-      <ul className="hackathon-showcase-stack" aria-label="Technologies">
-        {event.tech?.map((tech) => {
-          const icon = showcaseTechIcons[tech];
-          return (
-            <li className="skill-tile" key={tech}>
-              {icon && <Icon name={icon} size={11} />}
-              <span>{tech}</span>
-            </li>
-          );
-        })}
-      </ul>
+      <SkillGrid
+        skills={event.tech.map((name) => [name, showcaseTechIcons[name]])}
+        className="hackathon-showcase-stack"
+        label="Technologies"
+      />
+      <HackathonLinks event={event} />
     </div>
   );
 }
@@ -200,7 +206,6 @@ export function HackathonsSection({ archive = false }: { archive?: boolean }) {
       <dialog
         ref={dialog}
         className="hackathon-dialog"
-        data-showcase={selected?.showcase ? "true" : undefined}
         aria-labelledby="hackathon-dialog-title"
       >
         {selected && (
@@ -209,27 +214,14 @@ export function HackathonsSection({ archive = false }: { archive?: boolean }) {
               <div>
                 <HackathonLogos logos={selected.logos} />
                 <h3 id="hackathon-dialog-title">
-                  {selected.showcase?.title ??
-                    `${selected.name} · ${selected.project}`}
+                  {selected.showcase.title ?? selected.name}
                 </h3>
-                {selected.showcase && (
-                  <p className="hackathon-showcase-location">
-                    {selected.location}
-                  </p>
-                )}
-                {!selected.showcase && (
-                  <div className="hackathon-meta">
-                    <span>{selected.date}</span>
-                    {selected.badge && (
-                      <span
-                        className="tag hackathon-badge"
-                        data-placement={selected.badge}
-                      >
-                        {selected.badge}
-                      </span>
-                    )}
-                  </div>
-                )}
+                <p className="hackathon-showcase-location">
+                  {selected.location}
+                  {(selected.placement ?? selected.badge) && (
+                    <span> · {selected.placement ?? selected.badge}</span>
+                  )}
+                </p>
               </div>
               <form method="dialog">
                 <button
@@ -241,11 +233,7 @@ export function HackathonsSection({ archive = false }: { archive?: boolean }) {
                 </button>
               </form>
             </header>
-            {selected.showcase ? (
-              <HackathonShowcase event={selected} />
-            ) : (
-              <HackathonDetails event={selected} />
-            )}
+            <HackathonShowcase event={selected} />
           </>
         )}
       </dialog>

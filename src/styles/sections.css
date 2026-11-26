@@ -362,22 +362,6 @@
 .hackathon-open:is(:hover, :focus-visible) .hackathon-logos img {
   filter: grayscale(0);
 }
-.hackathon-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  color: var(--muted);
-  font-size: 12px;
-}
-.hackathon-meta > span:first-child {
-  font-family: "Geist Mono", monospace;
-}
-.hackathon-note {
-  color: var(--body-text);
-  font-size: 13px;
-  line-height: 1.6;
-}
 .tag.hackathon-badge {
   justify-self: end;
   padding: 2px 7px;
@@ -398,23 +382,27 @@
   background:
     linear-gradient(#0a0a0d, #0a0a0d) padding-box,
     conic-gradient(
-      from var(--hackathon-badge-angle, 48deg),
-      #45434c 0%,
-      #45434c 61%,
-      #655a85 68%,
-      #6ca3ff 73%,
-      #c7e8ff 77%,
-      #fff 79%,
-      #fbe3ad 82%,
-      #f39862 86%,
-      #be79d6 91%,
-      #45434c 97%
-    ) border-box;
+        from var(--hackathon-badge-angle, 48deg),
+        #45434c 0%,
+        #45434c 61%,
+        #655a85 68%,
+        #6ca3ff 73%,
+        #c7e8ff 77%,
+        #fff 79%,
+        #fbe3ad 82%,
+        #f39862 86%,
+        #be79d6 91%,
+        #45434c 97%
+      )
+      border-box;
   box-shadow: 0 0 8px rgb(123 146 221 / 22%);
   color: #f4f4f5;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .tag.hackathon-badge:is([data-placement="Winner"], [data-placement="Top 1%"]) {
+  .tag.hackathon-badge:is(
+      [data-placement="Winner"],
+      [data-placement="Top 1%"]
+    ) {
     animation: hackathon-badge-orbit 5s linear infinite;
   }
 }
@@ -422,29 +410,6 @@
   to {
     --hackathon-badge-angle: 408deg;
   }
-}
-.hackathon-details {
-  display: grid;
-  gap: 12px;
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-.hackathon-details :is(dt, h4) {
-  color: var(--foreground);
-  font-weight: 600;
-}
-.hackathon-facts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
-  gap: 8px 16px;
-}
-.hackathon-details ul {
-  list-style: disc;
-  padding-inline-start: 18px;
-}
-.hackathon-details .experience-tags {
-  margin-top: 0;
 }
 .hackathon-links {
   display: flex;
@@ -463,7 +428,9 @@
   position: fixed;
   inset: 0;
   width: min(560px, calc(100% - 32px));
-  max-height: min(76dvh, 660px);
+  height: calc(100dvh - 24px);
+  max-height: none;
+  overscroll-behavior: contain;
   margin: auto;
   overflow: auto;
 }
@@ -475,12 +442,15 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
 .hackathon-dialog h3 {
   font-weight: 700;
+  font-size: clamp(23px, 4.8vw, 30px);
+  line-height: 1.05;
+  letter-spacing: -0.045em;
 }
 .hackathon-dialog > header button {
   display: grid;
@@ -495,29 +465,7 @@
   background: var(--surface-hover);
   color: var(--foreground);
 }
-.hackathon-dialog .hackathon-details {
-  gap: 16px;
-  padding: 16px;
-}
-.hackathon-dialog .hackathon-facts {
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-}
-.hackathon-dialog[data-showcase="true"] {
-  height: calc(100dvh - 24px);
-  max-height: none;
-  overscroll-behavior: contain;
-}
-.hackathon-dialog[data-showcase="true"] > header {
-  padding-block: 12px;
-}
-.hackathon-dialog[data-showcase="true"] h3 {
-  font-size: clamp(25px, 5vw, 32px);
-  line-height: 1.05;
-  letter-spacing: -0.045em;
-}
-.hackathon-dialog[data-showcase="true"][open] {
+.hackathon-dialog[open] {
   display: grid;
   grid-template-rows: auto 1fr;
 }
@@ -527,7 +475,7 @@
   gap: 10px;
   padding: 16px;
   color: var(--muted);
-  font-size: clamp(14px, 1.8dvh, 17px);
+  font-size: clamp(12px, 1.5dvh, 14.5px);
   line-height: 1.45;
 }
 .hackathon-showcase-media {
@@ -536,25 +484,100 @@
   align-items: start;
   gap: 10px;
 }
+.hackathon-showcase-photo {
+  position: relative;
+  margin: 0;
+}
+.hackathon-photo-annotation {
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto auto calc(100% + 14px);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #fff;
+  font-family: "Bradley Hand", "Segoe Print", cursive;
+  font-size: clamp(12px, 2.7vw, 17px);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
+:root[data-theme="light"]
+  [data-annotation="outside"]
+  .hackathon-photo-annotation {
+  background: #27272a;
+}
+.hackathon-photo-annotation svg {
+  position: absolute;
+  top: 5px;
+  right: calc(100% - 2px);
+  width: clamp(43px, 12vw, 76px);
+  height: auto;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 1px #000b);
+}
+[data-annotation="inside"] .hackathon-photo-annotation {
+  inset: 0;
+  padding: 0;
+  font-size: clamp(10px, 2.6vw, 15px);
+  text-shadow: 0 1px 3px #000e;
+  transform: none;
+}
+[data-annotation="inside"] .hackathon-photo-annotation span {
+  position: absolute;
+  top: 2%;
+  right: 5%;
+  transform: rotate(-4deg);
+}
+[data-annotation="inside"] .hackathon-photo-annotation svg {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.45;
+}
 .hackathon-showcase-media img {
   display: block;
   width: 100%;
   height: auto;
+  max-height: min(28dvh, 220px);
+  object-fit: cover;
   border: 1px solid var(--border);
   border-radius: 6px;
   filter: grayscale(1);
   transition: filter 300ms ease;
 }
-.hackathon-showcase-media img:first-child {
+.hackathon-showcase-photo[data-annotation="outside"] img {
   aspect-ratio: 4 / 3;
-  object-fit: cover;
   object-position: top center;
+}
+.hackathon-showcase-photo[data-portrait] img {
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+  object-fit: contain;
+}
+.hackathon-showcase-media:has([data-annotation="outside"]) img {
+  max-height: none;
+}
+.hackathon-showcase-media[data-single] {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+.hackathon-showcase-media[data-single] img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(34dvh, 280px);
+  object-fit: contain;
 }
 .hackathon-showcase-media img:is(:hover, :focus-visible) {
   filter: grayscale(0);
 }
-.hackathon-showcase-media img:last-child {
-  margin-top: clamp(12px, 4vw, 26px);
+.hackathon-showcase-photo + .hackathon-showcase-photo {
+  margin-top: clamp(20px, 4vw, 26px);
 }
 .hackathon-showcase-details h4 {
   margin: 0 0 4px;
@@ -565,10 +588,56 @@
 .hackathon-showcase-details :is(p, ul) {
   margin: 0;
 }
+.hackathon-linkedin-preview {
+  display: grid;
+  gap: 9px;
+  padding: 11px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+}
+.hackathon-linkedin-preview header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.hackathon-linkedin-preview strong {
+  color: var(--foreground);
+}
+.hackathon-linkedin-preview a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9em;
+}
+.hackathon-linkedin-preview a > .icon {
+  transform: translateY(-1px);
+}
+.hackathon-linkedin-preview a:hover {
+  color: var(--foreground);
+}
+.hackathon-showcase-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.hackathon-showcase-overview > div:last-child {
+  padding-inline-start: 12px;
+  border-inline-start: 1px dotted var(--divider);
+}
+.hackathon-showcase-overview p,
+.hackathon-showcase-work li {
+  text-align: justify;
+  hyphens: auto;
+}
+.hackathon-showcase-details .hackathon-links {
+  font-weight: 550;
+}
 .hackathon-showcase-location {
   margin: 5px 0 0;
   color: var(--muted);
-  font-size: clamp(13px, 1.6dvh, 15px);
+  font-size: clamp(12px, 1.5dvh, 14px);
   line-height: 1.35;
 }
 .hackathon-showcase-details .hackathon-showcase-role {
@@ -581,20 +650,9 @@
   padding-inline-start: 18px;
   list-style: disc;
 }
-.hackathon-showcase-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+.skills-grid.hackathon-showcase-stack {
   padding: 10px 0 0;
-  list-style: none;
   background: var(--dotted-rule) top / 100% 1px no-repeat;
-}
-.hackathon-showcase-stack .skill-tile {
-  gap: 4px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-size: 11px;
-  line-height: 16.5px;
 }
 @media (max-width: 430px) {
   .hackathon-showcase-details {
@@ -603,6 +661,14 @@
   }
   .hackathon-showcase-work ul {
     gap: 1px;
+  }
+  .hackathon-showcase-overview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+  }
+  .hackathon-showcase-overview > div:last-child {
+    padding-inline-start: 0;
+    border-inline-start: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {

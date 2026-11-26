@@ -2,24 +2,28 @@ type HackathonItem = {
   name: string;
   project: string;
   logos?: { image: string; name: string }[];
-  date: string;
   location: string;
-  hours?: number;
   badge?: "Winner" | "Top 1%" | "Runner-up" | "Pre-Finale";
   placement?: string;
-  note: string;
-  problem: string;
-  solution?: string;
-  role?: string;
-  tech?: string[];
-  whatIBuilt?: string[];
-  showcase?: {
-    title: string;
-    images: { file: string; alt: string }[];
+  solution: string;
+  role: string;
+  tech: string[];
+  whatIBuilt: string[];
+  showcase: {
+    title?: string;
+    linkedinPreview?: { author: string; summary: string };
+    rationale: string;
+    images: {
+      file: string;
+      alt: string;
+      width: number;
+      height: number;
+      annotation?: { text: string; placement: "inside" | "outside" };
+    }[];
   };
   githubUrl?: string;
   demoUrl?: string;
-  galleryUrl?: string;
+  linkedinUrl?: string;
 };
 
 export const hackathons: HackathonItem[] = [
@@ -30,12 +34,7 @@ export const hackathons: HackathonItem[] = [
       { image: "cerebral-valley.svg", name: "Cerebral Valley" },
       { image: "deepmind.svg", name: "DeepMind" },
     ],
-    date: "July 11, 2026",
     location: "WeWork Roshni Tech Hub, Bangalore",
-    hours: 7,
-    note: "Live design reviews with four AI stakeholders that raise concerns as the team talks.",
-    problem:
-      "Design reviews can miss assumptions when specialists are outside the room.",
     solution:
       "Conclave brings four AI stakeholders into live design reviews. Gemini Live streams audio to each agent, a shared context engine tracks decisions, and an arbitrator chooses when to interrupt.",
     role: "Lead AI Architect & Full Stack Developer",
@@ -54,13 +53,20 @@ export const hackathons: HackathonItem[] = [
     ],
     showcase: {
       title: "Google DeepMind Bangalore Hackathon",
+      rationale:
+        "A design review can miss risks when specialists are outside the room. Conclave surfaces those concerns while the team can still change course and keeps a record of the decisions.",
       images: [
         {
           file: "conclave-team.webp",
+          width: 960,
+          height: 960,
           alt: "The four Conclave teammates working around a table at the hackathon",
+          annotation: { text: "dat's me", placement: "outside" },
         },
         {
           file: "deepmind-bangalore-poster.webp",
+          width: 960,
+          height: 960,
           alt: "Google DeepMind Bangalore Hackathon event poster",
         },
       ],
@@ -71,7 +77,7 @@ export const hackathons: HackathonItem[] = [
       "Built parallel Gemini Live sessions and real-time interruption logic.",
     ],
     githubUrl: "https://github.com/ntbnaren7/conclave",
-    galleryUrl:
+    linkedinUrl:
       "https://www.linkedin.com/posts/naren-tech_googledeepmind-gemini-google-activity-7483148291568861184-6nIj",
   },
   {
@@ -81,162 +87,260 @@ export const hackathons: HackathonItem[] = [
       { image: "cashfree.svg", name: "Cashfree" },
       { image: "sarvam.svg", name: "Sarvam AI" },
     ],
-    date: "November 21, 2026",
     location: "Cashfree Office, Ecoworld, Bengaluru",
-    note: "Built Attest, a multilingual collections desk that verifies payments and reconciles balances.",
-    problem:
-      "Merchants and lenders have to reconcile payment claims across screenshots, chats, handwritten records, and transaction histories. Stale balances can lead to unnecessary follow-ups.",
     solution:
-      "Attest uses Sarvam AI to handle voice, chat, and document scans in English, Hindi, Tamil, and Kannada. Cashfree verification updates balances, and operators approve actions that move money.",
-    tech: ["Python", "Sarvam AI", "Cashfree"],
+      "Attest brings voice, chat, and document scans into a collections desk that reconciles balances across four Indian languages. Cashfree verifies payments, and operators approve actions that move money.",
+    role: "Full Stack Developer",
+    tech: [
+      "Sarvam AI",
+      "Cashfree Relay",
+      "Document OCR",
+      "FastAPI",
+      "SQLite",
+      "React",
+      "TypeScript",
+      "Python",
+    ],
+    showcase: {
+      rationale:
+        "When payment evidence is scattered across chats, screenshots, and paper ledgers, teams can chase balances that have already been paid. Attest helps operators verify the evidence before following up.",
+      images: [
+        {
+          file: "cashfree-sarvam-attest.webp",
+          width: 1100,
+          height: 773,
+          alt: "The Attest team at the Cashfree × Sarvam AI Buildathon",
+          annotation: { text: "that's me", placement: "inside" },
+        },
+        {
+          file: "cashfree-sarvam-office.webp",
+          width: 900,
+          height: 586,
+          alt: "Inside the Cashfree office in Bengaluru during the buildathon",
+        },
+      ],
+    },
+    whatIBuilt: [
+      "Integrated Cashfree payment verification and the reconciliation engine into the operations desk.",
+      "Built the dashboard and connected customer chat, document scanning, and payment approvals.",
+    ],
     githubUrl: "https://github.com/ntbnaren7/attest",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/sanjay-t-43878229a_psnacet-sarvam-cashfree-activity-7530241441739030528-5U4A",
   },
   {
     name: "Amazon ML Challenge 2025",
     project: "Smart Product Pricing",
     logos: [{ image: "amazon-science.svg", name: "Amazon Science" }],
-    date: "October 11 - 13, 2025",
     location: "Online",
-    hours: 48,
     placement: "Rank #816 Globally, 1st Place Campus Level",
     badge: "Top 1%",
-    note: "Built a pricing model that estimates product prices from catalog data.",
-    problem:
-      "Predict product prices from catalog metadata under a highly sensitive SMAPE metric that disproportionately penalizes small errors on low-priced items.",
     solution:
-      "A feature engineering and gradient boosting regression pipeline optimized using logarithmic target transformations and MAE loss.",
+      "Our regression pipeline estimated prices from product descriptions, pack sizes, and other catalog data.",
     role: "ML Engineer",
-    tech: ["Python", "LightGBM", "Scikit-learn", "Pandas", "NumPy"],
+    tech: [
+      "LightGBM",
+      "RidgeCV",
+      "Target Encoding",
+      "Scikit-learn",
+      "Pandas",
+      "NumPy",
+      "Python",
+    ],
+    showcase: {
+      linkedinPreview: {
+        author: "Naren A",
+        summary:
+          "Our team finished #816 on the public leaderboard out of 80,000+ registrations and took first place on campus. I worked with Naveen Kumar K M, Rahman MS, and Vikash J D.",
+      },
+      rationale:
+        "Sellers need consistent price estimates across large catalogs. The challenge’s scoring metric made even small errors on low-priced items costly.",
+      images: [
+        {
+          file: "amazon-mlc-results.webp",
+          width: 1500,
+          height: 584,
+          alt: "Amazon ML Challenge 2025 results shared in the LinkedIn post",
+        },
+      ],
+    },
     whatIBuilt: [
-      "Engineered an automated, large-scale data cleaning and EDA pipeline (processing 75k+ rows) to handle missing values, extreme outliers via Winsorization, and skewed distributions.",
-      "Built a robust machine learning architecture utilizing LightGBM and RidgeCV with iterative hyperparameter tuning and aggressive K-Fold cross-validation target encoding.",
-      "Stabilized model training by applying log target transformations (`np.log1p`) and optimizing on MAE to directly mitigate the SMAPE metric's sensitivity on low-priced items.",
+      "Built the cleaning and feature pipeline for over 75,000 records, including outlier handling and cross-validated target encoding.",
+      "Trained LightGBM and RidgeCV models on log-transformed prices and tuned them against the challenge metric.",
     ],
     githubUrl: "https://github.com/ntbnaren7/amazon-ml-challenge-2025",
+    linkedinUrl:
+      "https://www.linkedin.com/posts/naren-tech_machinelearning-ml-amazonmlchallenge2025-activity-7404207236002340865-WPQj",
   },
   {
     name: "LTTS TECHgium 9th Edition",
     project: "Harmony Aura",
     logos: [{ image: "ltts.svg", name: "L&T Technology Services" }],
-    date: "November 10, 2025 - March 10, 2026",
     location: "LTTS campus, Mysore",
-    hours: 24,
     badge: "Pre-Finale",
-    note: "Built a safety dashboard that tracks worker stress and machine health in real time.",
-    problem:
-      "Industrial environments lack proactive, synchronized monitoring of both human physiological stress and heavy machinery telemetry to prevent accidents before they occur.",
     solution:
-      "A real-time industrial safety ecosystem that merges workforce biometrics with machine data using edge computing, digital twins, and AI predictive maintenance.",
+      "Harmony Aura combines machine telemetry and worker biometrics in an industrial safety monitoring system. A shared live feed powers a supervisor dashboard and mobile apps for operators.",
     role: "ML Engineer",
     tech: [
-      "Python",
+      "1D CNN",
+      "Digital Twin",
       "TensorFlow",
-      "Scikit-Learn",
-      "CNN",
-      "Firebase Realtime Database",
-      "ESP32 (C++)",
+      "Scikit-learn",
+      "Firebase",
+      "ESP32",
       "React",
       "Flutter",
+      "Python",
     ],
+    showcase: {
+      rationale:
+        "Machine faults and worker stress are often tracked separately. Seeing both together helps supervisors respond to unsafe conditions earlier.",
+      images: [
+        {
+          file: "ltts-techgium.webp",
+          width: 1050,
+          height: 591,
+          alt: "Official artwork for the LTTS TECHgium 9th Edition",
+        },
+      ],
+    },
     whatIBuilt: [
-      "Integrated a Deep Learning module utilizing a 1D-CNN to analyze time-series vibration data for predictive maintenance and fault detection.",
-      "Developed a Cognitive Intelligence Score (CIS) algorithm that calculates high-precision risk factors in real time by correlating human biometrics with machine state data.",
-      "Architected a unified multi-pillar ecosystem consisting of a React-based web dashboard and dual Flutter mobile apps (Supervisor and Operator), all synchronized via a centralized Firebase Realtime Uplink.",
+      "Built a 1D CNN for detecting machine faults from vibration time series.",
+      "Developed a risk score that combines worker biometrics with machine state and synced it across the dashboard and mobile apps.",
     ],
-    githubUrl: "https://github.com/ntbnaren7/harmony-aura-os",
+    githubUrl: "https://github.com/ntbnaren7/harmony-aura",
   },
   {
     name: "SaaSathoN'26",
-    project: "scribe",
+    project: "Scribe",
     logos: [
       { image: "lakshya.jpeg", name: "Lakshya" },
       { image: "ssn.png", name: "SSN College of Engineering" },
     ],
-    date: "April 11 - 12, 2026",
     location: "SSN College of Engineering, Chennai",
-    hours: 36,
     badge: "Winner",
-    note: "Built a tool that turns a brand website into ready-to-publish marketing posts.",
-    problem:
-      "Brands and marketers struggle to consistently generate engaging, on-brand social media content tailored to specific platforms.",
     solution:
-      "An AI-powered platform that analyzes a brand's URL and automatically generates platform-specific marketing posts using Google GenAI.",
+      "Scribe analyzes a brand’s website and turns what it learns into platform-specific marketing posts. We launched it during SaaSathoN and won first place.",
     role: "Full Stack Developer",
     tech: [
+      "Provider Fallbacks",
+      "Background Workers",
+      "Gemini",
       "Next.js",
-      "React",
       "Supabase",
-      "Google GenAI",
-      "GSAP",
-      "Framer Motion",
-      "Tailwind CSS",
-      "Razorpay",
+      "TypeScript",
     ],
+    showcase: {
+      rationale:
+        "Getting from a website to a campaign usually means repeating the same brand research for every channel. Scribe carries the brand context into each draft.",
+      images: [
+        {
+          file: "saasathon-scribe-trophy.webp",
+          width: 800,
+          height: 800,
+          alt: "SaaSathoN first-place trophy beside the Scribe demo",
+        },
+        {
+          file: "saasathon-scribe-product.webp",
+          width: 850,
+          height: 532,
+          alt: "Scribe product website",
+        },
+      ],
+    },
     whatIBuilt: [
-      "Engineered a fault-tolerant LLM inference engine with a multi-tier provider cascade to ensure high availability via graceful degradation.",
-      "Designed an asynchronous, self-chaining worker pipeline in Next.js with strict idempotency guards to safely bypass serverless timeout limits.",
-      "Developed advanced prompt architectures enforcing strict JSON schema adherence for complex generation workflows like brand persona extraction.",
-      "Implemented robust security and LLM prompt-injection defenses to securely process untrusted DOM inputs scraped via Puppeteer.",
+      "Built an inference layer that falls back across model providers when a request fails.",
+      "Built the background generation pipeline and defined schemas for brand profiles and content drafts.",
     ],
     githubUrl: "https://github.com/ntbnaren7/usescribe",
     demoUrl: "https://usescribe.in",
-    galleryUrl:
+    linkedinUrl:
       "https://www.linkedin.com/posts/naren-tech_saasathon-saas-scribe-share-7459209406929453056-OhZF/",
   },
   {
     name: "Auristra'26",
     project: "DriveOS",
-    date: "March 25 - 26, 2026",
     location: "Takshashila University, Villupuram",
-    hours: 48,
     badge: "Winner",
-    note: "Built a driver dashboard that combines live hazard detection with vehicle-to-vehicle alerts.",
-    problem:
-      "Gap between low-level sensor telemetry and high-level driver interfaces for hazard detection.",
     solution:
-      "An intelligent V2X ecosystem combining edge computer vision with a CarPlay-inspired dashboard.",
+      "DriveOS detects road hazards at the edge and shares them through a vehicle-to-vehicle mesh. Its dashboard brings the camera feed and hazard alerts into one view.",
     role: "Full Stack & Edge ML Developer",
     tech: [
-      "React",
-      "Vite",
+      "Vehicle-to-Vehicle Mesh",
+      "Edge Inference",
+      "YOLOv8s",
       "ONNX Runtime",
       "OpenCV",
       "Firebase",
-      "YOLOv8s",
+      "React",
       "Flutter",
-      "Dart",
     ],
+    showcase: {
+      rationale:
+        "A pothole detected by one vehicle can warn others before they reach it. DriveOS turns local camera detections into shared road alerts.",
+      images: [
+        {
+          file: "auristra-driveos-team.webp",
+          width: 1100,
+          height: 734,
+          alt: "The DriveOS team onstage at Auristra",
+        },
+        {
+          file: "auristra-takshashila-campus.webp",
+          width: 751,
+          height: 1000,
+          alt: "Courtyard at Takshashila University during Auristra",
+        },
+      ],
+    },
     whatIBuilt: [
-      "Built 'Benthic Vision' (YOLOv8s/OpenCV) for real-time edge anomaly detection.",
-      "Designed a glassmorphic React dashboard as the central HMI for live vision and V2X alerts.",
-      "Engineered a Firebase V2X backend and Flutter app for mobile mesh fleet tracking.",
+      "Built Benthic Vision, the real-time YOLOv8s and OpenCV detection pipeline that runs at the edge.",
+      "Built the driver dashboard and connected it to a Firebase-backed mobile app for sharing hazard alerts.",
     ],
     githubUrl: "https://github.com/ntbnaren7/drive-os",
-    galleryUrl:
-      "https://www.linkedin.com/posts/naren-tech_%F0%9D%97%AA%F0%9D%97%BC%F0%9D%97%BB-%F0%9D%97%94%F0%9D%97%A8%F0%9D%97%A5%F0%9D%97%9C%F0%9D%97%A6%F0%9D%97%A7%F0%9D%97%A5%F0%9D%97%94%F0%9F%AE%F0%9F%B2-a-48-hour-national-activity-7451285263906979840-0OCl",
+    linkedinUrl:
+      "https://www.linkedin.com/feed/update/urn:li:activity:7451285263906979840/",
   },
   {
     name: "Hackcelerate'26",
     project: "WI4ED",
-    date: "January 30 - 31, 2026",
     location: "SRM Institute of Science & Tech., Chennai",
-    hours: 24,
     placement: "First runner-up",
     badge: "Runner-up",
-    note: "Built a mobile dashboard that spots unusual power usage and flags appliance risks.",
-    problem:
-      "Current smart home energy monitoring systems lack real-time, high-fidelity anomaly detection and predictive maintenance capabilities, offering unengaging interfaces and basic historical data.",
     solution:
-      "A real-time, AI-augmented smart home energy dashboard designed as a futuristic IoT control panel with Waveform AI for deep electrical signature analysis and Neural Sentinel for predictive maintenance.",
+      "WI4ED is a smart plug with a companion app that shows live power use, identifies unusual appliance behavior, and can alert the user or cut power.",
     role: "Mobile App Developer",
-    tech: ["Flutter", "Dart", "Provider", "FL Chart", "Custom Painter API"],
+    tech: [
+      "Electrical Signature Analysis",
+      "Flutter",
+      "Dart",
+      "Provider",
+      "FL Chart",
+    ],
+    showcase: {
+      rationale:
+        "An energy total can tell you how much power an appliance used. WI4ED looks for patterns like sustained overload so you can act while it’s happening.",
+      images: [
+        {
+          file: "hackcelerate-wi4ed-team.webp",
+          width: 1100,
+          height: 825,
+          alt: "The WI4ED team receiving the second-place award at Hackcelerate",
+        },
+        {
+          file: "hackcelerate-wi4ed-award.webp",
+          width: 563,
+          height: 1000,
+          alt: "Hackcelerate second-place award cheque",
+        },
+      ],
+    },
     whatIBuilt: [
-      "Developed an edge-intelligent mobile application with a premium 'OLED Black' UI and glassmorphic design for real-time electrical safety monitoring.",
-      "Engineered intelligent power analytics featuring real-time consumption scorecards, appliance signature recognition, and predictive health scoring to preemptively detect appliance failures.",
-      "Implemented a Safety & Anomaly Center with actionable alerts for inrush growth and sustained overloads, alongside a smart historical timeline for tracking usage patterns.",
+      "Built the Flutter dashboard for live power, appliance signatures, and consumption history.",
+      "Built the safety center for overload alerts and appliance health scores.",
     ],
     githubUrl: "https://github.com/ntbnaren7/wi4ed-intelligence-mobile-app",
-    galleryUrl:
+    linkedinUrl:
       "https://www.linkedin.com/posts/naren-tech_finished-%F0%9D%9F%AE-%F0%9D%97%AE%F0%9D%98%81-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%B0%F0%9D%97%B8%F0%9D%97%B0%F0%9D%97%B2%F0%9D%97%B9%F0%9D%97%B2%F0%9D%97%BF%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B2-activity-7426701480973365248-__pH",
   },
 ];
