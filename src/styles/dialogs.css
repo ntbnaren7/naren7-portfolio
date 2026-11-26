@@ -79,38 +79,6 @@ dialog::backdrop {
   color: var(--subtle);
   font-size: 11px;
 }
-.lightbox {
-  max-width: min(90vw, 1000px);
-  max-height: 90vh;
-  overflow: auto;
-  padding: 20px;
-}
-.lightbox > img {
-  max-height: 72vh;
-  width: auto;
-  max-width: 100%;
-  margin: auto;
-  object-fit: contain;
-  border-radius: 6px;
-}
-.lightbox > p {
-  margin-top: 14px;
-  padding-inline: 8px;
-  color: var(--body-text);
-  text-align: center;
-}
-.highlight-post-link {
-  display: flex;
-  width: fit-content;
-  align-items: center;
-  gap: 4px;
-  margin: 10px auto 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-.highlight-post-link:hover {
-  color: var(--foreground);
-}
 .dialog-close {
   position: sticky;
   top: 0;

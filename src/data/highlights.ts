@@ -1,11 +1,10 @@
 export const highlights = [
   {
     title:
-      "Selected from the top 1% of Cashfree × Sarvam Buildathon applicants",
+      "Selected in the top 1% of applicants for the Cashfree × Sarvam Buildathon",
     image: "/images/highlights/cashfree-sarvam-selection.webp",
     label: "Cashfree × Sarvam",
     width: 255,
-    url: "https://www.linkedin.com/posts/naren-tech_didnt-make-it-to-the-top-6-but-holy-shit-activity-7530230860621434880-LYKq",
   },
   {
     title:
@@ -13,10 +12,9 @@ export const highlights = [
     image: "/images/hackathons/amazon-mlc-results.webp",
     label: "Amazon MLC",
     width: 300,
-    url: "https://www.linkedin.com/posts/naren-tech_machinelearning-ml-amazonmlchallenge2025-activity-7404207236002340865-WPQj",
   },
   {
-    title: "One of 10 selected to represent PSNACET at Google Ananta",
+    title: "One of 10 selected to represent CSE PSNACET at Google Ananta",
     image: "/images/highlights/google-ananta.webp",
     label: "Google Ananta",
     width: 285,
@@ -43,6 +41,5 @@ export const highlights = [
     image: "/images/highlights/t-hub-blitz.webp",
     label: "T-Hub",
     width: 300,
-    url: "https://www.linkedin.com/posts/naren-tech_2-months-at-t-hub-a-reality-check-and-a-activity-7391139004567629825-UvYc",
   },
 ];
