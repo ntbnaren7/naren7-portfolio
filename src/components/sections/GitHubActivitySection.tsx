@@ -14,17 +14,61 @@ const dayOffsets: Record<string, number> = {
   ArrowRight: 7,
 };
 
+const cacheKey = `github-calendar:${snapshot.username}`;
+const cacheMaxAge = 60 * 60 * 1000;
+
+function isCalendar(data: unknown): data is Calendar {
+  const calendar = data as Calendar | null;
+  return (
+    Number.isInteger(calendar?.total?.lastYear) &&
+    Array.isArray(calendar?.contributions) &&
+    calendar.contributions.length > 0
+  );
+}
+
+// Last fetched calendar, kept in the visitor's browser so reloads render it
+// instantly. Storage can be unavailable, so every access is guarded.
+function readCachedCalendar() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(cacheKey) ?? "null");
+    if (!isCalendar(cached?.data) || typeof cached.savedAt !== "number") {
+      return null;
+    }
+    return {
+      data: cached.data,
+      fresh: Date.now() - cached.savedAt < cacheMaxAge,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function writeCachedCalendar(data: Calendar) {
+  try {
+    localStorage.setItem(
+      cacheKey,
+      JSON.stringify({ savedAt: Date.now(), data }),
+    );
+  } catch {
+    /* The live calendar still renders without storage. */
+  }
+}
+
 function dayDescription(day: ContributionDay) {
   return `${day.count} ${day.count === 1 ? "contribution" : "contributions"} on ${formatDate.format(new Date(`${day.date}T12:00:00`))}`;
 }
 
 export function GitHubActivitySection() {
-  const [liveCalendar, setLiveCalendar] = useState<Calendar | null>(null);
+  const [cached] = useState(readCachedCalendar);
+  const [liveCalendar, setLiveCalendar] = useState<Calendar | null>(
+    cached?.data ?? null,
+  );
   const [refreshFailed, setRefreshFailed] = useState(false);
   const [tooltip, setTooltip] = useState<DayTooltip | null>(null);
   const [focusedDate, setFocusedDate] = useState<string | null>(null);
 
   useEffect(() => {
+    if (cached?.fresh) return;
     const controller = new AbortController();
 
     async function refreshCalendar() {
@@ -38,22 +82,21 @@ export function GitHubActivitySection() {
         });
         if (!response.ok) throw new Error("Contribution calendar unavailable");
 
-        const data: Calendar = await response.json();
-        if (
-          !Number.isInteger(data.total?.lastYear) ||
-          !data.contributions?.length
-        ) {
+        const data: unknown = await response.json();
+        if (!isCalendar(data)) {
           throw new Error("Invalid contribution calendar");
         }
+        writeCachedCalendar(data);
         if (!controller.signal.aborted) setLiveCalendar(data);
       } catch {
-        if (!controller.signal.aborted) setRefreshFailed(true);
+        // A stale cached calendar is still better than the bundled snapshot.
+        if (!controller.signal.aborted && !cached) setRefreshFailed(true);
       }
     }
 
     void refreshCalendar();
     return () => controller.abort();
-  }, []);
+  }, [cached]);
 
   const calendar = liveCalendar ?? snapshot;
   const days = calendar.contributions;
