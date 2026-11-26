@@ -64,6 +64,8 @@ function HackathonShowcase({ event }: { event: Hackathon }) {
             alt={alt}
             width={width}
             height={height}
+            loading="lazy"
+            decoding="async"
             tabIndex={expandable ? undefined : 0}
           />
         );

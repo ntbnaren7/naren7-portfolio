@@ -85,8 +85,8 @@ export function ResumeDialog({
         <img
           src={resume.image}
           alt="Naren’s resume"
-          width={2481}
-          height={3508}
+          width={1600}
+          height={2262}
           loading="lazy"
           decoding="async"
           onLoad={() => setLoaded(true)}

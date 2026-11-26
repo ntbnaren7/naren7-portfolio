@@ -15,7 +15,12 @@ function HighlightCard({
   return (
     <article className="highlight-card" style={{ width }}>
       <div className="highlight-image">
-        <img src={highlight.image} alt={highlight.title} loading="lazy" />
+        <img
+          src={highlight.image}
+          alt={highlight.title}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
       <div className="highlight-caption">
         <div className="highlight-caption-row">

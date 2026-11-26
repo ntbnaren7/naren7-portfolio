@@ -40,12 +40,14 @@ export function ProjectsSection({ archive = false }: { archive?: boolean }) {
                 src={project.hoverImage}
                 alt=""
                 loading="lazy"
+                decoding="async"
               />
               <div className="project-screen">
                 <img
                   src={project.image}
                   alt={`${project.name} preview`}
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <span className="project-hover-label">

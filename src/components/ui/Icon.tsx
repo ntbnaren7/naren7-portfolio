@@ -75,7 +75,7 @@ export function Icon({ name, size = 14, className = "" }: IconProps) {
       className={`icon ${className}`}
       aria-hidden="true"
     >
-      <use href={`/icons/sprite.svg#${name}`} />
+      <use href={`/icons/portfolio-icons.svg#${name}`} />
     </svg>
   );
 }

@@ -53,14 +53,14 @@ export const hackathons: HackathonItem[] = [
         "A design review can miss risks when specialists are outside the room. Conclave surfaces those concerns while the team can still change course and keeps a record of the decisions.",
       images: [
         {
-          file: "conclave-team.webp",
+          file: "google-deepmind-bangalore/team-photo.webp",
           width: 960,
           height: 960,
           alt: "The four Conclave teammates working around a table at the hackathon",
           crop: "top",
         },
         {
-          file: "deepmind-bangalore-poster.webp",
+          file: "google-deepmind-bangalore/event-poster.webp",
           width: 960,
           height: 960,
           alt: "Google DeepMind Bangalore Hackathon event poster",
@@ -98,13 +98,13 @@ export const hackathons: HackathonItem[] = [
         "When payment evidence is scattered across chats, screenshots, and paper ledgers, teams can chase balances that have already been paid. Attest helps operators verify the evidence before following up.",
       images: [
         {
-          file: "cashfree-sarvam-attest.webp",
+          file: "cashfree-sarvam-buildathon/team-photo.webp",
           width: 1100,
           height: 773,
           alt: "The Attest team at the Cashfree × Sarvam AI Buildathon",
         },
         {
-          file: "cashfree-sarvam-office.webp",
+          file: "cashfree-sarvam-buildathon/cashfree-office.webp",
           width: 900,
           height: 586,
           alt: "Inside the Cashfree office in Bengaluru during the buildathon",
@@ -147,7 +147,7 @@ export const hackathons: HackathonItem[] = [
         "Sellers need consistent price estimates across large catalogs. The challenge’s scoring metric made even small errors on low-priced items costly.",
       images: [
         {
-          file: "amazon-mlc-results.webp",
+          file: "amazon-ml-challenge/results.webp",
           width: 1500,
           height: 584,
           alt: "Amazon ML Challenge 2025 results shared in the LinkedIn post",
@@ -186,14 +186,14 @@ export const hackathons: HackathonItem[] = [
         "Machine faults and worker stress are often tracked separately. Seeing both together helps supervisors respond to unsafe conditions earlier.",
       images: [
         {
-          file: "ltts-techgium-certificate.webp",
+          file: "ltts-techgium/participation-certificate.webp",
           width: 1800,
           height: 1273,
           alt: "TECHgium certificate recognizing Harmony Aura’s participation in the virtual proof-of-concept round",
           expandable: true,
         },
         {
-          file: "ltts-techgium-shortlist.webp",
+          file: "ltts-techgium/shortlist-email.webp",
           width: 1897,
           height: 294,
           alt: "TECHgium email confirming the shortlist for the proof-of-concept presentation",
@@ -228,7 +228,7 @@ export const hackathons: HackathonItem[] = [
         "Getting from a website to a campaign usually means repeating the same brand research for every channel. Scribe carries the brand context into each draft.",
       images: [
         {
-          file: "saasathon-scribe-trophy.webp",
+          file: "saasathon/first-place-trophy.webp",
           width: 800,
           height: 800,
           alt: "SaaSathoN first-place trophy beside the Scribe demo",
@@ -267,13 +267,13 @@ export const hackathons: HackathonItem[] = [
         "A pothole detected by one vehicle can warn others before they reach it. DriveOS turns local camera detections into shared road alerts.",
       images: [
         {
-          file: "auristra-driveos-team.webp",
+          file: "auristra/team-photo.webp",
           width: 1100,
           height: 734,
           alt: "The DriveOS team onstage at Auristra",
         },
         {
-          file: "auristra-takshashila-campus.webp",
+          file: "auristra/takshashila-campus.webp",
           width: 751,
           height: 1000,
           alt: "Courtyard at Takshashila University during Auristra",
@@ -309,13 +309,13 @@ export const hackathons: HackathonItem[] = [
         "An energy total can tell you how much power an appliance used. WI4ED looks for patterns like sustained overload so you can act while it’s happening.",
       images: [
         {
-          file: "hackcelerate-wi4ed-team.webp",
+          file: "hackcelerate/team-photo.webp",
           width: 1100,
           height: 825,
           alt: "The WI4ED team receiving the second-place award at Hackcelerate",
         },
         {
-          file: "hackcelerate-wi4ed-award.webp",
+          file: "hackcelerate/runner-up-award.webp",
           width: 563,
           height: 1000,
           alt: "Hackcelerate second-place award cheque",

@@ -2,20 +2,20 @@ export const highlights = [
   {
     title:
       "Selected in the top 1% of applicants for the Cashfree × Sarvam Buildathon",
-    image: "/images/highlights/cashfree-sarvam-selection.webp",
+    image: "/images/highlights/cashfree-sarvam-selection-email.webp",
     label: "Cashfree × Sarvam",
     width: 255,
   },
   {
     title:
       "Ranked #816 globally and first on campus at Amazon ML Challenge 2025",
-    image: "/images/hackathons/amazon-mlc-results.webp",
+    image: "/images/hackathons/amazon-ml-challenge/results.webp",
     label: "Amazon MLC",
     width: 300,
   },
   {
     title: "One of 10 selected to represent CSE PSNACET at Google Ananta",
-    image: "/images/highlights/google-ananta.webp",
+    image: "/images/highlights/google-ananta-visit.webp",
     label: "Google Ananta",
     width: 285,
     url: "https://www.linkedin.com/posts/naren-tech_googleananta-googleindia-techecosystem-activity-7399704158330793985-nmLR",
@@ -23,14 +23,14 @@ export const highlights = [
   {
     title:
       "Spoke to and mentored 300+ first-years on college and what comes next",
-    image: "/images/highlights/the-threshold.webp",
+    image: "/images/highlights/the-threshold-talk.webp",
     label: "The Threshold",
     width: 300,
     url: "https://www.linkedin.com/posts/naren-tech_thethreshold-campusbuilders-firstyears-activity-7394413596773990400-DO8I",
   },
   {
     title: "Invited by WSAudiology’s VP of R&D to discuss echo",
-    image: "/images/highlights/wsaudiology.webp",
+    image: "/images/highlights/wsaudiology-team-photo.webp",
     label: "WSAudiology",
     width: 300,
     url: "https://www.linkedin.com/posts/naren-tech_still-low-key-buzzing-from-this-day-a-huge-activity-7391838128782630912-4GRj",
@@ -38,7 +38,7 @@ export const highlights = [
   {
     title:
       "Completed Blitz with echo. 40 selected from 1,000+ college applications.",
-    image: "/images/highlights/t-hub-blitz.webp",
+    image: "/images/highlights/t-hub-blitz-portrait.webp",
     label: "T-Hub",
     width: 300,
   },

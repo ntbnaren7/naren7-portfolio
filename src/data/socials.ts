@@ -16,7 +16,7 @@ export type SocialProfile = {
 
 export const socialOwner = {
   name: "Naren",
-  avatar: "/images/social-avatar.svg",
+  avatar: "/images/profiles/naren-avatar.webp",
   location: "Madurai, India",
 };
 
@@ -25,7 +25,7 @@ export const socials: SocialProfile[] = [
   {
     name: "GitHub",
     displayName: "Naren A",
-    avatar: "/images/profiles/github.jpg",
+    avatar: "/images/profiles/github-avatar.jpg",
     location: "Madurai, India (UTC +05:30)",
     icon: "github",
     variant: "github",
@@ -53,8 +53,8 @@ export const socials: SocialProfile[] = [
     name: "LinkedIn",
     displayName: "Naren A",
     location: "Greater Madurai Area",
-    avatar: "/images/profiles/linkedin.png",
-    banner: "/images/profiles/linkedin-banner.jpg",
+    avatar: "/images/profiles/linkedin-avatar.webp",
+    banner: "/images/profiles/linkedin-banner.webp",
     icon: "linkedin",
     variant: "linkedin",
     url: "https://www.linkedin.com/in/naren-tech/",
@@ -68,7 +68,7 @@ export const socials: SocialProfile[] = [
   {
     name: "Discord",
     displayName: "Naren",
-    avatar: "/images/profiles/discord.png",
+    avatar: "/images/profiles/discord-avatar.webp",
     icon: "discord",
     variant: "discord",
     url: "https://discord.com/users/684050302550147150",

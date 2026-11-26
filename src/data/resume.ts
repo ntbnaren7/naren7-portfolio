@@ -1,5 +1,5 @@
 export const resume = {
-  image: "/resume/resume-naren.jpg",
-  pdf: "/resume/resume-naren.pdf",
+  image: "/resume/naren-resume-preview.webp",
+  pdf: "/resume/naren-resume.pdf",
   downloadName: "Naren-Resume.pdf",
 };

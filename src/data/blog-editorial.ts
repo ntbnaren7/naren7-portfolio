@@ -17,14 +17,14 @@ export const blogEditorial: Record<string, BlogEditorial> = {
   "you-have-no-idea-how-cracked-people-are": {
     accent: "warm",
     layout: "essay",
-    cover: "/images/blogs/cracked-cover.webp",
+    cover: "/images/blogs/you-have-no-idea-how-cracked-people-are/cover.webp",
     coverAlt:
       "A student in a dim corridor looks into a warmly lit room where young builders are gathered.",
     resources: [],
   },
   "why-gemini-never-feels-as-good-as-claude-to-me": {
     accent: "cool",
-    cover: "/images/blogs/gemini-cover.webp",
+    cover: "/images/blogs/why-gemini-never-feels-as-good-as-claude-to-me/cover.webp",
     coverAlt:
       "Two glowing paths through a circuit board, one looping around a fault light and the other tracing back through several chips.",
     resources: [
@@ -53,7 +53,7 @@ export const blogEditorial: Record<string, BlogEditorial> = {
   },
   "is-entrepreneurship-gen-z-main-character-moment": {
     accent: "warm",
-    cover: "/images/blogs/entrepreneurship-cover.webp",
+    cover: "/images/blogs/is-entrepreneurship-gen-z-main-character-moment/cover.webp",
     coverAlt:
       "A young maker checks a prototype at a home workbench beside a laptop and packages ready to ship.",
     resources: [

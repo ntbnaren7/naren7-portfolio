@@ -4,7 +4,7 @@ import reference from "./reference-content.json";
 export const profile = {
   name: "naren7",
   age: "21",
-  avatar: "/images/profiles/goat.svg",
+  avatar: "/images/profiles/naren-avatar.webp",
   introductionTitle: "Engineer / Dreamer.",
   introduction: "Just someone who loves creating things.",
   interests: "Obsessed with AI, products, and possibilities.",
@@ -39,7 +39,7 @@ export const experiences: typeof reference.experiences = [
     role: "AI Engineer Intern",
     date: "Jun 2026 - Aug 2026",
     location: "Remote · Chennai",
-    image: "/images/experience/hyle-global.png",
+    image: "/images/experience/hyle-global-logo.png",
     stats: [
       { value: "Tech Lead", label: "Engineering role" },
       { value: "Cognis", label: "Product led" },
@@ -66,7 +66,7 @@ export const experiences: typeof reference.experiences = [
     role: "AI Engineer Intern",
     date: "Jan 2026 - Jun 2026",
     location: "Hybrid · Madurai",
-    image: "/images/experience/dci.png",
+    image: "/images/experience/dot-com-infoway-logo.png",
     stats: [
       { value: "DIYA", label: "AI product" },
       { value: "15-20h", label: "Weekly time saved*" },
@@ -88,7 +88,7 @@ export const experiences: typeof reference.experiences = [
     role: "Cofounder and Forward Deployed CEO",
     date: "Feb 2025 - Jan 2026",
     location: "Hybrid · Hyderabad",
-    image: "/images/experience/echo.png",
+    image: "/images/experience/echo-logo.webp",
     stats: [
       { value: "T-Hub and WSAudiology", label: "Recognition" },
       { value: "300+", label: "People surveyed" },
@@ -112,8 +112,8 @@ export const projects = [
     status: "Building",
     directLink: true,
     linkLabel: "Visit Scribe",
-    image: "/images/projects/scribe-ui.png",
-    hoverImage: "/images/projects/project-hover-scribe.webp",
+    image: "/images/projects/scribe/interface-preview.webp",
+    hoverImage: "/images/projects/scribe/hover-background.webp",
     description:
       "An AI-powered creative engine that turns brand websites into intelligent, ready-to-publish marketing campaigns.",
     technologies: ["next", "typescript", "python", "gemini", "tailwind"],
@@ -123,8 +123,8 @@ export const projects = [
     name: "Invariant",
     status: "Live",
     directLink: true,
-    image: "/images/projects/invariant-ui.png",
-    hoverImage: "/images/projects/project-hover-invariant.webp",
+    image: "/images/projects/invariant/interface-preview.webp",
+    hoverImage: "/images/projects/invariant/hover-background.webp",
     description:
       "An open-source financial intelligence engine that detects payment discrepancies, reconciles transactions, and automates recovery workflows.",
     technologies: [
@@ -142,8 +142,8 @@ export const projects = [
     status: "Building",
     directLink: true,
     hoverLabel: "Join the first listeners",
-    image: "/images/projects/echo-ui.png",
-    hoverImage: "/images/projects/project-hover-echo.webp",
+    image: "/images/projects/echo/interface-preview.webp",
+    hoverImage: "/images/projects/echo/hover-background.webp",
     description:
       "A hearing intelligence product that helps people understand, experience, and care for their hearing.",
     technologies: [],
@@ -154,8 +154,8 @@ export const projects = [
     name: "Blueprint",
     status: "Building",
     pinned: false,
-    image: "/images/projects/blueprint.png",
-    hoverImage: "/images/projects/project-hover-blueprint.webp",
+    image: "/images/projects/blueprint/interface-preview.webp",
+    hoverImage: "/images/projects/blueprint/hover-background.webp",
     description:
       "Blueprint is an AI UI builder that turns prompts into structured, production-ready interfaces.",
     technologies: [
@@ -173,8 +173,8 @@ export const projects = [
     name: "Inquiro",
     status: "Not Started",
     pinned: false,
-    image: "/images/projects/inquiro.png",
-    hoverImage: "/images/projects/project-hover-inquiro.webp",
+    image: "/images/projects/inquiro/interface-preview.webp",
+    hoverImage: "/images/projects/inquiro/hover-background.webp",
     description:
       "Inquiro is an AI-powered search engine that helps you find information on the internet",
     technologies: ["next", "typescript", "node", "zustand"],

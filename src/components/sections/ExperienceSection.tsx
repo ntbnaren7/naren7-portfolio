@@ -55,7 +55,7 @@ export function ExperienceSection() {
                           <span className="collaboration-x">x</span>
                           <span className="company-logo collaborator-logo">
                             <img
-                              src="/images/experience/vengence-ui.png"
+                              src="/images/experience/vengeance-ui-logo.png"
                               alt=""
                             />
                           </span>

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { profile, socials } from "../../data/portfolio";
 import { Icon } from "../ui/Icon";
 import { LiveClock } from "../ui/LiveClock";
@@ -17,24 +18,42 @@ export function ProfileHeader({
   onToggleTheme: () => void;
   onOpenResume: () => void;
 }) {
+  // Only the active theme's banner is needed for first paint. The other one
+  // loads after the page has finished so the theme crossfade still works.
+  const [bothBanners, setBothBanners] = useState(false);
+  useEffect(() => {
+    const load = () => setBothBanners(true);
+    if (document.readyState === "complete") {
+      load();
+      return;
+    }
+    window.addEventListener("load", load, { once: true });
+    return () => window.removeEventListener("load", load);
+  }, []);
+
   return (
     <>
       <div className="hero-banner">
-        <img
-          src="/images/hero/naren-banner.jpg"
-          alt="A pixel-art knight resting in a flower meadow"
-          width={1376}
-          height={768}
-          fetchPriority="high"
-        />
-        <img
-          className="hero-banner-day"
-          src="/images/hero/naren-banner-day.jpg"
-          alt=""
-          aria-hidden="true"
-          width={1679}
-          height={937}
-        />
+        {(!light || bothBanners) && (
+          <img
+            src="/images/hero/knight-banner-dark.webp"
+            alt="A pixel-art knight resting in a flower meadow"
+            width={1376}
+            height={768}
+            fetchPriority={light ? "low" : "high"}
+          />
+        )}
+        {(light || bothBanners) && (
+          <img
+            className="hero-banner-day"
+            src="/images/hero/knight-banner-light.webp"
+            alt=""
+            aria-hidden="true"
+            width={1376}
+            height={768}
+            fetchPriority={light ? "high" : "low"}
+          />
+        )}
         <BannerAtmosphere light={light} />
         <LiveClock />
       </div>

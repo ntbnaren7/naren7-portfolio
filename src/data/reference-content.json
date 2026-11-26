@@ -6,7 +6,7 @@
       "role": "AI Security Intern, Caracal",
       "date": "Jun 2026 - Present",
       "location": "Remote",
-      "image": "/images/experience/linux-foundation.png",
+      "image": "/images/experience/linux-foundation-logo.png",
       "stats": [
         {
           "value": "5",
@@ -51,7 +51,7 @@
       "role": "AI Intern, Sugar Labs",
       "date": "May 2026 - August 2026",
       "location": "Remote",
-      "image": "/images/experience/google-summer-of-code.png",
+      "image": "/images/experience/google-summer-of-code-logo.webp",
       "stats": [
         {
           "value": "3",
@@ -95,7 +95,7 @@
       "role": "Founder & Maintainer",
       "date": "Oct 2025 - Present",
       "location": "Remote",
-      "image": "/images/experience/vercel.png",
+      "image": "/images/experience/vercel-logo.png",
       "stats": [
         {
           "value": "683",
@@ -138,7 +138,7 @@
       "role": "Sugar Labs, Joplin, kgateway & more",
       "date": "Sep 2025 - Apr 2026",
       "location": "Remote",
-      "image": "/images/experience/github.png",
+      "image": "/images/experience/github-logo.png",
       "stats": [
         {
           "value": "10",
@@ -183,7 +183,7 @@
       "role": "Open Source Contributor",
       "date": "May 2025 - August 2025",
       "location": "Remote",
-      "image": "/images/experience/google-summer-of-code.png",
+      "image": "/images/experience/google-summer-of-code-logo.webp",
       "stats": [],
       "description": [
         "Built scalable solutions for open source organizations",
@@ -199,7 +199,7 @@
       "role": "Open Source Contributor",
       "date": "May 2025 - August 2025",
       "location": "Remote",
-      "image": "/images/experience/c4gt.png",
+      "image": "/images/experience/code-for-govtech-logo.webp",
       "stats": [],
       "description": [
         "Developed innovative tools solving real developer problems",
@@ -215,7 +215,7 @@
       "role": "Full Stack Developer",
       "date": "December 2024 - April 2025",
       "location": "Remote",
-      "image": "/images/experience/github.png",
+      "image": "/images/experience/github-logo.png",
       "stats": [],
       "description": [
         "Mastered React, Node.js, databases, and deployment technologies",
@@ -379,63 +379,63 @@
   "highlights": [
     {
       "title": "Completed Google Summer of Code 2026 with Sugar Labs",
-      "image": "/images/highlights/gsoc-2026-certificate.png",
+      "image": "/images/highlights/google-summer-of-code-2026-certificate.webp",
       "label": "GSoC 2026",
       "width": 255,
       "url": ""
     },
     {
       "title": "VengenceUI accepted into Sentry's Sponsored Account Program",
-      "image": "/images/highlights/sentry-sponsored-account.png",
+      "image": "/images/highlights/sentry-sponsored-account-selection.webp",
       "label": "Sentry",
       "width": 200,
       "url": ""
     },
     {
       "title": "Accepted into the Claude for Open Source Program",
-      "image": "/images/highlights/claude-open-source.png",
+      "image": "/images/highlights/claude-open-source-selection.webp",
       "label": "Claude OSS",
       "width": 208,
       "url": ""
     },
     {
       "title": "Selected as a Caracal Mentee for LFX Mentorship 2026",
-      "image": "/images/highlights/lf-mentorship.png",
+      "image": "/images/highlights/linux-foundation-mentorship-selection.webp",
       "label": "LFX 2026",
       "width": 200,
       "url": ""
     },
     {
       "title": "VengenceUI accepted into the Sarvam Startup Program",
-      "image": "/images/highlights/sarvam-startup-program.png",
+      "image": "/images/highlights/sarvam-startup-program-selection.webp",
       "label": "Sarvam AI",
       "width": 334,
       "url": ""
     },
     {
       "title": "Selected for Google Summer of Code 2025",
-      "image": "/images/highlights/gsoc-selection.png",
+      "image": "/images/highlights/google-summer-of-code-2025-selection.webp",
       "label": "GSoC 2025",
       "width": 300,
       "url": ""
     },
     {
       "title": "Accepted into Vercel Open Source Program",
-      "image": "/images/highlights/vercel-oss.png",
+      "image": "/images/highlights/vercel-open-source-program-selection.webp",
       "label": "Vercel OSS",
       "width": 300,
       "url": ""
     },
     {
       "title": "Accepted into Linux Foundation Mentorship Program",
-      "image": "/images/highlights/lf-mentorship.png",
+      "image": "/images/highlights/linux-foundation-mentorship-selection.webp",
       "label": "LFX Mentorship",
       "width": 300,
       "url": ""
     },
     {
       "title": "Featured on Harkirat Singh's Podcast",
-      "image": "/images/highlights/podcast-harkirat.png",
+      "image": "/images/highlights/harkirat-singh-podcast.webp",
       "label": "Podcast",
       "width": 300,
       "url": ""

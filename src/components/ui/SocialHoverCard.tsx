@@ -120,13 +120,13 @@ export function SocialHoverCard({ social }: { social: SocialProfile }) {
                 <>
                   <img
                     className="social-card-banner-day"
-                    src="/images/hero/naren-banner-day.jpg"
+                    src="/images/hero/knight-banner-light.webp"
                     alt=""
                     loading="lazy"
                   />
                   <img
                     className="social-card-banner-night"
-                    src="/images/hero/naren-banner.jpg"
+                    src="/images/hero/knight-banner-dark.webp"
                     alt=""
                     loading="lazy"
                   />
