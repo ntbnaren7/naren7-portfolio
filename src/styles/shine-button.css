@@ -1,0 +1,165 @@
+/* Shine effect from VengeanceUI's animated-button, ported to plain CSS so it
+   needs no animation library: a light band sweeps across the label, a glint
+   runs along the border, and the button springs on hover and press. */
+@property --shine-x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+.shine-button {
+  --shine: rgb(255 255 255 / 66%);
+  overflow: visible;
+  transition:
+    transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.2s,
+    color 0.2s;
+}
+:root[data-theme="light"] .shine-button {
+  --shine: rgb(0 0 0 / 66%);
+}
+.shine-button:hover {
+  transform: scale(1.01);
+}
+.shine-button:active {
+  transform: scale(0.97);
+  transition-duration: 120ms;
+}
+
+.shine-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    #000 calc(var(--shine-x) + 20%),
+    transparent calc(var(--shine-x) + 30%),
+    #000 calc(var(--shine-x) + 100%)
+  );
+  mask-image: linear-gradient(
+    -75deg,
+    #000 calc(var(--shine-x) + 20%),
+    transparent calc(var(--shine-x) + 30%),
+    #000 calc(var(--shine-x) + 100%)
+  );
+  animation: shine-label 2s linear infinite;
+}
+
+.shine-button-border {
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: 6px;
+  background: linear-gradient(
+      -75deg,
+      transparent 30%,
+      var(--shine) 50%,
+      transparent 70%
+    )
+    100% 0 / 200% 100%;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  pointer-events: none;
+  animation: shine-border 2s linear infinite;
+}
+
+/* One-second sweep followed by a one-second pause, like the original. */
+@keyframes shine-label {
+  0% {
+    --shine-x: 100%;
+  }
+  50%,
+  100% {
+    --shine-x: -100%;
+  }
+}
+@keyframes shine-border {
+  0% {
+    background-position: 100% 0;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    background-position: 0% 0;
+    opacity: 0;
+  }
+}
+
+/* The bell gives a small ring when the button is hovered or focused. */
+.bell-icon-body,
+.bell-icon-clapper {
+  transform-box: view-box;
+  transform-origin: 12px 3px;
+}
+.shine-button:is(:hover, :focus-visible) .bell-icon-body {
+  animation: bell-ring 700ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+.shine-button:is(:hover, :focus-visible) .bell-icon-clapper {
+  animation: bell-clapper 700ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+@keyframes bell-ring {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-12deg);
+  }
+  45% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes bell-clapper {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-1.6px);
+  }
+  30% {
+    transform: translateX(1.4px);
+  }
+  45% {
+    transform: translateX(-0.9px);
+  }
+  60% {
+    transform: translateX(0.5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shine-button,
+  .shine-button:hover,
+  .shine-button:active {
+    transform: none;
+  }
+  .shine-button-label,
+  .shine-button-border,
+  .shine-button .bell-icon-body,
+  .shine-button .bell-icon-clapper {
+    animation: none;
+  }
+  .shine-button-label {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}

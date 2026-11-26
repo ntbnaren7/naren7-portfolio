@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Bell, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { blogs, profile } from "../../data/portfolio";
 import { useBlogLikes } from "../../hooks/useBlogLikes";
 import { BlogLikeCount } from "../ui/BlogLikeButton";
+import { BellIcon } from "../ui/BellIcon";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { BlogSubscribeDialog } from "../BlogSubscribeDialog";
@@ -57,12 +58,15 @@ export function BlogSection({ showViewAll = true }: { showViewAll?: boolean }) {
         )}
         <button
           type="button"
-          className="framed-button"
+          className="framed-button shine-button"
           onClick={() => setSubscribeOpen(true)}
           aria-haspopup="dialog"
         >
-          <Bell size={13} aria-hidden="true" />
-          Get notified
+          <span className="shine-button-label">
+            <BellIcon size={14} />
+            Get notified
+          </span>
+          <span className="shine-button-border" aria-hidden="true" />
         </button>
       </div>
       <BlogSubscribeDialog

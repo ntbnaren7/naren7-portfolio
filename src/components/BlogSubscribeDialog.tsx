@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { Bell, Check, Loader2, MailCheck, X } from "lucide-react";
+import { Check, Loader2, MailCheck, X } from "lucide-react";
+import { BellIcon } from "./ui/BellIcon";
 import {
   isValidEmail,
   subscribeToBlogs,
@@ -82,7 +83,7 @@ export function BlogSubscribeDialog({
     >
       <header className="subscribe-header">
         <span className="subscribe-icon" aria-hidden="true">
-          <Bell size={16} />
+          <BellIcon size={17} />
         </span>
         <h2 id={titleId}>Get notified about new blogs</h2>
         <button
@@ -154,7 +155,7 @@ export function BlogSubscribeDialog({
                   aria-hidden="true"
                 />
               ) : (
-                <Bell size={14} aria-hidden="true" />
+                <BellIcon size={14} />
               )}
               {status === "submitting" ? "Subscribing…" : "Notify me"}
             </button>
