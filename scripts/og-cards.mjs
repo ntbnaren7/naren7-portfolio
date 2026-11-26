@@ -116,12 +116,12 @@ function postCard(post) {
 
 const cards = [
   {
-    out: "public/images/og/home-card.jpg",
+    out: "public/images/og/home-card-v2.jpg",
     html: bannerCard({
       title: "naren7",
       lines: [
         "<strong style='color:#fafafa'>Engineer / Dreamer.</strong> Just someone who loves creating things.",
-        "Building <strong style='color:#fafafa'>ECHO</strong> and <strong style='color:#fafafa'>Scribe</strong>.",
+        "Building <strong style='color:#fafafa'>ECHO</strong>, <strong style='color:#fafafa'>Scribe</strong>, and whatever comes next.",
       ],
     }),
   },
