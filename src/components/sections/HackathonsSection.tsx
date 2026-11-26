@@ -34,7 +34,6 @@ function HackathonLinks({ event }: { event: Hackathon }) {
     { label: "GitHub", url: event.githubUrl },
     { label: "Demo", url: event.demoUrl },
     { label: "Photos", url: event.galleryUrl },
-    { label: "Event", url: event.eventUrl },
   ];
   return (
     <div className="hackathon-links">

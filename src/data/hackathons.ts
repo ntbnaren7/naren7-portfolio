@@ -20,7 +20,6 @@ type HackathonItem = {
   githubUrl?: string;
   demoUrl?: string;
   galleryUrl?: string;
-  eventUrl?: string;
 };
 
 export const hackathons: HackathonItem[] = [
@@ -91,7 +90,6 @@ export const hackathons: HackathonItem[] = [
       "Attest uses Sarvam AI to handle voice, chat, and document scans in English, Hindi, Tamil, and Kannada. Cashfree verification updates balances, and operators approve actions that move money.",
     tech: ["Python", "Sarvam AI", "Cashfree"],
     githubUrl: "https://github.com/ntbnaren7/attest",
-    eventUrl: "https://luma.com/azuhrzuj",
   },
   {
     name: "Amazon ML Challenge 2025",
