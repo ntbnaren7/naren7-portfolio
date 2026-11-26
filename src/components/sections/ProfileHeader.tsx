@@ -93,9 +93,6 @@ export function ProfileHeader({
           <a href={profile.contactUrl} aria-label="Email">
             <Icon name="mail" size={20} />
           </a>
-          <button type="button" onClick={onOpenResume} aria-label="Resume">
-            <Icon name="file-text" size={20} />
-          </button>
         </div>
         <div className="profile-controls">
           <button
@@ -144,8 +141,13 @@ export function ProfileHeader({
           <BookingLink href={profile.bookingUrl} />
           <a className="small-button tactile-button" href={profile.contactUrl}>
             <Icon name="mail" />
-            Send an email
+            <span className="label-long">Send an email</span>
+            <span className="label-short">Email</span>
           </a>
+          {/* Phones: Resume joins the call buttons (desktop has it with the socials). */}
+          <span className="mobile-resume">
+            <ResumeButton onClick={onOpenResume} />
+          </span>
         </div>
         <div className="socials">
           <h2>

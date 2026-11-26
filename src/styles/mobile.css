@@ -29,7 +29,9 @@
 .mobile-nav,
 .mobile-socials,
 .mobile-bio,
-.section-callout {
+.mobile-resume,
+.section-callout,
+.label-short {
   display: none;
 }
 
@@ -249,8 +251,24 @@
     color: var(--foreground);
     font-weight: 600;
   }
+  /* Book a call, email and resume share one line. */
   .contact-actions {
+    flex-wrap: nowrap;
+    gap: 6px;
     margin-top: 20px;
+  }
+  .mobile-resume {
+    display: contents;
+  }
+  /* Shorter button labels so the three fit on one line. */
+  .label-long {
+    display: none;
+  }
+  .label-short {
+    display: inline;
+  }
+  .contact-actions .small-button {
+    white-space: nowrap;
   }
 
   /* ---------- Section titles and dashed intros ---------- */

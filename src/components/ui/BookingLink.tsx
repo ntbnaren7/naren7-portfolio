@@ -16,7 +16,8 @@ export function BookingLink({ href }: { href: string }) {
         aria-hidden="true"
       >
         <Calendar size={14} />
-        Book an intro call
+        <span className="label-long">Book an intro call</span>
+        <span className="label-short">Book a call</span>
       </span>
       <span
         className="small-button tactile-button-primary booking-destination"
@@ -33,7 +34,8 @@ export function BookingLink({ href }: { href: string }) {
         <span className="booking-cover-spine" />
         <span className="small-button tactile-button-primary booking-cover-outside">
           <Calendar size={14} />
-          Book an intro call
+          <span className="label-long">Book an intro call</span>
+          <span className="label-short">Book a call</span>
         </span>
       </span>
       <span className="booking-cover-shadow" aria-hidden="true" />
