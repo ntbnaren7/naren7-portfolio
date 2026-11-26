@@ -1062,7 +1062,7 @@
 .highlights-track {
   display: flex;
   width: max-content;
-  animation: highlights-scroll 100s linear infinite;
+  animation: highlights-scroll 25s linear infinite;
 }
 .highlights-group {
   display: flex;
