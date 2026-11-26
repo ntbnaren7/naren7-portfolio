@@ -405,30 +405,13 @@
     gap: 6px;
   }
 
-  /* ---------- Highlights: a swipeable row instead of a marquee ---------- */
-  .highlights-window {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-  .highlights-window::-webkit-scrollbar {
-    display: none;
-  }
-  .highlights-track {
-    width: auto;
-    animation: none;
-  }
-  .highlights-group[aria-hidden="true"] {
-    display: none;
-  }
-  .highlights-group {
-    padding-right: 0;
-  }
+  /* ---------- Highlights: the same moving marquee, phone-sized cards ---------- */
   .highlight-card {
-    width: min(78vw, 300px) !important;
-    scroll-snap-align: start;
+    width: min(72vw, 280px) !important;
+  }
+  /* Holding a finger on it pauses the scroll so a card can be read or tapped. */
+  .highlights-window:active .highlights-track {
+    animation-play-state: paused;
   }
 
   /* ---------- Blogs and subpages ---------- */
