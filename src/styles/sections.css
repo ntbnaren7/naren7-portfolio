@@ -1104,6 +1104,9 @@
 .highlights-archive .highlight-caption p {
   display: block;
 }
+.highlights-archive .highlight-image img {
+  filter: none;
+}
 @media (max-width: 600px) {
   .highlights-archive {
     grid-template-columns: minmax(0, 1fr);
