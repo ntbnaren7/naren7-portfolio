@@ -19,6 +19,7 @@ import {
   ThemeSurveyPoints,
   type SurveyPoint,
 } from "./components/ui/ThemeSurveyPoints";
+import { transitionTheme } from "./lib/theme-transition";
 
 export function App() {
   const [commandsOpen, setCommandsOpen] = useState(false);
@@ -42,18 +43,16 @@ export function App() {
       flushSync(() => setLight(nextLight));
     };
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      document.documentElement.dataset.theme = theme;
-      setLight(nextLight);
+      transitionTheme(updateTheme);
       return;
     }
 
     const settleTheme = () => {
-      document.documentElement.classList.add("theme-settling");
-      updateTheme();
+      transitionTheme(updateTheme);
+      // Ignore repeat clicks until the crossfade has finished.
       surveyTimer.current = window.setTimeout(() => {
-        document.documentElement.classList.remove("theme-settling");
         surveyTimer.current = undefined;
-      }, 550);
+      }, 400);
     };
     const points = getVisibleSurveyPoints();
     if (points.length === 0) {
@@ -67,10 +66,7 @@ export function App() {
       settleTheme();
     }, 600);
   };
-  useEffect(() => () => {
-    window.clearTimeout(surveyTimer.current);
-    document.documentElement.classList.remove("theme-settling");
-  }, []);
+  useEffect(() => () => window.clearTimeout(surveyTimer.current), []);
   useEffect(() => {
     const theme = light ? "light" : "dark";
     document.documentElement.dataset.theme = theme;

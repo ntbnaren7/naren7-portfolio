@@ -1,8 +1,10 @@
 import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { ArrowLeft } from "lucide-react";
 import { CommandMenu } from "./CommandMenu";
 import { Icon } from "./ui/Icon";
 import { LiveClock } from "./ui/LiveClock";
+import { transitionTheme } from "../lib/theme-transition";
 import "../styles/shadcn.css";
 import "../styles/global.css";
 import "../styles/blog.css";
@@ -59,7 +61,13 @@ export function PortfolioSubpage({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const toggleTheme = () => setLight((value) => !value);
+  const toggleTheme = () => {
+    const nextLight = !light;
+    transitionTheme(() => {
+      document.documentElement.dataset.theme = nextLight ? "light" : "dark";
+      flushSync(() => setLight(nextLight));
+    });
+  };
 
   return (
     <div

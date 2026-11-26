@@ -1,16 +1,18 @@
-@media (prefers-reduced-motion: no-preference) {
-  :root.theme-settling,
-  :root.theme-settling *,
-  :root.theme-settling *::before,
-  :root.theme-settling *::after {
-    transition:
-      color 350ms ease,
-      background-color 350ms ease,
-      border-color 350ms ease,
-      box-shadow 350ms ease,
-      opacity 520ms ease;
-  }
+/* Theme changes crossfade as two GPU snapshots (see lib/theme-transition.ts).
+   Element transitions are off while switching so nothing animates underneath. */
+:root.theme-switching,
+:root.theme-switching *,
+:root.theme-switching *::before,
+:root.theme-switching *::after {
+  transition: none !important;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 380ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+@media (prefers-reduced-motion: no-preference) {
   :root:not(.blog-return) .portfolio-column::before,
   :root:not(.blog-return) .portfolio-column::after {
     animation: survey-rail 0.65s ease-out both;
@@ -24,14 +26,15 @@
     animation: survey-rule 0.42s ease-out 0.35s both;
   }
 
-  :root:not(.blog-return) :is(
-    .hero-banner,
-    .profile-header > *,
-    .introduction,
-    .section-index,
-    .portfolio-column > .portfolio-section,
-    .portfolio-column > footer
-  ) {
+  :root:not(.blog-return)
+    :is(
+      .hero-banner,
+      .profile-header > *,
+      .introduction,
+      .section-index,
+      .portfolio-column > .portfolio-section,
+      .portfolio-column > footer
+    ) {
     animation: content-arrive 0.24s ease-out 0.78s both;
   }
 }

@@ -117,18 +117,19 @@ dialog::backdrop {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+/* Fade a fixed blur in with opacity; animating the blur radius re-blurs the
+   whole screen every frame. */
 .resume-dialog::backdrop {
-  background: #0000;
-  backdrop-filter: blur(0);
+  background: #000b;
+  backdrop-filter: blur(8px);
+  opacity: 0;
   transition:
-    background 220ms ease,
-    backdrop-filter 220ms ease,
+    opacity 220ms ease,
     overlay 220ms allow-discrete,
     display 220ms allow-discrete;
 }
 .resume-dialog[open]::backdrop {
-  background: #000b;
-  backdrop-filter: blur(8px);
+  opacity: 1;
 }
 @starting-style {
   .resume-dialog[open] {
@@ -136,8 +137,7 @@ dialog::backdrop {
     transform: translateY(12px) scale(0.98);
   }
   .resume-dialog[open]::backdrop {
-    background: #0000;
-    backdrop-filter: blur(0);
+    opacity: 0;
   }
 }
 .resume-toolbar {
@@ -245,17 +245,16 @@ dialog::backdrop {
   transform: translateY(0) scale(1);
 }
 .subscribe-dialog::backdrop {
-  background: #0000;
-  backdrop-filter: blur(0);
+  background: #0009;
+  backdrop-filter: blur(5px);
+  opacity: 0;
   transition:
-    background 200ms ease,
-    backdrop-filter 200ms ease,
+    opacity 200ms ease,
     overlay 200ms allow-discrete,
     display 200ms allow-discrete;
 }
 .subscribe-dialog[open]::backdrop {
-  background: #0009;
-  backdrop-filter: blur(5px);
+  opacity: 1;
 }
 @starting-style {
   .subscribe-dialog[open] {
@@ -263,8 +262,7 @@ dialog::backdrop {
     transform: translateY(12px) scale(0.98);
   }
   .subscribe-dialog[open]::backdrop {
-    background: #0000;
-    backdrop-filter: blur(0);
+    opacity: 0;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -402,7 +400,7 @@ dialog::backdrop {
 :root[data-theme="light"] .subscribe-dialog {
   box-shadow: 0 24px 60px rgb(0 0 0 / 15%);
 }
-:root[data-theme="light"] .subscribe-dialog[open]::backdrop {
+:root[data-theme="light"] .subscribe-dialog::backdrop {
   background: rgb(0 0 0 / 40%);
 }
 :root[data-theme="light"] .subscribe-field input[aria-invalid="true"] {

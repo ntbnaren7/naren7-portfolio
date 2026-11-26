@@ -127,9 +127,9 @@
   color: var(--quiet);
 }
 .section-index a {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
   font-size: 12px;
   font-weight: 500;
   line-height: 18px;
@@ -137,14 +137,26 @@
   color: var(--quiet);
   transition: color 0.3s;
 }
-.section-index a span {
-  width: 0;
+.section-index-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
   height: 1px;
   background: var(--quiet);
-  transition: width 0.3s;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.section-index a.active span {
-  width: 12px;
+.section-index-label {
+  margin-left: 12px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.section-index a.active .section-index-line {
+  transform: scaleX(1);
+}
+.section-index a.active .section-index-label {
+  transform: translateX(12px);
 }
 .section-index a.active {
   color: var(--body-text);

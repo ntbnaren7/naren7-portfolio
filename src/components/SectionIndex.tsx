@@ -14,8 +14,8 @@ export function SectionIndex() {
           className={active === id ? "active" : ""}
           aria-current={active === id ? "location" : undefined}
         >
-          <span />
-          {label}
+          <span className="section-index-line" />
+          <span className="section-index-label">{label}</span>
         </a>
       ))}
     </nav>

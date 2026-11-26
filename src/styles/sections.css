@@ -656,17 +656,16 @@
     transform: none;
   }
   .hackathon-dialog::backdrop {
-    background-color: transparent;
-    backdrop-filter: blur(0);
+    background-color: #0009;
+    backdrop-filter: blur(5px);
+    opacity: 0;
     transition:
-      background-color 280ms ease,
-      backdrop-filter 280ms ease,
+      opacity 280ms ease,
       display 320ms allow-discrete,
       overlay 320ms allow-discrete;
   }
   .hackathon-dialog[open]::backdrop {
-    background-color: #0009;
-    backdrop-filter: blur(5px);
+    opacity: 1;
   }
   @starting-style {
     .hackathon-dialog[open] {
@@ -674,8 +673,7 @@
       transform: translateY(14px) scale(0.985);
     }
     .hackathon-dialog[open]::backdrop {
-      background-color: transparent;
-      backdrop-filter: blur(0);
+      opacity: 0;
     }
   }
 }
