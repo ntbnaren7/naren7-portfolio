@@ -57,7 +57,7 @@ GitHub activity is fetched live from a public contributions API on page load, an
 
 ### Backend: blog likes
 
-`api/blog-likes.js` is a plain-JS Vercel function that uses `postgres` against Supabase (`portfolio_private.blog_likes`; schema in `supabase/migrations/`). It needs the server-only env var `BLOG_LIKES_DATABASE_URL`, the transaction pooler URI. It imports `src/data/blog-posts.json` to whitelist slugs and tracks one like per post per visitor cookie. The client side is `useBlogLikes.ts`, which dedupes concurrent reads.
+`api/blog-likes.js` is a plain-JS Vercel function that uses `postgres` against Supabase (`portfolio_private.blog_likes`; schema in `supabase/migrations/`). It needs the server-only env var `BLOG_LIKES_DATABASE_URL`, the transaction pooler URI. All API functions run in Singapore (`"regions": ["sin1"]` in `vercel.json`) to sit next to the Supabase database; keep them there, since every like and subscription makes several database round trips. It imports `src/data/blog-posts.json` to whitelist slugs and tracks one like per post per visitor cookie. The client side is `useBlogLikes.ts`, which dedupes concurrent reads.
 
 ### Backend: blog email subscriptions
 
