@@ -1,3 +1,5 @@
+import { timeoutSignal } from "./timeout-signal";
+
 export type SubscribeResult =
   // Subscribed straight away.
   | "subscribed"
@@ -33,7 +35,7 @@ export async function subscribeToBlogs(
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, website }),
-      signal: AbortSignal.timeout(8000),
+      signal: timeoutSignal(8000),
     });
     if ([404, 405, 503].includes(response.status)) {
       return "unavailable";

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import snapshot from "../../data/github-activity.json";
 import { sectionIntros } from "../../data/portfolio";
+import { timeoutSignal } from "../../lib/timeout-signal";
 
 type Calendar = Omit<typeof snapshot, "username">;
 type ContributionDay = Calendar["contributions"][number];
@@ -77,10 +78,7 @@ export function GitHubActivitySection() {
       try {
         const response = await fetch(calendarUrl, {
           cache: "no-store",
-          signal: AbortSignal.any([
-            controller.signal,
-            AbortSignal.timeout(8000),
-          ]),
+          signal: timeoutSignal(8000, controller.signal),
         });
         if (!response.ok) throw new Error("Contribution calendar unavailable");
 

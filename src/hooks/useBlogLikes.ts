@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { timeoutSignal } from "../lib/timeout-signal";
 
 type BlogLikes = Record<string, { count: number; liked: boolean }>;
 
@@ -7,7 +8,7 @@ let pendingRead: Promise<BlogLikes> | undefined;
 async function requestLikes(options?: RequestInit): Promise<BlogLikes> {
   const response = await fetch("/api/blog-likes", {
     cache: "no-store",
-    signal: AbortSignal.timeout(8000),
+    signal: timeoutSignal(8000),
     ...options,
   });
   if (!response.ok) throw new Error("Blog likes unavailable");
