@@ -39,7 +39,6 @@
   --soft-border: rgb(255 255 255 / 5%);
   --divider: rgb(255 255 255 / 15%);
   --selected: #1e1e20;
-  --column-width: 40%;
   --column-padding: 16px;
   --rail-dot: var(--divider);
   --dotted-rule: repeating-linear-gradient(

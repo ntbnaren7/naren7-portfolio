@@ -1,13 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 import snapshot from "../../data/github-activity.json";
 
 type Calendar = Omit<typeof snapshot, "username">;
+type ContributionDay = Calendar["contributions"][number];
+type DayTooltip = { text: string; left: number; top: number };
 
 const calendarUrl = `https://github-contributions-api.jogruber.de/v4/${snapshot.username}?y=last`;
+const formatDate = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
+const dayOffsets: Record<string, number> = {
+  ArrowUp: -1,
+  ArrowDown: 1,
+  ArrowLeft: -7,
+  ArrowRight: 7,
+};
+
+function dayDescription(day: ContributionDay) {
+  return `${day.count} ${day.count === 1 ? "contribution" : "contributions"} on ${formatDate.format(new Date(`${day.date}T12:00:00`))}`;
+}
 
 export function GitHubActivitySection() {
   const [liveCalendar, setLiveCalendar] = useState<Calendar | null>(null);
   const [refreshFailed, setRefreshFailed] = useState(false);
+  const [tooltip, setTooltip] = useState<DayTooltip | null>(null);
+  const [focusedDate, setFocusedDate] = useState<string | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -42,9 +57,44 @@ export function GitHubActivitySection() {
 
   const calendar = liveCalendar ?? snapshot;
   const days = calendar.contributions;
+  const tabStop =
+    days.find((day) => day.date === focusedDate)?.date ?? days.at(-1)?.date;
+  const leadingDays = new Date(`${days[0].date}T12:00:00`).getDay();
   const months = days.filter(
     (day, i) => i === 0 || new Date(`${day.date}T12:00:00`).getDate() === 1,
   );
+
+  function showDay(day: ContributionDay, cell: HTMLButtonElement) {
+    const grid = cell.parentElement!.getBoundingClientRect();
+    const rect = cell.getBoundingClientRect();
+    const gutter = Math.min(126, window.innerWidth / 2);
+    const center = Math.max(
+      gutter,
+      Math.min(window.innerWidth - gutter, rect.left + rect.width / 2),
+    );
+    setTooltip({
+      text: dayDescription(day),
+      left: center - grid.left,
+      top: rect.top - grid.top,
+    });
+  }
+
+  function onDayKeyDown(
+    event: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    if (event.key === "Escape") {
+      setTooltip(null);
+      return;
+    }
+    const offset = dayOffsets[event.key];
+    if (offset === undefined) return;
+    event.preventDefault();
+    const next = Math.min(days.length - 1, Math.max(0, index + offset));
+    event.currentTarget.parentElement
+      ?.querySelector<HTMLButtonElement>(`[data-day-index="${next}"]`)
+      ?.focus();
+  }
 
   return (
     <section
@@ -73,15 +123,40 @@ export function GitHubActivitySection() {
         </div>
         <div
           className="calendar-grid"
+          role="group"
           aria-label={`Daily GitHub contributions for ${snapshot.username} over the last year`}
         >
-          {days.map((day) => (
-            <div
+          {Array.from({ length: leadingDays }, (_, index) => (
+            <span aria-hidden="true" key={index} />
+          ))}
+          {days.map((day, index) => (
+            <button
+              type="button"
               className={`calendar-day level-${day.level}`}
               key={day.date}
-              title={`${day.count} contributions on ${day.date}`}
+              data-day-index={index}
+              aria-label={dayDescription(day)}
+              tabIndex={day.date === tabStop ? 0 : -1}
+              onPointerEnter={(event) => showDay(day, event.currentTarget)}
+              onPointerLeave={() => setTooltip(null)}
+              onFocus={(event) => {
+                setFocusedDate(day.date);
+                showDay(day, event.currentTarget);
+              }}
+              onBlur={() => setTooltip(null)}
+              onClick={(event) => showDay(day, event.currentTarget)}
+              onKeyDown={(event) => onDayKeyDown(event, index)}
             />
           ))}
+          {tooltip && (
+            <span
+              className="calendar-tooltip"
+              aria-hidden="true"
+              style={{ left: tooltip.left, top: tooltip.top }}
+            >
+              {tooltip.text}
+            </span>
+          )}
         </div>
         <div className="calendar-legend">
           <span>Less active</span>

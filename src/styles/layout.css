@@ -1,3 +1,6 @@
+:root {
+  --column-width: 40%;
+}
 .portfolio-shell {
   position: relative;
   overflow-x: clip;
