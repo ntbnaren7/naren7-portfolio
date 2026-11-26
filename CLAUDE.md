@@ -57,6 +57,16 @@ GitHub activity is fetched live from a public contributions API on page load, an
 
 `api/blog-likes.js` is a plain-JS Vercel function that uses `postgres` against Supabase (`portfolio_private.blog_likes`; schema in `supabase/migrations/`). It needs the server-only env var `BLOG_LIKES_DATABASE_URL`, the transaction pooler URI. It imports `src/data/blog-posts.json` to whitelist slugs and tracks one like per post per visitor cookie. The client side is `useBlogLikes.ts`, which dedupes concurrent reads.
 
+### Backend: blog email subscriptions
+
+Double opt-in subscriptions sent through Resend (installed via the Vercel Marketplace; `RESEND_API_KEY`, sending domain `naren7.me` verified with DNS records in Cloudflare). Emails come from `naren7's raven <raven@naren7.me>`. Tables `portfolio_private.blog_subscribers` and `blog_notifications` (schema in `supabase/migrations/`) use the same `BLOG_LIKES_DATABASE_URL`. Shared code is in `api/_lib/subscriptions.js` (underscore paths are not deployed as functions).
+
+- `api/blog-subscribe.js`: POST from `BlogSubscribeDialog`. Stores the address as pending and emails a confirmation link; at most one confirmation per address per day and 30 per hour overall. It always answers `pending`, so it never reveals whether an address is subscribed.
+- `api/blog-confirm.js` / `api/blog-unsubscribe.js`: GET renders a page with a button and only POST changes state, so mail scanners that pre-open links can't act. Unsubscribe also accepts RFC 8058 one-click POSTs from the `List-Unsubscribe` header.
+- `api/blog-notify.js`: bearer-protected with `BLOG_NOTIFY_SECRET`, called by `npm run notify -- <slug>` (dry run by default; `--test <email>`; `--send` asks for confirmation). It only accepts slugs in the deployed `blog-posts.json`, and records each send before sending, so nobody gets a post twice. The local secret lives in the gitignored `.env.notify` (not `.env.local`, which `vercel env pull` overwrites).
+
+After publishing a post and deploying it, run `npm run notify -- <slug> --test <your email>`, check the email, then `npm run notify -- <slug> --send`.
+
 ### Styling
 
 Styling is mostly hand-written CSS in `src/styles/`, imported by components and entry files. Tailwind v4 (via `@tailwindcss/vite`) and shadcn theme mappings live in `shadcn.css`, and the base reset sits in a layer so utilities can override it. Some UI components (`radial-glow-button`, `liquid-metal`) come from the VengeanceUI shadcn registry and load their own CSS. The layout is desktop-first (40vw centered column) with only basic small-screen fallbacks.
