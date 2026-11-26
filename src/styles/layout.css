@@ -1,5 +1,7 @@
 :root {
-  --column-width: 40%;
+  /* Fixed reading width (what a 1920px screen got from the old 40%), so
+     smaller laptops keep the same layout instead of squeezing it. */
+  --column-width: min(768px, 100% - 64px);
 }
 .portfolio-shell {
   position: relative;
@@ -112,7 +114,7 @@
   position: fixed;
   z-index: 10;
   top: calc(22vh + 8px);
-  left: calc(69% + 32px);
+  left: calc(50% + var(--column-width) / 2 + 12px);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -438,7 +440,8 @@
   outline: 2px solid var(--muted);
   outline-offset: 6px;
 }
-@media (max-width: 1023px) {
+/* Only shown when it fits beside the column; ⌘K covers smaller windows. */
+@media (max-width: 1179px) {
   .section-index {
     display: none;
   }

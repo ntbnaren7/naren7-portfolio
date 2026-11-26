@@ -1341,7 +1341,7 @@
     transition: none;
   }
 }
-@media (min-width: 1536px) {
+@media (min-width: 768px) {
   .experience-row .experience-summary {
     flex-direction: row;
     align-items: center;

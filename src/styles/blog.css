@@ -449,7 +449,7 @@
 
 @media (min-width: 768px) {
   .blog-shell {
-    --column-width: max(40%, 576px);
+    --column-width: min(768px, 100% - 64px);
     --rail-dot: var(--divider);
   }
 }
