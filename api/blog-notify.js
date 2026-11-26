@@ -18,6 +18,16 @@ const roundBudgetMs = 200_000;
 const sendGapMs = 600; // Stays under Resend's default 2 requests per second.
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// The post's 1200x630 social image, or the site-wide one if it has none.
+async function coverImage(origin, slug) {
+  const url = `${origin}/images/blogs/${slug}/og.jpg`;
+  const response = await fetch(url, {
+    method: "HEAD",
+    signal: AbortSignal.timeout(5000),
+  }).catch(() => null);
+  return response?.ok ? url : `${origin}/images/og/home.jpg`;
+}
+
 function authorized(request) {
   const secret = process.env.BLOG_NOTIFY_SECRET;
   const header = request.headers.get("authorization") ?? "";
@@ -64,11 +74,16 @@ export default {
     const origin = new URL(request.url).origin;
     const postUrl = new URL(post.url, origin).href;
     const unsubscribeBase = `${origin}/api/blog-unsubscribe?token=`;
-    const preview = newPostEmail({
-      post,
-      postUrl,
-      unsubscribeUrl: `${unsubscribeBase}preview`,
-    });
+    const imageUrl = await coverImage(origin, post.slug);
+    const emailFor = (unsubscribeUrl) =>
+      newPostEmail({
+        post,
+        postUrl,
+        unsubscribeUrl,
+        siteUrl: origin,
+        imageUrl,
+      });
+    const preview = emailFor(`${unsubscribeBase}preview`);
 
     try {
       if (body.mode === "preview") {
@@ -125,7 +140,7 @@ export default {
           if (!claimed.length) continue;
 
           const unsubscribeUrl = unsubscribeBase + subscriber.unsubscribe_token;
-          const message = newPostEmail({ post, postUrl, unsubscribeUrl });
+          const message = emailFor(unsubscribeUrl);
           try {
             await sendEmail({
               to: subscriber.email,

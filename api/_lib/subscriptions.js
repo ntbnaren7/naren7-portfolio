@@ -93,83 +93,179 @@ export async function sendEmail({
 }
 
 // ---------------------------------------------------------------------------
-// Emails. Table layout and inline styles, since email clients ignore most CSS.
+// Emails. Dark, like the site. Table layout and inline styles, since email
+// clients ignore most CSS; images are absolute URLs on the live site.
 
-function emailLayout({ preheader, content, footer }) {
+const font =
+  "Geist,-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif";
+const mono = "'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace";
+const links = {
+  x: "https://x.com/ntbnaren7",
+  github: "https://github.com/ntbnaren7",
+};
+
+function emailLayout({
+  siteUrl,
+  preheader,
+  heroUrl,
+  heroAlt,
+  content,
+  footer,
+}) {
+  const site = escapeHtml(siteUrl);
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<meta name="supported-color-schemes" content="light dark">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
 <title>${escapeHtml(siteName)}</title>
+<style>
+@font-face{font-family:Geist;src:url(${site}/fonts/geist-sans.woff2) format("woff2");font-weight:100 900}
+@font-face{font-family:"Geist Mono";src:url(${site}/fonts/geist-mono.woff2) format("woff2")}
+a{color:inherit}
+@media (max-width:600px){.px{padding-left:22px!important;padding-right:22px!important}.title{font-size:23px!important}}
+</style>
 </head>
-<body style="margin:0;padding:0;background:#f4f4f5;">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(preheader)}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;">
-<tr><td align="center" style="padding:40px 16px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background:#ffffff;border:1px solid #e4e4e7;border-radius:12px;">
-<tr><td style="padding:32px 32px 8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:0.04em;color:#71717b;">
-&#x1F426;&#x200D;&#x2B1B; naren7's raven
+<body style="margin:0;padding:0;background:#000000;">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;color:#000000;">${escapeHtml(preheader)}&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#000000" style="background:#000000;">
+<tr><td align="center" style="padding:32px 12px 24px;">
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="#09090b" style="max-width:560px;background:#09090b;border:1px solid #27272a;border-radius:16px;border-collapse:separate;">
+<tr><td style="padding:0;">
+<a href="${site}" style="text-decoration:none;"><img src="${escapeHtml(heroUrl)}" width="560" alt="${escapeHtml(heroAlt)}" style="display:block;width:100%;max-width:560px;height:auto;border:0;border-radius:15px 15px 0 0;"></a>
 </td></tr>
-<tr><td style="padding:8px 32px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:#27272a;">
+<tr><td class="px" style="padding:24px 32px 0;">
+<table role="presentation" cellpadding="0" cellspacing="0"><tr>
+<td style="padding-right:12px;"><img src="${site}/images/email/avatar.png" width="40" height="40" alt="naren7" style="display:block;border:0;border-radius:50%;"></td>
+<td style="font-family:${font};">
+<div style="font-size:14px;font-weight:600;color:#fafafa;line-height:1.3;">naren7</div>
+<div style="font-size:12px;color:#71717b;line-height:1.4;">via the raven &middot; <a href="${site}" style="color:#71717b;text-decoration:none;">naren7.me</a></div>
+</td>
+</tr></table>
+</td></tr>
+<tr><td class="px" style="padding:20px 32px 0;"><div style="height:1px;border-top:1px dashed #27272a;font-size:0;line-height:0;">&nbsp;</div></td></tr>
+<tr><td class="px" style="padding:22px 32px 32px;font-family:${font};font-size:15px;line-height:1.65;color:#a1a1aa;">
 ${content}
 </td></tr>
 </table>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
-<tr><td style="padding:16px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;line-height:1.6;color:#a1a1aa;text-align:center;">
-${footer}
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
+<tr><td style="padding:22px 24px 0;font-family:${font};font-size:12px;line-height:1.7;color:#52525c;text-align:center;">
+<a href="${site}" style="color:#a1a1aa;text-decoration:none;">naren7.me</a>
+&nbsp;&middot;&nbsp;
+<a href="${links.x}" style="color:#a1a1aa;text-decoration:none;">X</a>
+&nbsp;&middot;&nbsp;
+<a href="${links.github}" style="color:#a1a1aa;text-decoration:none;">GitHub</a>
+<br>${footer}
 </td></tr>
 </table>
+
 </td></tr>
 </table>
 </body>
 </html>`;
 }
 
+function eyebrow(label) {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 14px;"><tr>
+<td style="padding:4px 10px;border:1px solid #3f3f46;border-radius:999px;font-family:${mono};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#d4d4d8;"><span style="color:#22c55e;">&#9679;</span>&nbsp; ${escapeHtml(label)}</td>
+</tr></table>`;
+}
+
 function emailButton(href, label) {
-  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0;"><tr>
-<td style="border-radius:8px;background:#18181b;">
-<a href="${escapeHtml(href)}" style="display:inline-block;padding:11px 20px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;font-weight:600;color:#fafafa;text-decoration:none;border-radius:8px;">${escapeHtml(label)}</a>
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:26px 0 0;"><tr>
+<td bgcolor="#fafafa" style="border-radius:10px;background:#fafafa;">
+<a href="${escapeHtml(href)}" style="display:inline-block;padding:13px 22px;font-family:${font};font-size:14px;font-weight:600;line-height:1;color:#09090b;text-decoration:none;border-radius:10px;">${escapeHtml(label)} &rarr;</a>
 </td></tr></table>`;
+}
+
+function fallbackLink(href) {
+  return `<p style="margin:14px 0 0;font-size:12px;line-height:1.6;color:#52525c;">Button not working? Paste this into your browser:<br><a href="${escapeHtml(href)}" style="color:#71717b;word-break:break-all;">${escapeHtml(href)}</a></p>`;
 }
 
 export function confirmationEmail({ confirmUrl, siteUrl }) {
   const subject = "Confirm your subscription to naren7's blogs";
+  const perks = [
+    "One email whenever a new blog goes up",
+    "No newsletters, no spam, nothing else",
+    "Unsubscribe in one click, anytime",
+  ]
+    .map(
+      (perk) =>
+        `<tr><td style="padding:3px 10px 3px 0;color:#22c55e;font-size:13px;vertical-align:top;">&#10003;</td><td style="padding:3px 0;font-size:14px;color:#d4d4d8;">${perk}</td></tr>`,
+    )
+    .join("");
   const html = emailLayout({
+    siteUrl,
     preheader: "One tap and the raven will find you whenever a new blog lands.",
-    content: `<p style="margin:0 0 12px;font-size:20px;font-weight:600;color:#09090b;">Confirm your subscription</p>
-<p style="margin:0;">Someone (hopefully you) asked to get an email whenever I publish a new blog on <a href="${escapeHtml(siteUrl)}" style="color:#2563eb;">naren7.me</a>. Tap below to confirm.</p>
-${emailButton(confirmUrl, "Confirm subscription")}
-<p style="margin:0;color:#71717b;font-size:13px;">One email per new blog, nothing else. If this wasn't you, just ignore this email and you won't hear from me again. The link expires in ${confirmWindowDays} days.</p>`,
+    heroUrl: `${siteUrl}/images/og/home.jpg`,
+    heroAlt: "A knight resting in a moonlit meadow",
+    content: `${eyebrow("One last step")}
+<h1 class="title" style="margin:0 0 10px;font-family:${font};font-size:26px;line-height:1.25;font-weight:700;letter-spacing:-0.02em;color:#fafafa;">Confirm your subscription</h1>
+<p style="margin:0;">Someone (hopefully you) asked to hear from me whenever I publish a new blog on <a href="${escapeHtml(siteUrl)}" style="color:#fafafa;">naren7.me</a>. Tap the button and you're in.</p>
+<table role="presentation" cellpadding="0" cellspacing="0" style="margin:20px 0 0;">${perks}</table>
+${emailButton(confirmUrl, "Yes, notify me")}
+${fallbackLink(confirmUrl)}
+<p style="margin:22px 0 0;padding:12px 14px;background:#18181b;border-radius:10px;font-size:13px;line-height:1.6;color:#a1a1aa;">Wasn't you? Just ignore this email and you'll never hear from me. The link expires in ${confirmWindowDays} days.</p>`,
     footer:
       "You're getting this because this address was entered on naren7.me.",
   });
   const text = `Confirm your subscription
 
-Someone (hopefully you) asked to get an email whenever I publish a new blog on naren7.me. Open this link to confirm:
+Someone (hopefully you) asked to hear from me whenever I publish a new blog on naren7.me. Open this link to confirm:
 
 ${confirmUrl}
 
-One email per new blog, nothing else. If this wasn't you, just ignore this email and you won't hear from me again. The link expires in ${confirmWindowDays} days.`;
+- One email whenever a new blog goes up
+- No newsletters, no spam, nothing else
+- Unsubscribe in one click, anytime
+
+Wasn't you? Just ignore this email and you'll never hear from me. The link expires in ${confirmWindowDays} days.
+
+-- naren7's raven, naren7.me`;
   return { subject, html, text };
 }
 
-export function newPostEmail({ post, postUrl, unsubscribeUrl }) {
+export function newPostEmail({
+  post,
+  postUrl,
+  unsubscribeUrl,
+  siteUrl,
+  imageUrl,
+}) {
   const subject = `New blog: ${post.title}`;
+  const meta = [post.date, post.readingTime]
+    .filter(Boolean)
+    .map(escapeHtml)
+    .join(" &middot; ");
+  const tags = (post.tags ?? [])
+    .slice(0, 4)
+    .map(
+      (tag) =>
+        `<span style="display:inline-block;margin:0 6px 6px 0;padding:3px 9px;border:1px dashed #3f3f46;border-radius:999px;font-size:12px;line-height:1.5;color:#a1a1aa;">${escapeHtml(tag)}</span>`,
+    )
+    .join("");
   const html = emailLayout({
+    siteUrl,
     preheader: post.description,
-    content: `<p style="margin:0 0 4px;font-size:13px;color:#71717b;">A new blog just landed</p>
-<p style="margin:0 0 12px;font-size:20px;line-height:1.35;font-weight:600;color:#09090b;">${escapeHtml(post.title)}</p>
-<p style="margin:0;">${escapeHtml(post.description)}</p>
-${emailButton(postUrl, "Read it")}
-<p style="margin:0;color:#71717b;font-size:13px;">${escapeHtml(post.readingTime ?? "")}</p>`,
-    footer: `You're getting this because you subscribed on naren7.me.<br><a href="${escapeHtml(unsubscribeUrl)}" style="color:#a1a1aa;">Unsubscribe</a>`,
+    heroUrl: imageUrl ?? `${siteUrl}/images/og/home.jpg`,
+    heroAlt: post.title,
+    content: `${eyebrow("New blog")}
+<h1 class="title" style="margin:0 0 10px;font-family:${font};font-size:26px;line-height:1.25;font-weight:700;letter-spacing:-0.02em;"><a href="${escapeHtml(postUrl)}" style="color:#fafafa;text-decoration:none;">${escapeHtml(post.title)}</a></h1>
+<p style="margin:0;font-size:16px;color:#d4d4d8;">${escapeHtml(post.description)}</p>
+<p style="margin:12px 0 0;font-family:${mono};font-size:12px;color:#71717b;">${meta}</p>
+${tags ? `<div style="margin:14px 0 0;">${tags}</div>` : ""}
+${emailButton(postUrl, "Read the blog")}
+${fallbackLink(postUrl)}`,
+    footer: `You're getting this because you subscribed on naren7.me.<br>One email per new blog, nothing else. <a href="${escapeHtml(unsubscribeUrl)}" style="color:#a1a1aa;">Unsubscribe</a>`,
   });
-  const text = `A new blog just landed: ${post.title}
+  const text = `New blog: ${post.title}
 
 ${post.description}
+${[post.date, post.readingTime].filter(Boolean).join(" · ")}
 
 Read it: ${postUrl}
 
