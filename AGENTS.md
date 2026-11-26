@@ -4,7 +4,7 @@
 
 Portfolio7 is a desktop-first React and TypeScript portfolio built with Vite. `src/main.tsx` mounts `src/App.tsx`, which composes the page and manages theme and dialog state. Page sections live in `src/components/sections/`, shared controls in `src/components/ui/`, and hooks in `src/hooks/`.
 
-Edit portfolio content in `src/data/`, including `portfolio.ts`, `socials.ts`, and the static GitHub activity snapshots. Keep section IDs in sync with the navigation entries in `portfolio.ts`. Shared styles and theme tokens live in `src/styles/`. Put published images, fonts, icons, and resume files in `public/`. Use `assets-to-use/` for local staging.
+Edit portfolio content in `src/data/`, including `portfolio.ts`, `socials.ts`, and the static GitHub activity snapshots. Keep section IDs in sync with the navigation entries in `portfolio.ts`. Shared styles and theme tokens live in `src/styles/`. Put published fonts and icons in `public/`. Images (`public/images/`) and the resume (`public/resume/`) also live there locally, but they are gitignored and never committed: they are served from the Vercel Blob store `naren7-assets` (see below). Use `assets-to-use/` for local staging.
 
 ## Development Commands
 
@@ -14,6 +14,13 @@ Edit portfolio content in `src/data/`, including `portfolio.ts`, `socials.ts`, a
 - `npm run build` checks TypeScript and builds the static site into `dist/`.
 - `npm run preview` serves the built site locally.
 - `npm run format` runs Prettier over `src/` and the root files listed in `package.json`.
+- `npm run upload-assets` uploads new or changed files in `public/images/` and `public/resume/` to Vercel Blob (`-- --check` lists them without uploading).
+- `npm run og-cards` renders the link-preview cards (needs `npm run dev` running).
+- `npm run notify -- <slug>` emails blog subscribers about a published post (dry run unless `--send`).
+
+## Images and the Resume (Don't Forget)
+
+Images and the resume are not in git. Locally they sit in `public/images/` and `public/resume/`, and `vercel.json` rewrites `/images/*` and `/resume/*` on the live site to the Vercel Blob store. So **whenever you add or change an image or the resume, run `npm run upload-assets` before you push or deploy.** If you skip it, that file is missing on naren7.me (it still works locally, which makes the mistake easy to miss). Give a replaced image a new filename, since images are cached for a week. The script needs `BLOB_READ_WRITE_TOKEN` in `.env.local`; run `vercel env pull` if it's missing.
 
 ## Coding Style
 
@@ -21,7 +28,7 @@ Use two-space indentation, double quotes, and semicolons in TypeScript. Follow e
 
 ## Testing
 
-The repository has no automated test runner or coverage target. Run `npm run build` before opening a pull request. For UI changes, check the affected flow in both themes and at desktop and narrow viewport widths. For interactive changes, exercise keyboard navigation and check reduced-motion behavior where relevant.
+The repository has no automated test runner or coverage target. Run `npm run build` before opening a pull request, and `npm run upload-assets -- --check` if any images changed (it should report 0 to upload). For UI changes, check the affected flow in both themes and at desktop and narrow viewport widths. For interactive changes, exercise keyboard navigation and check reduced-motion behavior where relevant.
 
 ## Commits and Pull Requests
 
