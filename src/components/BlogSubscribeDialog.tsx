@@ -12,6 +12,7 @@ type Status = "idle" | "submitting" | SubscribeResult;
 const errorMessages: Partial<Record<Status, string>> = {
   invalid: "That doesn’t look like a valid email address.",
   unavailable: "Subscriptions aren’t open just yet. Please check back soon.",
+  busy: "Lots of sign-ups right now. Please try again in a bit.",
   error: "Something went wrong. Please try again in a moment.",
 };
 
@@ -107,7 +108,7 @@ export function BlogSubscribeDialog({
           </span>
           <p>
             {status === "pending"
-              ? "Almost there. Check your inbox and confirm your email to start getting notified."
+              ? "Almost there. Check your inbox (and spam, just in case) for an email from naren7’s raven, and confirm to start getting notified."
               : "You’re in. You’ll get an email whenever a new blog goes up."}
           </p>
           <button type="button" className="framed-button" onClick={onClose}>

@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc -b",
-    "format": "prettier --write src index.html README.md package.json tsconfig.json"
+    "format": "prettier --write src index.html README.md package.json tsconfig.json",
+    "notify": "node --env-file=.env.notify scripts/notify-subscribers.mjs"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.82",
