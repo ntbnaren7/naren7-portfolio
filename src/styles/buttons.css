@@ -63,6 +63,19 @@
     inset 0 1px 1px #0000000d,
     0 1px 1px #0000001a;
 }
+:root[data-theme="light"] .small-button.tactile-button-primary {
+  background: linear-gradient(to bottom, #3f3f46, #18181b 60%);
+  border-color: rgb(0 0 0 / 10%);
+  color: #fafafa;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 12%),
+    0 1px 2px rgb(0 0 0 / 20%);
+}
+:root[data-theme="light"]
+  .small-button.tactile-button-primary:is(:hover, :focus-visible) {
+  background: linear-gradient(to bottom, #52525b, #27272a 60%);
+  color: #fff;
+}
 
 /* Keep the registry effect at the current row size and inside its border. */
 .small-button.rg-button.resume-button {

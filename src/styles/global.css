@@ -91,7 +91,8 @@
   --surface-hover: #f4f4f5;
   --border: rgb(0 0 0 / 20%);
   --soft-border: rgb(0 0 0 / 5%);
-  --divider: rgb(0 0 0 / 25%);
+  --divider: rgb(0 0 0 / 30%);
+  --rail-dot: rgb(0 0 0 / 45%);
   --selected: #e4e4e7;
 }
 @layer base {

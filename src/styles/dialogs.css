@@ -210,3 +210,13 @@ dialog::backdrop {
   font-size: 12px;
   text-align: center;
 }
+:root[data-theme="light"] .command-menu::backdrop {
+  background: rgb(0 0 0 / 40%);
+}
+:root[data-theme="light"] .command-menu {
+  box-shadow: 0 20px 60px rgb(0 0 0 / 12%);
+}
+:root[data-theme="light"] .resume-dialog {
+  box-shadow: 0 24px 60px rgb(0 0 0 / 15%);
+}
+

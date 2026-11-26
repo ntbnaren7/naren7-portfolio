@@ -37,7 +37,7 @@ Archive pages (`/projects/`, `/hackathons/`, `/highlights/`, `/blogs/`) wrap the
 
 ### Theme
 
-The theme is `data-theme="light" | "dark"` on `<html>`, persisted in `localStorage` under `portfolio-theme` (wrapped in try/catch). CSS tokens key off `[data-theme]`. On the home page, `App.tsx` animates the switch via `ThemeSurveyPoints` and a `theme-settling` class, and skips the animation under `prefers-reduced-motion`.
+The theme is `data-theme="light" | "dark"` on `<html>`, persisted in `localStorage` under `portfolio-theme` (wrapped in try/catch). CSS tokens key off `[data-theme]`. Every HTML entry has a small inline `<head>` script that applies the saved light theme before first paint; copy it into any new HTML shell, or light-mode visitors get a dark flash. Light-mode styling follows the reference site: when a rule hard-codes a colour, add a `:root[data-theme="light"]` override next to it (zinc palette, `rgb(0 0 0 / N%)` borders) rather than relying on tokens alone. On the home page, `App.tsx` animates the switch via `ThemeSurveyPoints` and a `theme-settling` class, and skips the animation under `prefers-reduced-motion`.
 
 ### Data
 

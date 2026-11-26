@@ -109,3 +109,13 @@
   opacity: 1;
   transform: rotateX(45deg) scale(0.95);
 }
+:root[data-theme="light"] .booking-link {
+  background: #a9adb6;
+  box-shadow:
+    0 -1px 2px #fff,
+    inset 0 1px 2px rgb(0 0 0 / 20%),
+    inset 0 3px 10px rgb(0 0 0 / 10%);
+}
+:root[data-theme="light"] .booking-link:is(:hover, :focus-visible) {
+  background: #ebeff2;
+}
