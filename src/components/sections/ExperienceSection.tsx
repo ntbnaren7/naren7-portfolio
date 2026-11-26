@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { experiences } from "../../data/portfolio";
+import { experiences, sectionIntros } from "../../data/portfolio";
 import { SectionHeading } from "../ui/SectionHeading";
 // import { ViewAllLink } from "../ui/ViewAllLink";
 
@@ -7,7 +7,9 @@ export function ExperienceSection() {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   return (
     <section id="experience" className="portfolio-section experience-section">
-      <SectionHeading>Experiences</SectionHeading>
+      <SectionHeading intro={sectionIntros.experience}>
+        Experiences
+      </SectionHeading>
       <div>
         {experiences.map((experience) => {
           const hasDetails =

@@ -2,12 +2,14 @@ import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { flushSync } from "react-dom";
 import { ArrowLeft } from "lucide-react";
 import { CommandMenu } from "./CommandMenu";
+import { MobileNav } from "./MobileNav";
 import { Icon } from "./ui/Icon";
 import { LiveClock } from "./ui/LiveClock";
 import { transitionTheme } from "../lib/theme-transition";
 import "../styles/shadcn.css";
 import "../styles/global.css";
 import "../styles/blog.css";
+import "../styles/mobile.css";
 
 const ResumeDialog = lazy(() =>
   import("./ResumeDialog").then(({ ResumeDialog }) => ({
@@ -75,6 +77,7 @@ export function PortfolioSubpage({
       data-accent={accent}
       data-layout={layout}
     >
+      <MobileNav light={light} onToggleTheme={toggleTheme} />
       <main className="portfolio-column blog-column">
         <div className="blog-dot-banner full-divider">
           <LiveClock />

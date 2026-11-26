@@ -1,5 +1,6 @@
-import { useEffect, useState, type KeyboardEvent } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import snapshot from "../../data/github-activity.json";
+import { sectionIntros } from "../../data/portfolio";
 
 type Calendar = Omit<typeof snapshot, "username">;
 type ContributionDay = Calendar["contributions"][number];
@@ -59,6 +60,7 @@ function dayDescription(day: ContributionDay) {
 }
 
 export function GitHubActivitySection() {
+  const calendarRef = useRef<HTMLDivElement>(null);
   const [cached] = useState(readCachedCalendar);
   const [liveCalendar, setLiveCalendar] = useState<Calendar | null>(
     cached?.data ?? null,
@@ -97,6 +99,12 @@ export function GitHubActivitySection() {
     void refreshCalendar();
     return () => controller.abort();
   }, [cached]);
+
+  // On phones the calendar scrolls sideways; start at the latest weeks.
+  useEffect(() => {
+    const el = calendarRef.current;
+    if (el && el.scrollWidth > el.clientWidth) el.scrollLeft = el.scrollWidth;
+  }, [liveCalendar]);
 
   const calendar = liveCalendar ?? snapshot;
   const days = calendar.contributions;
@@ -154,7 +162,8 @@ export function GitHubActivitySection() {
               : "Updating contributions…"}
         </span>
       </div>
-      <div className="activity-calendar">
+      <p className="section-callout">{sectionIntros.activity}</p>
+      <div className="activity-calendar" ref={calendarRef}>
         <div className="calendar-months">
           {months.map((month) => (
             <span key={month.date}>

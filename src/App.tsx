@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { CommandMenu } from "./components/CommandMenu";
 import { SectionIndex } from "./components/SectionIndex";
+import { MobileNav } from "./components/MobileNav";
 import { BlogSection } from "./components/sections/BlogSection";
 import { ExperienceSection } from "./components/sections/ExperienceSection";
 import { HighlightsSection } from "./components/sections/HighlightsSection";
@@ -96,6 +97,7 @@ export function App() {
         Skip to experience
       </a>
       <SectionIndex />
+      <MobileNav light={light} onToggleTheme={toggleTheme} />
       <main className="portfolio-column">
         <ProfileHeader
           onOpenCommands={() => setCommandsOpen(true)}

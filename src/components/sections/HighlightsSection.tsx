@@ -1,4 +1,5 @@
 import { highlights } from "../../data/highlights";
+import { sectionIntros } from "../../data/portfolio";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { ViewAllLink } from "../ui/ViewAllLink";
@@ -57,7 +58,9 @@ export function HighlightsSection({ archive = false }: { archive?: boolean }) {
 
   return (
     <section id="highlights" className="portfolio-section highlights-section">
-      <SectionHeading>Highlights</SectionHeading>
+      <SectionHeading intro={sectionIntros.highlights}>
+        Highlights
+      </SectionHeading>
       <div className="highlights-window" aria-label="Highlights gallery">
         <div className="highlights-track">
           {[0, 1].map((copy) => (

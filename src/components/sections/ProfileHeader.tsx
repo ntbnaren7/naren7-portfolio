@@ -6,6 +6,7 @@ import { SocialHoverCard } from "../ui/SocialHoverCard";
 import { ResumeButton } from "../ui/ResumeButton";
 import { BookingLink } from "../ui/BookingLink";
 import { BannerAtmosphere } from "../ui/BannerAtmosphere";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 export function ProfileHeader({
   onOpenCommands,
@@ -21,6 +22,8 @@ export function ProfileHeader({
   // Only the active theme's banner is needed for first paint. The other one
   // loads after the page has finished so the theme crossfade still works.
   const [bothBanners, setBothBanners] = useState(false);
+  // Phones get a text-first header, so the banner isn't rendered (or downloaded).
+  const showBanner = useMediaQuery("(min-width: 768px)");
   useEffect(() => {
     const load = () => setBothBanners(true);
     if (document.readyState === "complete") {
@@ -33,30 +36,32 @@ export function ProfileHeader({
 
   return (
     <>
-      <div className="hero-banner">
-        {(!light || bothBanners) && (
-          <img
-            src="/images/hero/knight-banner-dark.webp"
-            alt="A pixel-art knight resting in a flower meadow"
-            width={1376}
-            height={768}
-            fetchPriority={light ? "low" : "high"}
-          />
-        )}
-        {(light || bothBanners) && (
-          <img
-            className="hero-banner-day"
-            src="/images/hero/knight-banner-light.webp"
-            alt=""
-            aria-hidden="true"
-            width={1376}
-            height={768}
-            fetchPriority={light ? "high" : "low"}
-          />
-        )}
-        <BannerAtmosphere light={light} />
-        <LiveClock />
-      </div>
+      {showBanner && (
+        <div className="hero-banner">
+          {(!light || bothBanners) && (
+            <img
+              src="/images/hero/knight-banner-dark.webp"
+              alt="A pixel-art knight resting in a flower meadow"
+              width={1376}
+              height={768}
+              fetchPriority={light ? "low" : "high"}
+            />
+          )}
+          {(light || bothBanners) && (
+            <img
+              className="hero-banner-day"
+              src="/images/hero/knight-banner-light.webp"
+              alt=""
+              aria-hidden="true"
+              width={1376}
+              height={768}
+              fetchPriority={light ? "high" : "low"}
+            />
+          )}
+          <BannerAtmosphere light={light} />
+          <LiveClock />
+        </div>
+      )}
       <header className="profile-header full-divider">
         <div className="profile-identity">
           <div className="avatar-frame">
@@ -71,6 +76,26 @@ export function ProfileHeader({
             <h1>{profile.name}</h1>
             <p>{profile.age}</p>
           </div>
+        </div>
+        {/* Phones: icon-only socials beside the name (see mobile.css). */}
+        <div className="mobile-socials">
+          {socials.map((social) => (
+            <a
+              key={social.name}
+              href={social.url}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={social.name}
+            >
+              <Icon name={social.icon} size={20} />
+            </a>
+          ))}
+          <a href={profile.contactUrl} aria-label="Email">
+            <Icon name="mail" size={20} />
+          </a>
+          <button type="button" onClick={onOpenResume} aria-label="Resume">
+            <Icon name="file-text" size={20} />
+          </button>
         </div>
         <div className="profile-controls">
           <button

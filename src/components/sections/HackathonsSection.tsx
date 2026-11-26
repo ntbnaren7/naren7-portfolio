@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { ArrowUpRight, X } from "lucide-react";
 import { hackathons } from "../../data/hackathons";
+import { sectionIntros } from "../../data/portfolio";
 import { skills } from "../../data/skills";
 import { SectionHeading } from "../ui/SectionHeading";
 import { SkillGrid } from "../ui/SkillGrid";
@@ -158,7 +159,11 @@ export function HackathonsSection({ archive = false }: { archive?: boolean }) {
 
   return (
     <section id="hackathons" className="portfolio-section hackathons-section">
-      {!archive && <SectionHeading>Hackathons</SectionHeading>}
+      {!archive && (
+        <SectionHeading intro={sectionIntros.hackathons}>
+          Hackathons
+        </SectionHeading>
+      )}
       <div className="hackathon-list">
         {(archive ? hackathons : featuredHackathons).map((event) => (
           <EntryHeading className="hackathon-entry" key={event.name}>

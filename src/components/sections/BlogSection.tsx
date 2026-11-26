@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
-import { blogs, profile } from "../../data/portfolio";
+import { blogs, profile, sectionIntros } from "../../data/portfolio";
 import { useBlogLikes } from "../../hooks/useBlogLikes";
 import { BlogLikeCount } from "../ui/BlogLikeButton";
 import { BellIcon } from "../ui/BellIcon";
@@ -15,7 +15,7 @@ export function BlogSection({ showViewAll = true }: { showViewAll?: boolean }) {
 
   return (
     <section id="blogs" className="portfolio-section blog-section">
-      <SectionHeading>Blogs</SectionHeading>
+      <SectionHeading intro={sectionIntros.blogs}>Blogs</SectionHeading>
       {visibleBlogs.map((blog, i) => (
         <a
           className={`blog-row ${i === visibleBlogs.length - 1 ? "full-divider" : "local-divider"}`}

@@ -6,6 +6,7 @@ import { VercelTelemetry } from "./components/VercelTelemetry";
 import { blogReturnUrl, scrollBackToBlogs } from "./lib/blog-scroll";
 import "./styles/shadcn.css";
 import "./styles/global.css";
+import "./styles/mobile.css";
 
 const root = createRoot(document.getElementById("root")!);
 const render = () =>

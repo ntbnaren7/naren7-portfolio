@@ -20,6 +20,18 @@ export const profile = {
   quoteAuthor: "Franz Kafka",
 };
 
+// One-line intros shown under each section title on phones.
+export const sectionIntros = {
+  experience: "Where I've shipped real work with real teams.",
+  projects: "Things I've built end to end, from the first idea to production.",
+  hackathons:
+    "Weekends spent building fast, breaking things, and learning a ton.",
+  activity: "A year of code, one square at a time.",
+  skills: "The tools I reach for when I'm building.",
+  blogs: "Thoughts on building, AI, and figuring things out as I go.",
+  highlights: "A few moments I'm proud of along the way.",
+};
+
 export const sections = [
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },

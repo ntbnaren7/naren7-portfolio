@@ -1,4 +1,4 @@
-import { projects } from "../../data/portfolio";
+import { projects, sectionIntros } from "../../data/portfolio";
 import { Icon } from "../ui/Icon";
 import { SectionHeading } from "../ui/SectionHeading";
 import { ViewAllLink } from "../ui/ViewAllLink";
@@ -19,7 +19,9 @@ const technologyLabels: Record<string, string> = {
 export function ProjectsSection({ archive = false }: { archive?: boolean }) {
   return (
     <section id="projects" className="portfolio-section projects-section">
-      {!archive && <SectionHeading>Projects</SectionHeading>}
+      {!archive && (
+        <SectionHeading intro={sectionIntros.projects}>Projects</SectionHeading>
+      )}
       <div className="projects-grid">
         {projects.map((project) => (
           <article className="project-card" key={project.name}>
