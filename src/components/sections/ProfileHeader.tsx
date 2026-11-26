@@ -115,10 +115,23 @@ export function ProfileHeader({
         </div>
       </header>
       <section className="introduction" aria-label="About me">
-        <p>
+        {/* Phones: a shorter three-line bio (see mobile.css). */}
+        <div className="mobile-bio">
+          <p>
+            <strong>{profile.introductionTitle}</strong> -{" "}
+            {profile.introduction}
+          </p>
+          <p>{profile.interests}</p>
+          <p>
+            Building <strong>{profile.currentProjects[0]}</strong>,{" "}
+            <strong>{profile.currentProjects[1]}</strong>, and whatever&apos;s
+            next.
+          </p>
+        </div>
+        <p className="desktop-bio">
           <strong>{profile.introductionTitle}</strong> {profile.introduction}
         </p>
-        <ul>
+        <ul className="desktop-bio">
           <li>{profile.interests}</li>
           <li>{profile.philosophy}</li>
           <li>

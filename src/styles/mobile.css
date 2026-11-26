@@ -28,6 +28,7 @@
 /* Phone-only pieces stay out of the desktop layout. */
 .mobile-nav,
 .mobile-socials,
+.mobile-bio,
 .section-callout {
   display: none;
 }
@@ -233,21 +234,19 @@
   }
 
   .introduction {
-    padding-block: 4px 24px;
-    font-size: 17px;
-    line-height: 1.5;
+    padding-block: 2px 24px;
   }
-  .introduction ul {
-    margin-top: 2px;
-    padding-left: 0;
-  }
-  .introduction li {
-    padding-left: 0;
-  }
-  .introduction li::before {
+  .introduction .desktop-bio {
     display: none;
   }
-  .introduction strong {
+  .mobile-bio {
+    display: block;
+    color: var(--body-text);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+  .mobile-bio strong {
+    color: var(--foreground);
     font-weight: 600;
   }
   .contact-actions {
