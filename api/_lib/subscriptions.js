@@ -153,7 +153,11 @@ ${content}
 </table>
 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
-<tr><td style="padding:22px 24px 0;font-family:${font};font-size:12px;line-height:1.7;color:#52525c;text-align:center;">
+<tr><td align="center" style="padding:28px 24px 0;">
+<a href="${site}" style="text-decoration:none;"><img src="${site}/images/raven/raven-emblem.png" width="72" height="72" alt="naren7's raven" style="display:block;width:72px;height:72px;border:0;image-rendering:pixelated;"></a>
+</td></tr>
+<tr><td style="padding:6px 24px 0;font-family:${font};font-size:12px;color:#71717b;text-align:center;">Delivered by naren7's raven</td></tr>
+<tr><td style="padding:10px 24px 0;font-family:${font};font-size:12px;line-height:1.7;color:#52525c;text-align:center;">
 <a href="${site}" style="color:#a1a1aa;text-decoration:none;">naren7.me</a>
 &nbsp;&middot;&nbsp;
 <a href="${links.x}" style="color:#a1a1aa;text-decoration:none;">X</a>
@@ -291,12 +295,14 @@ export function page({ title, heading, message, form, status = 200 }) {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=circle">
 <style>
 @font-face{font-family:"Geist";src:url("/fonts/geist-sans.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url("/fonts/geist-mono.woff2") format("woff2");font-display:swap}
 :root{--bg:#000;--fg:#f4f4f5;--muted:#9f9fa9;--card:#09090b;--border:rgb(255 255 255/15%);--btn-bg:#fafafa;--btn-fg:#09090b}
 :root[data-theme="light"]{--bg:#fff;--fg:#09090b;--muted:#52525c;--card:#fafafa;--border:rgb(0 0 0/12%);--btn-bg:#18181b;--btn-fg:#fafafa}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--bg);color:var(--fg);font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 main{width:100%;max-width:420px;padding:28px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
-.eyebrow{margin:0 0 14px;font-size:13px;color:var(--muted)}
+.raven{display:block;width:88px;height:88px;margin:-8px 0 6px -6px;image-rendering:pixelated}
+.eyebrow{margin:0 0 10px;font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 h1{margin:0 0 8px;font-size:20px;font-weight:600;letter-spacing:-0.01em}
 p{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
 form{margin-top:20px}
@@ -307,7 +313,8 @@ button:focus-visible,.link:focus-visible{outline:2px solid var(--muted);outline-
 </head>
 <body>
 <main>
-<p class="eyebrow">&#x1F426;&#x200D;&#x2B1B; naren7's raven</p>
+<img class="raven" src="/images/raven/raven-emblem.png" width="88" height="88" alt="">
+<p class="eyebrow">naren7's raven</p>
 <h1>${escapeHtml(heading)}</h1>
 <p>${escapeHtml(message)}</p>
 ${form ?? `<a class="link" href="/blogs/">Read the blogs</a>`}
