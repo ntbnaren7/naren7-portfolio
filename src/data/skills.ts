@@ -1,4 +1,4 @@
-type Skill = [name: string, icon?: string];
+export type Skill = [name: string, icon?: string];
 
 export const skills: Skill[] = [
   ["Python", "python"],
