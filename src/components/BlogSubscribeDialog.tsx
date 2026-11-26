@@ -9,7 +9,7 @@ import {
   X,
 } from "lucide-react";
 import { BellIcon } from "./ui/BellIcon";
-import { blogs, profile } from "../data/portfolio";
+import { blogs } from "../data/portfolio";
 import {
   isValidEmail,
   subscribeToBlogs,
@@ -128,15 +128,12 @@ export function BlogSubscribeDialog({
       }}
     >
       <div className="subscribe-banner" aria-hidden="true">
-        <span className="subscribe-avatar">
-          <img src={profile.avatar} alt="" width={56} height={56} />
-          <span
-            className="subscribe-avatar-badge"
-            data-done={done || undefined}
-            key={done ? "done" : "idle"}
-          >
-            {done ? <Mail size={11} /> : <BellIcon size={12} />}
-          </span>
+        <span
+          className="subscribe-raven"
+          data-done={done || undefined}
+          key={done ? "done" : "idle"}
+        >
+          <img src="/images/raven/raven.png" alt="" width={96} height={96} />
         </span>
       </div>
       <button
