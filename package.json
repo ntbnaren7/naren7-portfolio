@@ -9,7 +9,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc -b",
     "format": "prettier --write src index.html README.md package.json tsconfig.json",
-    "notify": "node --env-file=.env.notify scripts/notify-subscribers.mjs"
+    "notify": "node --env-file=.env.notify scripts/notify-subscribers.mjs",
+    "og-cards": "node scripts/og-cards.mjs"
   },
   "dependencies": {
     "@paper-design/shaders-react": "^0.0.82",
