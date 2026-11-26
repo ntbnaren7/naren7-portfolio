@@ -43,9 +43,9 @@ export default {
         headers: { Allow: "GET, POST" },
       });
     }
-    if (request.headers.get("origin") !== url.origin) {
-      return new Response("Invalid request origin", { status: 403 });
-    }
+    // No Origin check: the page sends no referrer (to keep the token out of
+    // it), so browsers post with "Origin: null". The single-use 256-bit token
+    // is what proves the click came from the inbox.
 
     const form = await request.formData().catch(() => null);
     const token = form?.get("token");
