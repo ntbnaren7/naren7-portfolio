@@ -108,7 +108,7 @@ export function BlogSubscribeDialog({
           </span>
           <p>
             {status === "pending"
-              ? "Almost there. Check your inbox (and spam, just in case) for an email from naren7’s raven, and confirm to start getting notified."
+              ? "Almost there. Check your inbox (or your Spam or Promotions folder) for an email from naren7’s raven, and confirm to start getting notified."
               : "You’re in. You’ll get an email whenever a new blog goes up."}
           </p>
           <button type="button" className="framed-button" onClick={onClose}>
