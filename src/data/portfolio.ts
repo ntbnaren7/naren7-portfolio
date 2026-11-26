@@ -26,7 +26,7 @@ export const sections = [
   { id: "hackathons", label: "Hackathons" },
   // { id: "opensource", label: "Open Source" },
   { id: "skills", label: "Skills" },
-  { id: "blogs", label: "Blog" },
+  { id: "blogs", label: "Blogs" },
   { id: "highlights", label: "Highlights" },
 ];
 
