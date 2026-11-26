@@ -302,7 +302,7 @@ export function page({ title, heading, message, form, status = 200 }) {
 body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--bg);color:var(--fg);font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 main{width:100%;max-width:420px;padding:28px;border:1px solid var(--border);border-radius:12px;background:var(--card)}
 .raven{display:block;width:88px;height:88px;margin:-8px 0 6px -6px;image-rendering:pixelated}
-.eyebrow{margin:0 0 10px;font-family:"Geist Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{margin:0 0 10px;font-family:"Geist Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.02em;color:var(--muted)}
 h1{margin:0 0 8px;font-size:20px;font-weight:600;letter-spacing:-0.01em}
 p{margin:0;font-size:15px;line-height:1.6;color:var(--muted)}
 form{margin-top:20px}

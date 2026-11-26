@@ -363,8 +363,7 @@ dialog::backdrop {
   color: var(--subtle);
   font-family: var(--font-mono, "Geist Mono", ui-monospace, monospace);
   font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 .subscribe-live-dot {
   position: relative;
